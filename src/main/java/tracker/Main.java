@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        final int workweek = 5;
+        final int WORKWEEK = 5;
         Scanner console = new Scanner(System.in);
         System.out.println("Введите резюме");
         String resume = console.nextLine();
@@ -19,7 +19,7 @@ public class Main {
         // tod 1 - lowerCamelCase, moreThanWeek
         // todo0 - рабочая неделя 5 дней
         // tod 3 - лучше вынести 7 (5) в именованную константу в начало main
-        boolean moreThanWeek = numberOfDays>workweek;
+        boolean moreThanWeek = numberOfDays>WORKWEEK;
         System.out.println("Резюме:" + resume + "|" + "Критичность:" + critical + "|" +"Дней на исправление:" + numberOfDays + "|" + moreThanWeek);
 
     }
