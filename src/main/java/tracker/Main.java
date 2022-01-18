@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        int workweek = 5;
+        final int workweek = 5;
         Scanner console = new Scanner(System.in);
         System.out.println("Введите резюме");
         String resume = console.nextLine();
         // tod 1 - "выдать список вариантов" для критичностей
-        System.out.println("Введите критичность дефекта");
+        System.out.println("Введите критичность дефекта: критично, некритично или *****");
         String critical = console.nextLine();
         System.out.println("Введите ожидаемое количество дней на исправление дефекта");
         // tod 1 - lowerCamelCase, numberOfDays
