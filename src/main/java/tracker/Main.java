@@ -6,7 +6,7 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        final int workWeek = 5;
+        final int WORK_WEEK = 5;
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Введите резюме дефекта");
@@ -19,7 +19,7 @@ public class Main {
         int dayCountBug = scanner.nextInt();
         scanner.nextLine();
 
-        boolean compareWeek = dayCountBug > workWeek;
+        boolean compareWeek = dayCountBug > WORK_WEEK;
 
         System.out.println("Резюме  | Серьезность | Кол-во дней на исправление | займет больше рабочей недели (true/false)");
         System.out.println(resumeBug + "  |  " + criticalBug + "  |  " + dayCountBug + "  |  " + compareWeek);
