@@ -7,12 +7,16 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // todo 1 - WORK_WEEK нигде не используется, можно удалить
         final int WORK_WEEK = 5; // константа, кол-во рабочих дней
         final int MAX_BUG = 10;  //константа, максимальное кол-во дефектов
 
         boolean isRun = true; // показатель того, в работе мы или идем на выход
         int  countBug = 0; //кол-во заведенных дефектов
 
+        // todo 3 - каждое поле (резюме, критичность, дни) в отдельный массив
+        //  сейчас int (дни) хранится как часть String
+        //  и невозможно поменять одно из полей
         String[] defects  = new String[MAX_BUG]; //массив дефектов
 
         Scanner scanner = new Scanner(System.in);
@@ -26,6 +30,7 @@ public class Main {
             String action = scanner.nextLine();
             switch (action) {
                 case ("add"): {
+                    // todo 0 - countBug > MAX_BUG - 1 сложно, countBug >= MAX_BUG по сути то же самое
                     if (countBug > MAX_BUG - 1) {
                         System.out.println("В списке есть уже " + MAX_BUG + " дефектов, больше ввести не возможно!");
                     }else {
@@ -55,9 +60,9 @@ public class Main {
                 case ("quit"): {
                     isRun = false;
                     break;
-                }    }
+                }    } // todo 1 - две скобки на одной строке, что-то пошло не так
         }
-
+    // todo 0 - пустые строчки
 
 
 
