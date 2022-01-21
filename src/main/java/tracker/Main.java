@@ -2,9 +2,9 @@ package tracker;
 
 import java.util.Scanner;
 
-// todo 0 - HomeWork2 -> Main, переименовать можно через shift-f6
-public class HomeWork2 {
+public class Main {
     public static void main(String[] args) {
+        final int week = 5;
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Введите резюме дефекта");
@@ -17,9 +17,11 @@ public class HomeWork2 {
         int countDays = scanner.nextInt();
         scanner.nextLine();
 
+        boolean takeWeek = countDays > week;
+
         System.out.println("Резюме дефекта: " + resume);
         System.out.println("Критичность дефекта: " + severity);
         System.out.println("Кол-во дней на испр. дефекта: " + countDays);
-        // todo 3 - "займет больше рабочей недели (true/false)"
+        System.out.println("Займет больше рабочей недели: " + takeWeek);
     }
 }
