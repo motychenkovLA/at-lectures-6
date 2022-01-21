@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        final int week = 5;
+        final int WEEK = 5;
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Введите резюме дефекта");
@@ -17,7 +17,7 @@ public class Main {
         int countDays = scanner.nextInt();
         scanner.nextLine();
 
-        boolean takeWeek = countDays > week;
+        boolean takeWeek = countDays > WEEK;
 
         System.out.println("Резюме дефекта: " + resume);
         System.out.println("Критичность дефекта: " + severity);
