@@ -2,6 +2,7 @@ package tracker;
 
 import java.util.Scanner;
 
+// todo 0 - HomeWork2 -> Main, переименовать можно через shift-f6
 public class HomeWork2 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -19,6 +20,6 @@ public class HomeWork2 {
         System.out.println("Резюме дефекта: " + resume);
         System.out.println("Критичность дефекта: " + severity);
         System.out.println("Кол-во дней на испр. дефекта: " + countDays);
-
+        // todo 3 - "займет больше рабочей недели (true/false)"
     }
 }
