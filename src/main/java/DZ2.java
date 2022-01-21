@@ -5,12 +5,14 @@ public class DZ2 {
         System.out.println("Введите резюме дефекта:");
         Scanner scanner = new Scanner(System.in);
         String resumeBug = scanner.nextLine();
-        System.out.println("Выберете критичность дефекта:\nБлокирующий\nКритический\nЗначительный\nНезначительный\nТривиальный");
-        String PriorityBug = scanner.nextLine();
+        System.out.println("Выберете критичность дефекта:\nБлокирующий\nКритический\nЗначительный" +
+        "\nНезначительный\nТривиальный");
+        String priorityBug = scanner.nextLine();
         System.out.println("Введите количество дней на исправление дефекта:");
         int numberDayFixBug = scanner.nextInt();
-        final int numberDayWorkWeeks = 5;
-        boolean t = numberDayFixBug > numberDayWorkWeeks;
-        System.out.println("Резюме: "+ resumeBug + "\nКритичность: "+ PriorityBug + "\nКоличество дней на исправление: " + numberDayFixBug+ "\nБольше рабочей недели: " + t);
+        final int NUMBER_DAY_WORK_WEEKS = 5;
+        boolean validWorkDay = numberDayFixBug > NUMBER_DAY_WORK_WEEKS;
+        System.out.println("Резюме: "+ resumeBug + "\nКритичность: "+ priorityBug + "\nКоличество дней на исправление: "
+                + numberDayFixBug+ "\nБольше рабочей недели: " + validWorkDay);
     }
 }
