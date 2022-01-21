@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         boolean run = true;
         int numberOfDefects = 0;
-        final int arraySize = 10;
+        final int arraySize = 10; // todo 1 - CONST_STYLE
         String[] resumeArray = new String[arraySize];
         String[] criticalArray = new String[arraySize];
         int[] numberOfDaysArray = new int[arraySize];
@@ -21,11 +21,11 @@ public class Main {
                     }
                     break;
                 case "add":
-                    if (numberOfDefects == arraySize) {
+                    if (numberOfDefects == arraySize) { // todo ? - можно совсем уж на всякий случай >= сделать
                         System.out.println("Невозможно добавить больше 10 дефектов");
                         break;
                     }
-                    if (resumeArray[numberOfDefects] == null) {
+                    if (resumeArray[numberOfDefects] == null) { // todo 3 - это условие всегда true
                         System.out.println("Введите резюме");
                         resumeArray[numberOfDefects] = console.nextLine();
 
