@@ -12,7 +12,12 @@ public class dz2 { public static void  main (String[] args) {
 int NumberOfDays = scanner.nextInt();
     int DayOfWeek=5;
     boolean WorkWeek = NumberOfDays>=DayOfWeek;
-    System.out.println(Description + "|" + Critical + "|" + NumberOfDays + "| Займёт больше рабочей недели:" + WorkWeek);
+    System.out.println(Description + " | " + Critical + " | " + NumberOfDays + " | Займёт больше рабочей недели:" + WorkWeek);
 
 }
 }
+
+
+
+
+
