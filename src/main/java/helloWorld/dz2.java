@@ -11,7 +11,7 @@ public class dz2 { public static void  main (String[] args) {
             System.out.println("Введите ожидаемое количество дней на исправление дефекта");
 int NumberOfDays = scanner.nextInt();
     int DaysOfWorkWeek=5;
-    boolean WorkWeek = NumberOfDays>=DaysOfWorkWeek;
+    boolean WorkWeek = NumberOfDays>DaysOfWorkWeek;
     System.out.println(Description + " | " + Critical + " | " + NumberOfDays + " | Займёт больше рабочей недели:" + WorkWeek);
 
 
