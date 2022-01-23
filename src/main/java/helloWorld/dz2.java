@@ -14,6 +14,7 @@ int NumberOfDays = scanner.nextInt();
     boolean WorkWeek = NumberOfDays>=DayOfWeek;
     System.out.println(Description + " | " + Critical + " | " + NumberOfDays + " | Займёт больше рабочей недели:" + WorkWeek);
 
+
 }
 }
 
