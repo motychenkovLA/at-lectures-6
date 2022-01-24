@@ -6,9 +6,12 @@ public class Main {
     public static void main(String[] args) {
 
         final int WORK_DAYS_IN_WEEK = 5;
-        //todo магическое число 10
-        //todo неудачный вариант хранения данных дефектов
-        String [] listOfBugs = new String[10];
+        final int MAX_COUNT_OF_BUGS = 10;
+
+        String [] defectSummaryArray = new String[MAX_COUNT_OF_BUGS];
+        String [] defectPriorityArray = new String[MAX_COUNT_OF_BUGS];
+        int [] defectDayCountArray = new int[MAX_COUNT_OF_BUGS];
+        boolean [] moreThanWeekArray = new boolean[MAX_COUNT_OF_BUGS];
         int numOfBug = 0;
 
         while (true){
@@ -16,16 +19,12 @@ public class Main {
                     "Введите list, чтобы вывести список дефектов\n" +
                     "Введите quit для выхода из прогруммы ");
             Scanner scanner = new Scanner(System.in);
-            //todo можно в одну строчку
+
             String selectionInTheMainMenu = scanner.nextLine();
 
             if (selectionInTheMainMenu.equals("add")){
-                //todo нужно ли это? ессли да, то почему не во всех пунктах?
-                System.out.println("Зашел в add");
 
-                //todo магическое число
-                //todo if else  и сообщение о переполнении
-                while (numOfBug<10){
+                if (numOfBug<MAX_COUNT_OF_BUGS) {
                     System.out.println("Введите резюме дефекта: ");
 
                     String defectSummary = scanner.nextLine();
@@ -34,28 +33,32 @@ public class Main {
                     String defectPriority = scanner.nextLine();
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта: ");
                     int defectDayCount = scanner.nextInt();
+
                     boolean moreThanWeek = defectDayCount > WORK_DAYS_IN_WEEK;
 
-                    String bugDesc = "Резюме: " + defectSummary + " | Серьезность: " + defectPriority +
-                            " | Количество дней на исправление: " + defectDayCount +
-                            " | Займет больше рабочей недели: " + moreThanWeek;
-
-                    listOfBugs[numOfBug] = bugDesc;
+                    defectSummaryArray[numOfBug] = defectSummary;
+                    defectPriorityArray[numOfBug] = defectPriority;
+                    defectDayCountArray[numOfBug] = defectDayCount;
+                    moreThanWeekArray[numOfBug] = moreThanWeek;
                     numOfBug++;
-                    break;
+                } else {
+                    System.out.println("Достигнуто максимальное количество дефектов!");
                 }
             }
-            if (selectionInTheMainMenu.equals("list")) {
+            else if (selectionInTheMainMenu.equals("list")) {
                 for (int i = 0; i<numOfBug; i++){
-                    System.out.println(listOfBugs[i]);
+                    System.out.println("Резюме: " + defectSummaryArray[i] + " | Серьезность: " +
+                            defectPriorityArray[i] + " | Количество дней на исправление: " + defectDayCountArray[i] +
+                                    " | Займет больше рабочей недели: " + moreThanWeekArray[i]);
                 }
             }
-            if (selectionInTheMainMenu.equals("quit")) {
-                //todo тут можно сказать пользователю - До свидания!)
+            else if (selectionInTheMainMenu.equals("quit")) {
+                System.out.println("До свидания!");
                 break;
             }
-
-            //todo можно добавить обработку некорректного выбора пункта меню
+            else {
+                System.out.println("Нет такого пункта меню. Введите корректный пункт меню.");
+            }
         }
     }
 }
