@@ -17,14 +17,14 @@ public class Main {
                     "Введите quit для выхода из прогруммы ");
             Scanner scanner = new Scanner(System.in);
             //todo можно в одну строчку
-            String selectionInTheMainMenu;
-            selectionInTheMainMenu = scanner.nextLine();
+            String selectionInTheMainMenu = scanner.nextLine();
 
             if (selectionInTheMainMenu.equals("add")){
                 //todo нужно ли это? ессли да, то почему не во всех пунктах?
                 System.out.println("Зашел в add");
 
                 //todo магическое число
+                //todo if else  и сообщение о переполнении
                 while (numOfBug<10){
                     System.out.println("Введите резюме дефекта: ");
 
@@ -42,7 +42,6 @@ public class Main {
 
                     listOfBugs[numOfBug] = bugDesc;
                     numOfBug++;
-                    //todo идея подсказывает дело
                     break;
                 }
             }
