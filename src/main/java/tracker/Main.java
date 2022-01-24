@@ -4,41 +4,42 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        final int WEEK = 5;
-        Scanner scanner = new Scanner(System.in);
-        // todo 1 - "i" не объясняет смысл переменной
-        int i = 0;
-        // todo 3 - по массиву на каждое поле (резюме, критичность, дни)
-        // todo 3 - 10 константа
-        String[] bugs = new String[10];
-        // todo 1 - toDoList -> command, input, action, не понятно при чем тут лист
-        String toDoList = null;
 
-        while (!Objects.equals(toDoList, "quit")) {
+        Scanner scanner = new Scanner(System.in);
+        final String[] bugs = new String[10];
+        String[] resumeBug = new String[bugs.length];
+        String[] severityBug = new String[bugs.length];
+        int[] daysToFixBug = new int[bugs.length];
+
+        // todo 1 - toDoList -> command, input, action, не понятно при чем тут лист
+        // не очень понятен комментарий: лист - перечень, toDoList - перечень того, что сделать
+        String commandList = null;
+
+        int countBugs = 0;
+        while (!Objects.equals(commandList, "quit")) {
             System.out.println("Введите: add, list или quit");
-            toDoList = scanner.nextLine();
-            switch (toDoList) {
+            commandList = scanner.nextLine();
+            switch (commandList) {
                 case "add":
-                    if (i < bugs.length) {
+                    if (countBugs < bugs.length) {
                         System.out.println("Введите резюме дефекта");
-                        String resume = scanner.nextLine();
+                        resumeBug[countBugs] = scanner.nextLine();
                         System.out.println("Введите критичность дефекта");
-                        String severity = scanner.nextLine();
+                        severityBug[countBugs] = scanner.nextLine();
                         System.out.println("Введите количество дней на исправление дефекта");
-                        int countDays = scanner.nextInt();
+                        daysToFixBug[countBugs] = scanner.nextInt();
                         scanner.nextLine();
-                        boolean takeWeek = countDays > WEEK; // todo ? - в принципе можно убрать, оно только в дз 2 нужно было
-                        bugs[i] = "Номер дефекта: " + i + " | " + "Резюме: " + resume + " | " +
-                                "Критичность: " + severity + " | " + "Дней на исправление: " + countDays +
-                                " | " + "Займет больше рабочей недели: " + takeWeek;
-                        i++;
+                        bugs[countBugs] = "Номер дефекта: " + countBugs + " | " + "Резюме: " + resumeBug[countBugs] +
+                                " | " + "Критичность: " + severityBug[countBugs] + " | " +
+                                "Дней на исправление: " + daysToFixBug[countBugs];
+                        countBugs++;
                     } else {
                         System.out.println("Превышено максимально допустимое кол-во дефектов");
                     }
                     break;
 
                 case "list":
-                    for (int a = 0; a < i; a++) {
+                    for (int a = 0; a < countBugs; a++) {
                         System.out.println(bugs[a]);
                     }
                     break;
