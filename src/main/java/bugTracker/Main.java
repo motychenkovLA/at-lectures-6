@@ -6,6 +6,8 @@ public class Main {
     public static void main(String[] args) {
 
         final int WORK_DAYS_IN_WEEK = 5;
+        //todo магическое число 10
+        //todo неудачный вариант хранения данных дефектов
         String [] listOfBugs = new String[10];
         int numOfBug = 0;
 
@@ -14,12 +16,15 @@ public class Main {
                     "Введите list, чтобы вывести список дефектов\n" +
                     "Введите quit для выхода из прогруммы ");
             Scanner scanner = new Scanner(System.in);
+            //todo можно в одну строчку
             String selectionInTheMainMenu;
             selectionInTheMainMenu = scanner.nextLine();
 
             if (selectionInTheMainMenu.equals("add")){
+                //todo нужно ли это? ессли да, то почему не во всех пунктах?
                 System.out.println("Зашел в add");
 
+                //todo магическое число
                 while (numOfBug<10){
                     System.out.println("Введите резюме дефекта: ");
 
@@ -37,6 +42,7 @@ public class Main {
 
                     listOfBugs[numOfBug] = bugDesc;
                     numOfBug++;
+                    //todo идея подсказывает дело
                     break;
                 }
             }
@@ -46,8 +52,11 @@ public class Main {
                 }
             }
             if (selectionInTheMainMenu.equals("quit")) {
+                //todo тут можно сказать пользователю - До свидания!)
                 break;
             }
+
+            //todo можно добавить обработку некорректного выбора пункта меню
         }
     }
 }
