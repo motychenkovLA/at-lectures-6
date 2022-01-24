@@ -5,13 +5,17 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         int menuItem = 0;
+        //todo неговорящее имя переменной
         int i = 0;
         final int WORK_WEEK = 5;
+        //todo не дефект а дефектЫ
         String[] defect;
+        //todo магическое число 10
+        //todo плохое решение хранить данные в строке
         defect = new String[10];
         Scanner scanner = new Scanner(System.in);
 
-
+        //todo рабочее решение но с ходу непонятно зачем оно тут
         while (menuItem != 3){
             System.out.println("Выберите действие(укажите номер пункта меню): \n" +
                     "1.Добавить дефект\n" +
@@ -19,6 +23,8 @@ public class Main {
                     "3.Выход");
             menuItem = scanner.nextInt();
             scanner.nextLine();
+
+            //todo необходимо отформатировать кейсы, обромить {}
             switch (menuItem){
                 case 1: if (i < defect.length) {
                     System.out.println("Введите описание дефекта");
@@ -36,6 +42,7 @@ public class Main {
                     break;
 
                 case 2:
+                    //todo не то что бы придираюсь но в консоли выглядит ужасно), можно переделать с таблицы на карточки
                     System.out.println( "Описание дефекта | Критичность | Дней на исправление | Займет меньше рабочей недели");
                     for (int j = 0;j < i;j++) {
                         System.out.println(defect[j]);
@@ -43,6 +50,7 @@ public class Main {
                     break;
 
                 case 3:
+                    //todo тут можно сказать пользователю что то типа - До свидания!)
                     break;
 
                 default:
