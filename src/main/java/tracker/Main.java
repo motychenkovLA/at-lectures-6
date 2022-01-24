@@ -6,8 +6,12 @@ public class Main {
     public static void main(String[] args) {
         final int WEEK = 5;
         Scanner scanner = new Scanner(System.in);
+        // todo 1 - "i" не объясняет смысл переменной
         int i = 0;
+        // todo 3 - по массиву на каждое поле (резюме, критичность, дни)
+        // todo 3 - 10 константа
         String[] bugs = new String[10];
+        // todo 1 - toDoList -> command, input, action, не понятно при чем тут лист
         String toDoList = null;
 
         while (!Objects.equals(toDoList, "quit")) {
@@ -23,7 +27,7 @@ public class Main {
                         System.out.println("Введите количество дней на исправление дефекта");
                         int countDays = scanner.nextInt();
                         scanner.nextLine();
-                        boolean takeWeek = countDays > WEEK;
+                        boolean takeWeek = countDays > WEEK; // todo ? - в принципе можно убрать, оно только в дз 2 нужно было
                         bugs[i] = "Номер дефекта: " + i + " | " + "Резюме: " + resume + " | " +
                                 "Критичность: " + severity + " | " + "Дней на исправление: " + countDays +
                                 " | " + "Займет больше рабочей недели: " + takeWeek;
