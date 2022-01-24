@@ -8,10 +8,9 @@ public class Main {
         final int WORK_DAYS_IN_WEEK = 5;
         final int MAX_COUNT_OF_BUGS = 10;
 
-        String [] defectSummaryArray = new String[MAX_COUNT_OF_BUGS];
-        String [] defectPriorityArray = new String[MAX_COUNT_OF_BUGS];
-        int [] defectDayCountArray = new int[MAX_COUNT_OF_BUGS];
-        boolean [] moreThanWeekArray = new boolean[MAX_COUNT_OF_BUGS];
+        String [] defectSummaries = new String[MAX_COUNT_OF_BUGS];
+        String [] defectPriorities = new String[MAX_COUNT_OF_BUGS];
+        int [] daysOfFix = new int[MAX_COUNT_OF_BUGS];
         int numOfBug = 0;
 
         while (true){
@@ -34,12 +33,9 @@ public class Main {
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта: ");
                     int defectDayCount = scanner.nextInt();
 
-                    boolean moreThanWeek = defectDayCount > WORK_DAYS_IN_WEEK;
-
-                    defectSummaryArray[numOfBug] = defectSummary;
-                    defectPriorityArray[numOfBug] = defectPriority;
-                    defectDayCountArray[numOfBug] = defectDayCount;
-                    moreThanWeekArray[numOfBug] = moreThanWeek;
+                    defectSummaries[numOfBug] = defectSummary;
+                    defectPriorities[numOfBug] = defectPriority;
+                    daysOfFix[numOfBug] = defectDayCount;
                     numOfBug++;
                 } else {
                     System.out.println("Достигнуто максимальное количество дефектов!");
@@ -47,9 +43,11 @@ public class Main {
             }
             else if (selectionInTheMainMenu.equals("list")) {
                 for (int i = 0; i<numOfBug; i++){
-                    System.out.println("Резюме: " + defectSummaryArray[i] + " | Серьезность: " +
-                            defectPriorityArray[i] + " | Количество дней на исправление: " + defectDayCountArray[i] +
-                                    " | Займет больше рабочей недели: " + moreThanWeekArray[i]);
+
+                    boolean moreThanWeek = daysOfFix[i] > WORK_DAYS_IN_WEEK;
+                    System.out.println("Резюме: " + defectSummaries[i] + " | Серьезность: " +
+                            defectPriorities[i] + " | Количество дней на исправление: " + daysOfFix[i] +
+                                    " | Займет больше рабочей недели: " + moreThanWeek);
                 }
             }
             else if (selectionInTheMainMenu.equals("quit")) {
