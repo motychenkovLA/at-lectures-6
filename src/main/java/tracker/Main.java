@@ -6,6 +6,8 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        // todo 3 - 10 константа
+        // todo 3 - bugs всё ещё используется/существует, хотя все данные уже лежат не в нем
         final String[] bugs = new String[10];
         String[] resumeBug = new String[bugs.length];
         String[] severityBug = new String[bugs.length];
@@ -13,6 +15,7 @@ public class Main {
 
         // todo 1 - toDoList -> command, input, action, не понятно при чем тут лист
         // не очень понятен комментарий: лист - перечень, toDoList - перечень того, что сделать
+        // как может в одной строке лежать целый лист? пользователь ведь вводит одну команду за раз
         String commandList = null;
 
         int countBugs = 0;
