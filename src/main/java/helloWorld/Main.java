@@ -3,6 +3,6 @@ package helloWorld;
 import java.util.Scanner;
 public class Main<date> {
     public static void main(String[] args) {
-        System.out.println("hi");
+        System.out.println("hive");
     }
 }
