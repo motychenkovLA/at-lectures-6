@@ -6,25 +6,19 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        // todo 3 - 10 константа
-        // todo 3 - bugs всё ещё используется/существует, хотя все данные уже лежат не в нем
-        final String[] bugs = new String[10];
-        String[] resumeBug = new String[bugs.length];
-        String[] severityBug = new String[bugs.length];
-        int[] daysToFixBug = new int[bugs.length];
+        final int maxBugs = 10;
+        String[] resumeBug = new String[maxBugs];
+        String[] severityBug = new String[maxBugs];
+        int[] daysToFixBug = new int[maxBugs];
 
-        // todo 1 - toDoList -> command, input, action, не понятно при чем тут лист
-        // не очень понятен комментарий: лист - перечень, toDoList - перечень того, что сделать
-        // как может в одной строке лежать целый лист? пользователь ведь вводит одну команду за раз
-        String commandList = null;
-
+        String command = null;
         int countBugs = 0;
-        while (!Objects.equals(commandList, "quit")) {
+        while (!Objects.equals(command, "quit")) {
             System.out.println("Введите: add, list или quit");
-            commandList = scanner.nextLine();
-            switch (commandList) {
+            command = scanner.nextLine();
+            switch (command) {
                 case "add":
-                    if (countBugs < bugs.length) {
+                    if (countBugs < maxBugs) {
                         System.out.println("Введите резюме дефекта");
                         resumeBug[countBugs] = scanner.nextLine();
                         System.out.println("Введите критичность дефекта");
@@ -32,9 +26,6 @@ public class Main {
                         System.out.println("Введите количество дней на исправление дефекта");
                         daysToFixBug[countBugs] = scanner.nextInt();
                         scanner.nextLine();
-                        bugs[countBugs] = "Номер дефекта: " + countBugs + " | " + "Резюме: " + resumeBug[countBugs] +
-                                " | " + "Критичность: " + severityBug[countBugs] + " | " +
-                                "Дней на исправление: " + daysToFixBug[countBugs];
                         countBugs++;
                     } else {
                         System.out.println("Превышено максимально допустимое кол-во дефектов");
@@ -43,7 +34,9 @@ public class Main {
 
                 case "list":
                     for (int a = 0; a < countBugs; a++) {
-                        System.out.println(bugs[a]);
+                        System.out.println("Номер дефекта: " + a + " | " + "Резюме: " + resumeBug[a] +
+                                " | " + "Критичность: " + severityBug[a] + " | " +
+                                "Дней на исправление: " + daysToFixBug[a]);
                     }
                     break;
 
