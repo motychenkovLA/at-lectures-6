@@ -39,7 +39,7 @@ public class dz2 {
         System.out.println("Введите Число - ожидаемое количество дней на исправление дефекта:");
         byte Bug_NumberOfDays = scanner.nextByte();
     //  Проверка: займёт ли кол-во дней больше рабочей недели
-        boolean BiggerThanWeek = Bug_NumberOfDays > 5;
+        boolean BiggerThanWeek = Bug_NumberOfDays > 4;
     //  Вывод итоговой информации о заведенном дефекте
         System.out.println("Резюме: " + Bug_Resume);
         System.out.println("Критичность: " + Bug_Severity);
