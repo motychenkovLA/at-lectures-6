@@ -13,23 +13,23 @@ public class dz2 {
         java.util.Scanner scanner = new java.util.Scanner(System.in);
     //  Ввести резюме
         System.out.println("Напишите резюме дефекта:");
-        String Bug_Resume = scanner.nextLine();
+        String resume = scanner.nextLine();
     //  Варианты критичности бага
-        String[] Case_Bug_Severity = new String[2];
-        Case_Bug_Severity [0] = "Низкий";
-        Case_Bug_Severity [1] = "Высокий";
+        String[] severitys = new String[2];
+        severitys [0] = "Низкий";
+        severitys [1] = "Высокий";
     //  Вывод вариантов ввода критичности бага
         boolean check = false;
-        String Bug_Severity = null;
+        String severity = null;
         while(!check) {
             System.out.println("Оцените и введите критичность дефекта. Варианты: ");
-            for (String value : Case_Bug_Severity) {
+            for (String value : severitys) {
                 System.out.println(value);
             }
-            Bug_Severity = scanner.nextLine();
+            severity = scanner.nextLine();
             //  Проверка введенного варианта
-            for (String s : Case_Bug_Severity) {
-                if (Objects.equals(Bug_Severity, s)) {
+            for (String s : severitys) {
+                if (Objects.equals(severity, s)) {
                     check = true;
                     break;
                 }
@@ -37,13 +37,14 @@ public class dz2 {
         }
     //  Ввести кол-во дней
         System.out.println("Введите Число - ожидаемое количество дней на исправление дефекта:");
-        byte Bug_NumberOfDays = scanner.nextByte();
+        int numberofdays = scanner.nextInt();
+        scanner.nextLine();
     //  Проверка: займёт ли кол-во дней больше рабочей недели
-        boolean BiggerThanWeek = Bug_NumberOfDays > 4;
+        boolean biggerthanweek = numberofdays > 4;
     //  Вывод итоговой информации о заведенном дефекте
-        System.out.println("Резюме: " + Bug_Resume);
-        System.out.println("Критичность: " + Bug_Severity);
-        System.out.println("Займет количество дней: " + Bug_NumberOfDays);
-        System.out.println("Займёт больше рабочей недели: " + BiggerThanWeek);
+        System.out.println("Резюме: " + resume);
+        System.out.println("Критичность: " + severity);
+        System.out.println("Займет количество дней: " + numberofdays);
+        System.out.println("Займёт больше рабочей недели: " + biggerthanweek);
     }
 }
