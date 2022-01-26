@@ -13,6 +13,7 @@ public class Main {
         int[] daysNumbers = new int[maxBugs];
         int numberOfBug = 0;
 
+        label:
         while (true) {
             System.out.println("add - добавить новый дефект" + "\nlist - вывести список дефектов" + "\nquit - выход из программы ");
 
@@ -20,36 +21,39 @@ public class Main {
             Scanner scanner = new Scanner(System.in);
             String menu = scanner.nextLine();
 
-            if (menu.equals("add")) {
+            switch (menu) {
+                case "add":
 
-                if (numberOfBug < maxBugs) {
-                    System.out.println("Введите резюме дефекта");
+                    if (numberOfBug < maxBugs) {
+                        System.out.println("Введите резюме дефекта");
 
-                    String description = scanner.nextLine();
-                    System.out.println("Введите критичность дефекта:\nLow\nMedium\nHigh\nCritical");
-                    String critical = scanner.nextLine();
-                    System.out.println("Введите ожидаемое количество дней на исправление дефекта");
-                    int daysNumber = scanner.nextInt();
+                        String description = scanner.nextLine();
+                        System.out.println("Введите критичность дефекта:\nLow\nMedium\nHigh\nCritical");
+                        String critical = scanner.nextLine();
+                        System.out.println("Введите ожидаемое количество дней на исправление дефекта");
+                        int daysNumber = scanner.nextInt();
 
 
-                    descriptions[numberOfBug] = description;
-                    criticals[numberOfBug] = critical;
-                    daysNumbers[numberOfBug] = daysNumber;
-                    numberOfBug++;
+                        descriptions[numberOfBug] = description;
+                        criticals[numberOfBug] = critical;
+                        daysNumbers[numberOfBug] = daysNumber;
+                        numberOfBug++;
 
-                } else {
-                    System.out.println("Достигнуто максимальное количество дефектов");
-                }
-            } else if (menu.equals("list")) {
-                for (int i = 0; i < numberOfBug; i++) {
-                    int workWeek = 5;
-                    boolean moreThanWorkWeek = daysNumbers[i] >= workWeek;
-                    System.out.println(descriptions[i] + " | " + criticals[i] + " | " + daysNumbers[i] + " | Займёт больше рабочей недели:" + moreThanWorkWeek);
-                }
+                    } else {
+                        System.out.println("Достигнуто максимальное количество дефектов");
+                    }
+                    break;
+                case "list":
+                    for (int i = 0; i < numberOfBug; i++) {
+                        int workWeek = 5;
+                        boolean moreThanWorkWeek = daysNumbers[i] >= workWeek;
+                        System.out.println(descriptions[i] + " | " + criticals[i] + " | " + daysNumbers[i] + " | Займёт больше рабочей недели:" + moreThanWorkWeek);
+                    }
 
-            } else if (menu.equals("quit")) {
-                System.out.println("Выход из программы");
-                break;
+                    break;
+                case "quit":
+                    System.out.println("Выход из программы");
+                    break label;
             }
         }
     }
