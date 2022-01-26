@@ -1,7 +1,7 @@
 package helloWorld;
 import java.util.Objects;
 import java.util.Scanner;
-public class dz3 {
+public class HomeWork {
     public static void  main (String[] args) {
         /*  Задание:
          *   Главное меню: добавить дефект add(как в dz1), вывести список list, выйти из программы quit
