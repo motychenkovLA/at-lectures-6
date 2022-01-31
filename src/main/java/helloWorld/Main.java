@@ -13,8 +13,7 @@ public class Main {
         int[] daysNumbers = new int[maxBugs];
         int numberOfBug = 0;
 
-        label:
-        while (true) {
+                while (true) {
             System.out.println("add - добавить новый дефект" + "\nlist - вывести список дефектов" + "\nquit - выход из программы ");
 
 
@@ -53,7 +52,7 @@ public class Main {
                     break;
                 case "quit":
                     System.out.println("Выход из программы");
-                    break label;
+                    break;
             }
         }
     }
