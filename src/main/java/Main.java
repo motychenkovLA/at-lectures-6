@@ -2,12 +2,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //todo убрать второй сканер
         Scanner sc = new Scanner(System.in);
-        //todo убрать условие сделать wile true
         String command = "";
-        //todo нейминг                      \/ магическое число
-        //todo разбить на 3 массива
         final int MAX_COUNT_DEFECT = 10;
         final int NUMBER_DAY_WORK_WEEKS = 5;
         int countDefects = 0;
@@ -37,7 +33,6 @@ public class Main {
                     System.out.println("Хранилище может содержать не более " + MAX_COUNT_DEFECT);
             }
             else if(command.equals("List")) {
-                //todo вывести только заполненные
                 for(int i = 0; i < MAX_COUNT_DEFECT; i++) {
                     if(resume[i] != null) {
                         System.out.print("Номер дефекта " + i + " ");
@@ -51,7 +46,6 @@ public class Main {
                 }
             }
             else if(command.equals("Quit")) {
-                //todo сказать досводиния
                 System.out.println("До свидания!");
                 break;
             }
