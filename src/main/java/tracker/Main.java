@@ -12,9 +12,7 @@ public class Main {
         boolean isRun = true; // показатель того, в работе мы или идем на выход
         int  countBug = 0; //кол-во заведенных дефектов
 
-        String[] defectResumes  = new String[MAX_BUG]; //массив резюме дефектов
-        String[] defectCrits  = new String[MAX_BUG]; //массив критичностей дефектов
-        int[] defectDays  = new int[MAX_BUG]; //массив критичностей дефектов
+        Defect[] defects  = new Defect[MAX_BUG]; //массив дефектов
 
         Scanner scanner = new Scanner(System.in);
 
@@ -31,23 +29,24 @@ public class Main {
                         System.out.println("В списке есть уже " + MAX_BUG + " дефектов, больше ввести невозможно!");
                     }else {
                         System.out.println("Введите резюме дефекта");
-                        defectResumes[countBug] = scanner.nextLine();
+                        String resume = scanner.nextLine();
 
                         System.out.println("Введите критичность дефекта (Low, Medium, High)");
-                        defectCrits[countBug] = scanner.nextLine();
+                        String priority = scanner.nextLine();
 
                         System.out.println("Введите ожидаемое кол-во дней на исправление дефекта");
-                        defectDays[countBug] = scanner.nextInt();
+                        int daysToFix = scanner.nextInt();
                         scanner.nextLine();
 
+                        Defect bug = new Defect(resume, priority, daysToFix);
+                        defects[countBug] = bug;
                         countBug++;
                     }
                     break;
                 }
                 case ("list"): {
-                    System.out.println(" Номер |  Резюме  | Серьезность | Кол-во дней на исправление ");
-                    for (int i = 0; i < countBug; i++) {
-                        System.out.println(i + "  |  " + defectResumes[i] + "  |  " + defectCrits[i] + "  |  " + defectDays[i]);
+                    for(Defect bug : defects){
+                        if (bug != null) System.out.println(bug.toString());
                     }
                     break;
                 }
