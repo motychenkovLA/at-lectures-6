@@ -23,12 +23,13 @@ public class Main {
             switch (menuItem){
                 case 1: {
                     if (defectCounter < MAX_NUMBER_OF_DEFECTS) {
+                        //todo переделать в соответствии с конструктором
                         System.out.println("Введите описание дефекта");
                         defects[defectCounter] = new Defect();                                  //создаём экземпляр дефекта
                         defects[defectCounter].Id = defectCounter + 1;                          //присваеваем Id дефекта
                         defects[defectCounter].resume = scanner.nextLine();                     //заполняем описание
                         System.out.println("Введите критичность дефекта: Low, Mid, High, Critical");
-                        defects[defectCounter].criticality = scanner.nextLine();                //заполняем критичность
+                        defects[defectCounter].sewerity = scanner.nextLine();                //заполняем критичность
                         System.out.println("Введите ожидаемое количество дней на исправление");
                         defects[defectCounter].daysToFix = scanner.nextInt();                   //заполняем количество дней на исправление
                         defectCounter++;
