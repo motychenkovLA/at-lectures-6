@@ -45,11 +45,8 @@ public class Main {
                     break;
                 }
                 case ("list"): {
-                    // todo 3 - лучше перебирать до countBug.
-                    //   допустим у нас максимум дефектов 1_000_000, а заведено 10,
-                    //   тогда цикл выполнится 1_000_000 раз из них 999_990 ничего не делая.
-                    for(Defect bug : defects){
-                        if (bug != null) System.out.println(bug.toString()); // todo 1 - toString можно опустить
+                    for (int i = 0; i < countBug; i++){
+                        System.out.println(defects[i]);
                     }
                     break;
                 }
