@@ -42,7 +42,7 @@ public class Main {
             }
             else if (selectionInTheMainMenu.equals("list")) {
                 for (int i = 0; i<numOfBug; i++){
-                    String info = defects[i].getInfo(defects[i].id, defects[i].summary, defects[i].priority, defects[i].dayCount);
+                    String info = defects[i].getInfo();
                     System.out.println(info);
                 }
             }
