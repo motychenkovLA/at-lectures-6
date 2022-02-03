@@ -22,7 +22,6 @@ public class Main {
             switch (menuItem){
                 case 1: {
                     if (defectCounter < MAX_NUMBER_OF_DEFECTS) {
-                        //переделать в соответствии с конструктором - исправлено
                         System.out.println("Введите описание дефекта");
                         String resume = scanner.nextLine();                                                     //заполняем описание
                         System.out.println("Введите критичность дефекта: Low, Mid, High, Critical");
