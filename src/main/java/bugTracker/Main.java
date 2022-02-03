@@ -8,8 +8,7 @@ public class Main {
         final int WORK_DAYS_IN_WEEK = 5;
         final int MAX_COUNT_OF_BUGS = 10;
 
-        //todo в множественном числе - defects
-        Defect [] defect = new Defect[MAX_COUNT_OF_BUGS];
+        Defect [] defects = new Defect[MAX_COUNT_OF_BUGS];
         int numOfBug = 0;
 
         while (true){
@@ -23,20 +22,18 @@ public class Main {
             if (selectionInTheMainMenu.equals("add")){
 
                 if (numOfBug<MAX_COUNT_OF_BUGS) {
-                    Defect newDefect = new Defect();
-                    newDefect.setId(numOfBug);
                     System.out.println("Введите резюме дефекта: ");
-
-                    newDefect.setDefectSummary(scanner.nextLine());
+                    String summary = scanner.nextLine();
 
                     System.out.println("Введите критичность дефекта, например:\nP1 – Высокая (High);\n" +
                             "P2 – Средняя (Medium);\nP3 – Низкая (Low).");
-                    newDefect.setDefectPriority(scanner.nextLine());
+                    String priority = scanner.nextLine();
 
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта: ");
-                    newDefect.setDefectDayCount(scanner.nextInt());
+                    int dayCount = scanner.nextInt();
 
-                    defect[numOfBug] = newDefect;
+                    Defect newDefect = new Defect(numOfBug, summary, priority, dayCount);
+                    defects[numOfBug] = newDefect;
                     numOfBug++;
                 } else {
                     System.out.println("Достигнуто максимальное количество дефектов!");
@@ -44,11 +41,11 @@ public class Main {
             }
             else if (selectionInTheMainMenu.equals("list")) {
                 for (int i = 0; i<numOfBug; i++){
-                //todo в выводе пропустила ID
-                    boolean moreThanWeek = defect[i].getDefectDayCount() > WORK_DAYS_IN_WEEK;
-                    System.out.println("Резюме: " + defect[i].getDefectSummary() + " | Серьезность: " +
-                            defect[i].getDefectPriority() + " | Количество дней на исправление: " +
-                            defect[i].getDefectDayCount() + " | Займет больше рабочей недели: " + moreThanWeek);
+
+                    boolean moreThanWeek = defects[i].getDayCount() > WORK_DAYS_IN_WEEK;
+                    System.out.println("ID: " + numOfBug + " | Резюме: " + defects[i].getSummary() + " | Серьезность: " +
+                            defects[i].getPriority() + " | Количество дней на исправление: " +
+                            defects[i].getDayCount() + " | Займет больше рабочей недели: " + moreThanWeek);
                 }
             }
             else if (selectionInTheMainMenu.equals("quit")) {
