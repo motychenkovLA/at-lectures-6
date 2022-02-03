@@ -35,6 +35,7 @@ public class Main {
                     Defect newDefect = new Defect(numOfBug, summary, priority, dayCount);
                     defects[numOfBug] = newDefect;
                     numOfBug++;
+
                 } else {
                     System.out.println("Достигнуто максимальное количество дефектов!");
                 }
@@ -43,7 +44,7 @@ public class Main {
                 for (int i = 0; i<numOfBug; i++){
 
                     boolean moreThanWeek = defects[i].getDayCount() > WORK_DAYS_IN_WEEK;
-                    System.out.println("ID: " + numOfBug + " | Резюме: " + defects[i].getSummary() + " | Серьезность: " +
+                    System.out.println("ID: " + defects[i].id + " | Резюме: " + defects[i].getSummary() + " | Серьезность: " +
                             defects[i].getPriority() + " | Количество дней на исправление: " +
                             defects[i].getDayCount() + " | Займет больше рабочей недели: " + moreThanWeek);
                 }
