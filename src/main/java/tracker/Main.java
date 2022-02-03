@@ -6,7 +6,8 @@ public class Main {
     public static void main(String[] args) {
         boolean run = true;
         int numberOfDefects = 0;
-        final int CONST_STYLE = 10;
+        final int CONST_STYLE = 10; // todo 1 - константа с названием константа
+        // todo 1 - объявление переменных задолго до использования
         String resume;
         String critical;
         int numberOfDays;

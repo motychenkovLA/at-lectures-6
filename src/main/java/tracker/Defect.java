@@ -1,5 +1,6 @@
 package tracker;
 
+// todo 5 - "дефект" содержит текстовые описания всех дефектов, не описывает дефект, не содержит полей
 public class Defect {
     String [] defects;
     void setConstStyle(int CONST_STYLE) {
