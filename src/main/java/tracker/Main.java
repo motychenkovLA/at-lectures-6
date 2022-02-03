@@ -15,7 +15,7 @@ public class Main {
             switch (action) {
                 case "list":
                     for (int i = 0; i < numberOfDefects; i++) {
-                        System.out.println(defectList[i].getDefect());
+                        System.out.println(defectList[i].printDefect());
                     }
 
                     break;
@@ -32,8 +32,8 @@ public class Main {
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта");
                     int numberOfDays = console.nextInt();
                     console.nextLine();
-                    defectList[numberOfDefects] = new Defect();
-                    defectList[numberOfDefects].addDefect(numberOfDefects, resume, critical, numberOfDays);
+                    defectList[numberOfDefects] = new Defect(numberOfDefects, resume, critical, numberOfDays);
+
                     numberOfDefects++;
                     break;
                 case "quit":
