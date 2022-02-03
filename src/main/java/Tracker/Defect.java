@@ -1,28 +1,26 @@
 package Tracker;
 
 public class Defect {
-    //todo апперкейс
-    int Id;
+    //апперкейс - исправлено
+    int id;              //порядковый номер дефекта
     String resume;       //описание дефекта
-    String sewerity;  //критичность дефекта
+    String priority;     //критичность дефекта
     int daysToFix;       // время на иправление
 
-    //todo нужен конструктор алл аргс
+    //нужен конструктор алл аргс - исправлено
 
-    //    void printDefectInfo(int WORK_WEEK){ //метод для вывода дефекта
-//        boolean fixInAWeek = daysToFix < WORK_WEEK;
-//        System.out.println(Id + ". Описание: " + resume + "|"
-//                         + "  Критичность: " + criticality + "|"
-//                         + "  Дней на исправление: " + daysToFix+ "|"
-//                         + "  Займёт меньше рабочей недели: " + fixInAWeek);
-//    }
+    public Defect(int id, String resume, String priority, int daysToFix) {
+        this.id = id;
+        this.resume = resume;
+        this.priority = priority;
+        this.daysToFix = daysToFix;
+    }
 
-    String getInfo(int WORK_WEEK){
-        boolean fixInAWeek = daysToFix < WORK_WEEK;
-        return Id + ". Описание: " + resume + "|"
-                + "  Критичность: " + sewerity + "|"
-                + "  Дней на исправление: " + daysToFix+ "|"
-                + "  Займёт меньше рабочей недели: " + fixInAWeek;
+
+    String getInfo(){
+        return id + ". Описание: " + resume + "|"
+                + "  Критичность: " + priority + "|"
+                + "  Дней на исправление: " + daysToFix;
     }
 
 }
