@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        final int WORK_DAYS_IN_WEEK = 5;
+        //final int WORK_DAYS_IN_WEEK = 5;
         final int MAX_COUNT_OF_BUGS = 10;
 
         Defect [] defects = new Defect[MAX_COUNT_OF_BUGS];
@@ -42,11 +42,8 @@ public class Main {
             }
             else if (selectionInTheMainMenu.equals("list")) {
                 for (int i = 0; i<numOfBug; i++){
-
-                    boolean moreThanWeek = defects[i].getDayCount() > WORK_DAYS_IN_WEEK;
-                    System.out.println("ID: " + defects[i].id + " | Резюме: " + defects[i].getSummary() + " | Серьезность: " +
-                            defects[i].getPriority() + " | Количество дней на исправление: " +
-                            defects[i].getDayCount() + " | Займет больше рабочей недели: " + moreThanWeek);
+                    String info = defects[i].getInfo(defects[i].id, defects[i].summary, defects[i].priority, defects[i].dayCount);
+                    System.out.println(info);
                 }
             }
             else if (selectionInTheMainMenu.equals("quit")) {

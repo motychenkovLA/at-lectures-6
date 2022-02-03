@@ -24,7 +24,7 @@ public class Defect {
         return dayCount;
     }
 
-    public String getInfo(){
+    public String getInfo(long id, String summary, String priority, int dayCount){
         String info = "ID: " + id + " | Резюме: " + summary + " | Серьезность: " +
                 priority + " | Количество дней на исправление: " +
                 dayCount;
