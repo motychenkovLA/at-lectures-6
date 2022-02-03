@@ -8,6 +8,7 @@ public class Main {
         final int WORK_DAYS_IN_WEEK = 5;
         final int MAX_COUNT_OF_BUGS = 10;
 
+        //todo в множественном числе - defects
         Defect [] defect = new Defect[MAX_COUNT_OF_BUGS];
         int numOfBug = 0;
 
@@ -43,7 +44,7 @@ public class Main {
             }
             else if (selectionInTheMainMenu.equals("list")) {
                 for (int i = 0; i<numOfBug; i++){
-
+                //todo в выводе пропустила ID
                     boolean moreThanWeek = defect[i].getDefectDayCount() > WORK_DAYS_IN_WEEK;
                     System.out.println("Резюме: " + defect[i].getDefectSummary() + " | Серьезность: " +
                             defect[i].getDefectPriority() + " | Количество дней на исправление: " +

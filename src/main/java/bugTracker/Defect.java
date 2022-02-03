@@ -2,9 +2,13 @@ package bugTracker;
 
 public class Defect {
     long id;
+    //todo поля и так находятся в классе Defect не нужно перегружать название уже известной информацией)
+    // достаточно просто - summary, priority и т.д.
     String defectSummary;
     String defectPriority;
     int defectDayCount;
+
+    //todo В принципе пправильно, но вариант с инициализацией через конструктор логичнее.
 
     public Defect(){
 
