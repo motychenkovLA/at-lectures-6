@@ -4,23 +4,14 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        int menuItem;
-        //неговорящее имя переменной - исправлено
-        int defectNumber = 0;
-        final int WORK_WEEK = 5;
-        //магическое число 10 - исправлено
-        final int MAX_NUMBER_OF_DEFECTS = 10;
-        //не дефект а дефектЫ - переменная больше не используется
-        //плохое решение хранить данные в строке - исправлено
-        String[] resume = new String[MAX_NUMBER_OF_DEFECTS];
-        String[] criticality = new String[MAX_NUMBER_OF_DEFECTS];
-        int[] daysToFix = new int[MAX_NUMBER_OF_DEFECTS];
-
-
+        int menuItem;                                           //пункт меню
+        int defectCounter = 0;                                  //счётчик дефектов
+        final int WORK_WEEK = 5;                                //количество рабочих дней в неделе
+        final int MAX_NUMBER_OF_DEFECTS = 10;                   //максимальное количество дефектов
+        Defect[] defects = new Defect[MAX_NUMBER_OF_DEFECTS];   //массив дефектов
         Scanner scanner = new Scanner(System.in);
-
-        //рабочее решение но с ходу непонятно зачем оно тут - испралвено
         boolean isRun = true;
+
         while (isRun){
             System.out.println("Выберите действие(укажите номер пункта меню): \n" +
                     "1.Добавить дефект\n" +
@@ -29,37 +20,34 @@ public class Main {
             menuItem = scanner.nextInt();
             scanner.nextLine();
 
-            //необходимо отформатировать кейсы, обромить {} - исправлено
             switch (menuItem){
                 case 1: {
-                    if (defectNumber < MAX_NUMBER_OF_DEFECTS) {
+                    if (defectCounter < MAX_NUMBER_OF_DEFECTS) {
                         System.out.println("Введите описание дефекта");
-                        resume[defectNumber] = scanner.nextLine();
+                        defects[defectCounter] = new Defect();                                  //создаём экземпляр дефекта
+                        defects[defectCounter].Id = defectCounter + 1;                          //присваеваем Id дефекта
+                        defects[defectCounter].resume = scanner.nextLine();                     //заполняем описание
                         System.out.println("Введите критичность дефекта: Low, Mid, High, Critical");
-                        criticality[defectNumber] = scanner.nextLine();
+                        defects[defectCounter].criticality = scanner.nextLine();                //заполняем критичность
                         System.out.println("Введите ожидаемое количество дней на исправление");
-                        daysToFix[defectNumber] = scanner.nextInt();
-                        defectNumber++;
-                    } else System.out.println("Превышено максимальное количество дефектов!");
-                    System.out.println();
+                        defects[defectCounter].daysToFix = scanner.nextInt();                   //заполняем количество дней на исправление
+                        defectCounter++;
+                    } else {
+                        System.out.println("Превышено максимальное количество дефектов!");
+                        System.out.println();
+                    }
                     break;
                 }
-
                 case 2: {
-                    //не то что бы придираюсь но в консоли выглядит ужасно), можно переделать с таблицы на карточки - исправлено
                     System.out.println("Список дефектов:");
-                    for (int i = 0; i < defectNumber; i++) {
-                        boolean fixInAWeek = daysToFix[i] < WORK_WEEK;
-                        System.out.println(i+1 + "." + "Описание: " + resume[i] + "|"
-                                                     + "  Критичность: " + criticality[i] + "|"
-                                                     + "  Дней на исправление: " + daysToFix[i]+ "|"
-                                                     + "  Займёт меньше рабочей недели: " + fixInAWeek);
-                    }
+                    for (int i = 0; i < defectCounter; i++) {
+//                               defects[i].printDefectInfo(WORK_WEEK);                             //вывод методом printDefectInfo()
+                                 System.out.println(defects[i].getInfo(WORK_WEEK));                 // вывод методом getInfo(), который возвращает строку
+                       }
                     System.out.println();
                     break;
                 }
                 case 3: {
-                    //тут можно сказать пользователю что то типа - До свидания!) - исправлено
                     System.out.println("До новых встреч!");
                     isRun = false;
                     break;
@@ -69,7 +57,6 @@ public class Main {
                     System.out.println();
                 }
             }
-
         }
     }
 }
