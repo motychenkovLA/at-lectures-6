@@ -1,7 +1,6 @@
 package tracker;
 
 public class Defect {
-    // todo 1 - они все и так находятся в классе дефект, нет смысла уточнять что ...Bug
     long id;
     String resume;
     String severity;
