@@ -8,7 +8,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         final int maxBugs = 10;
         Defect[] defectList = new Defect[maxBugs];
-        int idBug = 0;
+        int idBug = 0; // todo 1 - не используется
         String command = null;
         int countBugs = 0;
         while (!Objects.equals(command, "quit")) {
