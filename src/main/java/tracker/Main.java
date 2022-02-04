@@ -7,10 +7,8 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         final int maxBugs = 10;
-        String[] resumeBug = new String[maxBugs];
-        String[] severityBug = new String[maxBugs];
-        int[] daysToFixBug = new int[maxBugs];
-
+        Defect[] defectList = new Defect[maxBugs];
+        int idBug = 0;
         String command = null;
         int countBugs = 0;
         while (!Objects.equals(command, "quit")) {
@@ -20,12 +18,14 @@ public class Main {
                 case "add":
                     if (countBugs < maxBugs) {
                         System.out.println("Введите резюме дефекта");
-                        resumeBug[countBugs] = scanner.nextLine();
+                        String resumeBug = scanner.nextLine();
                         System.out.println("Введите критичность дефекта");
-                        severityBug[countBugs] = scanner.nextLine();
+                        String severityBug = scanner.nextLine();
                         System.out.println("Введите количество дней на исправление дефекта");
-                        daysToFixBug[countBugs] = scanner.nextInt();
+                        int daysToFixBug = scanner.nextInt();
                         scanner.nextLine();
+
+                        defectList[countBugs] = new Defect(countBugs + 1, resumeBug, severityBug, daysToFixBug);
                         countBugs++;
                     } else {
                         System.out.println("Превышено максимально допустимое кол-во дефектов");
@@ -34,9 +34,7 @@ public class Main {
 
                 case "list":
                     for (int a = 0; a < countBugs; a++) {
-                        System.out.println("Номер дефекта: " + a + " | " + "Резюме: " + resumeBug[a] +
-                                " | " + "Критичность: " + severityBug[a] + " | " +
-                                "Дней на исправление: " + daysToFixBug[a]);
+                        System.out.println(defectList[a].getBugsInfo());
                     }
                     break;
 
