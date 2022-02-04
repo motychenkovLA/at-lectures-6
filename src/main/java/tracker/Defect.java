@@ -2,23 +2,22 @@ package tracker;
 
 public class Defect {
     // todo 1 - они все и так находятся в классе дефект, нет смысла уточнять что ...Bug
-    long idBug;
-    String resumeBug;
-    String severityBug;
-    int daysToFixBug;
+    long id;
+    String resume;
+    String severity;
+    int daysToFix;
 
-    public Defect(long idBug, String resumeBug, String severityBug, int daysToFixBug) {
-        this.idBug = idBug;
-        this.resumeBug = resumeBug;
-        this.severityBug = severityBug;
-        this.daysToFixBug = daysToFixBug;
+    public Defect(long id, String resume, String severity, int daysToFix) {
+        this.id = id;
+        this.resume = resume;
+        this.severity = severity;
+        this.daysToFix = daysToFix;
     }
 
-
     String getBugsInfo() {
-        String bugsInfo = "Id дефекта: " + idBug + " | " + "Резюме: " + resumeBug +
-                                " | " + "Критичность: " + severityBug + " | " +
-                                "Дней на исправление: " + daysToFixBug;
+        String bugsInfo = "Id дефекта: " + id + " | " + "Резюме: " + resume +
+                                " | " + "Критичность: " + severity + " | " +
+                                "Дней на исправление: " + daysToFix;
         return bugsInfo;
     }
 
