@@ -14,8 +14,36 @@ public class Defect {
         this.daysToFix = daysToFix;
         this.id = counterOfBugs;
         counterOfBugs++;
+
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
+    }
+
+    public String getResume() {
+        return resume;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setDaysToFix(int daysToFix) {
+        this.daysToFix = daysToFix;
+    }
+
+    public int getDaysToFix() {
+        return daysToFix;
+    }
 
     public String toString() {
         return String.format(
