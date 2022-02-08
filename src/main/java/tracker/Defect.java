@@ -1,20 +1,33 @@
 package tracker;
 
 
+import java.util.Scanner;
+
 public class Defect {
-    int numberOfDefects;
-    String resume;
-    String critical;
-    int numberOfDays;
+    private String resume;
+    private String critical;
+    private int numberOfDays;
+    static long numberOfDefects=0;
+    private final long id;
 
-    Defect(int numberOfDefects, String resume, String critical, int numberOfDays) {
-        this.numberOfDefects = numberOfDefects;
-        this.resume = resume;
-        this.critical = critical;
-        this.numberOfDays = numberOfDays;
+    Defect() {
+        numberOfDefects++;
+        this.id = numberOfDefects;
+        Scanner console = new Scanner(System.in);
+        System.out.println("Введите резюме");
+        this.resume = console.nextLine();
+        System.out.println("Введите критичность дефекта: критично, некритично или *****");
+        this.critical = console.nextLine();
+        System.out.println("Введите ожидаемое количество дней на исправление дефекта");
+        this.numberOfDays = console.nextInt();
+
     }
 
-    String printDefect() {
-        return "" + numberOfDefects + " | " + resume + " | " + critical + " | " + numberOfDays;
+    String getDefect() {
+        return "" + id + " | " + resume + " | " + critical + " | " + numberOfDays;
     }
+    long getId() {
+        return id;
+    }
+
 }
