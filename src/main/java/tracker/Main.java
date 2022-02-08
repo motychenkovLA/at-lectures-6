@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
         boolean isRun = true; // показатель того, в работе мы или идем на выход
-        int  countBug = 0; //кол-во заведенных дефектов
+        int  countBug = 0; //кол-во заведенных дефектов // todo 3 - дублирует ответственность репозитория
 
         Scanner scanner = new Scanner(System.in);
 
