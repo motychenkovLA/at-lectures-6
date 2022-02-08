@@ -5,13 +5,11 @@ import java.util.*;
 
 public class Main {
     final static int MAX_BUG = 2;                                       //первоначальная размерность репозитория
-    private static final Repository repository = new Repository(MAX_BUG);     //создаем репозиторий
+    private static final Repository repository = new Repository();     //создаем репозиторий
 
     public static void main(String[] args) {
 
         boolean isRun = true; // показатель того, в работе мы или идем на выход
-        int  countBug = 0; //кол-во заведенных дефектов // todo 3 - дублирует ответственность репозитория
-
         Scanner scanner = new Scanner(System.in);
 
         while (isRun) {
@@ -37,14 +35,13 @@ public class Main {
 
                     Defect bug = new Defect(resume, priority, daysToFix);
                     repository.add(bug);
-                    countBug++;
                     break;
                 }
                 case ("list"): {
                     Defect[] defects;
                     defects=repository.getAll();
-                    for (int i = 0; i < countBug; i++){
-                        System.out.println(defects[i]);
+                    for(Defect bug : defects){
+                        System.out.println(bug);
                     }
                     break;
                 }
