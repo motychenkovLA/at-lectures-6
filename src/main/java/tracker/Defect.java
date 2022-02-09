@@ -2,6 +2,9 @@ package tracker;
 
 
 public class Defect {
+    // todo 0 - лучше статик поля объявить до не-статик полей
+    //   финалить что-то кроме id не обязательно, но в принципе можно
+    //   гетеры-сеттеры пока не используются, но можно добавить
     private final String resume;
     private final String critical;
     private final int numberOfDays;
