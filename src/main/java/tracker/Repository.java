@@ -10,6 +10,7 @@ public class Repository {
     }
 
     public void addDefect(int id, Defect defect) {
+
         defectsList[Defect.getCountDefects()] = defect;
     }
 
