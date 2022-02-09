@@ -11,6 +11,7 @@ public class Main {
         Repository repository = new Repository(maxDefects);
         while (run) {
             System.out.println("Чтобы добавить новый дефект, введите \"add\". Чтобы вывести список дефектов, введите \"list\". Чтобы выйти, введите \"quit\"");
+            console.nextLine();
             String action = console.nextLine();
             switch (action) {
                 case "list":
