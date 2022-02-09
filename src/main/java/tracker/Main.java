@@ -8,15 +8,14 @@ public class Main {
         Scanner console = new Scanner(System.in);
         System.out.println("Введите максимальное количеество дефектов:");
         int maxDefects = console.nextInt();
+        console.nextLine();
         Repository repository = new Repository(maxDefects);
         while (run) {
             System.out.println("Чтобы добавить новый дефект, введите \"add\". Чтобы вывести список дефектов, введите \"list\". Чтобы выйти, введите \"quit\"");
-            console.nextLine(); // todo 3 - что он тут делает? некоторые команды "съедаются", приходится вводить по два раза
             String action = console.nextLine();
             switch (action) {
                 case "list":
                     for (Defect defect : repository.getAll()) {
-                        if (defect == null) break; // todo 1 - null-а не может быть
                         System.out.println(defect.getDefectInfo());
                     }
                     break;
@@ -31,7 +30,7 @@ public class Main {
                     String critical = console.nextLine();
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта");
                     int numberOfDays = console.nextInt();
-                    // todo 3 - nextLine
+                    console.nextLine();
                     repository.add(new Defect(resume, critical, numberOfDays));
                     break;
                 case "quit":
