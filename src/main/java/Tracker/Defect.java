@@ -1,24 +1,22 @@
 package Tracker;
 
 public class Defect {
-    //апперкейс - исправлено
-    int id;              //порядковый номер дефекта
-    String resume;       //описание дефекта
-    String priority;     //критичность дефекта
-    int daysToFix;       // время на иправление
+    private static int i = 1;
+    private final int id;              //порядковый номер дефекта
+    private final String resume;       //описание дефекта
+    private final String priority;     //критичность дефекта
+    private final int daysToFix;       // время на иправление
 
-    //нужен конструктор алл аргс - исправлено
-
-    public Defect(int id, String resume, String priority, int daysToFix) {
-        this.id = id;
+    public Defect(String resume, String priority, int daysToFix) {
+        id = i;
+        i++;
         this.resume = resume;
         this.priority = priority;
         this.daysToFix = daysToFix;
     }
 
-
-    String getInfo(){
-        return id + ". Описание: " + resume + "|"
+    String getInfo() {
+        return "ID:" + id + ".Описание: " + resume + "|"
                 + "  Критичность: " + priority + "|"
                 + "  Дней на исправление: " + daysToFix;
     }
