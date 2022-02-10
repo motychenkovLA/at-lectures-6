@@ -24,8 +24,7 @@ public class Main {
                         int daysToFixBug = scanner.nextInt();
                         scanner.nextLine();
 
-                        repository.addDefect (new Defect(resumeBug, severityBug, // todo 0 - какой-то случайный перенос
-                                daysToFixBug));
+                        repository.addDefect (new Defect(resumeBug, severityBug, daysToFixBug));
 
                     } else {
                         System.out.println("Превышено максимально допустимое кол-во дефектов");
