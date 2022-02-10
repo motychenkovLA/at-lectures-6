@@ -24,7 +24,7 @@ public class Main {
                         int daysToFixBug = scanner.nextInt();
                         scanner.nextLine();
 
-                        repository.addDefect (new Defect(resumeBug, severityBug,
+                        repository.addDefect (new Defect(resumeBug, severityBug, // todo 0 - какой-то случайный перенос
                                 daysToFixBug));
 
                     } else {

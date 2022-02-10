@@ -45,6 +45,7 @@ public class Defect {
     }
 
     String getBugsInfo() {
+        // todo 0 - можно сделать в одну строчку, идея наверняка предлагает
         String bugsInfo = "Id дефекта: " + id + " | " + "Резюме: " + resume +
                                 " | " + "Критичность: " + severity + " | " +
                                 "Дней на исправление: " + daysToFix;
