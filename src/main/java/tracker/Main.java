@@ -33,6 +33,7 @@ public class Main {
                     break;
 
                 case "list":
+                    // todo 5 - не выводит список дефектов
                     for (int a = 0; a < Defect.getCountDefects(); a++) {
                         System.out.println(Arrays.toString(repository.getAllDefects()));
                     }
