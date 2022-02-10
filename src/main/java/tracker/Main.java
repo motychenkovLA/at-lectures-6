@@ -1,5 +1,4 @@
 package tracker;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -10,12 +9,13 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String command = null;
 
+
         while (!Objects.equals(command, "quit")) {
             System.out.println("Введите: add, list или quit");
             command = scanner.nextLine();
             switch (command) {
                 case "add":
-                    if (Defect.getCountDefects() < repository.maxBugs) {
+                    if (!repository.repositoryIsFull()) {
                         System.out.println("Введите резюме дефекта");
                         String resumeBug = scanner.nextLine();
                         System.out.println("Введите критичность дефекта");
@@ -24,7 +24,7 @@ public class Main {
                         int daysToFixBug = scanner.nextInt();
                         scanner.nextLine();
 
-                        repository.addDefect(Defect.getCountDefects(), new Defect(resumeBug, severityBug,
+                        repository.addDefect (new Defect(resumeBug, severityBug,
                                 daysToFixBug));
 
                     } else {
@@ -33,13 +33,17 @@ public class Main {
                     break;
 
                 case "list":
-                    // todo 5 - не выводит список дефектов
-                    for (int a = 0; a < Defect.getCountDefects(); a++) {
-                        System.out.println(Arrays.toString(repository.getAllDefects()));
+                    for (Defect defect : repository.getAllDefects()) {
+                        System.out.println(defect.getBugsInfo());
                     }
                     break;
 
+                case "quit":
+                    break;
 
+                default:
+                    System.out.println("Введено не корректное значение, повторите попытку");
+                    break;
             }
         }
     }

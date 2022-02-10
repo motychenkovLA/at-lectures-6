@@ -8,11 +8,6 @@ public class Defect {
     private String severity;
     private int daysToFix;
 
-    // todo 3 - конструктор создает не валидный дефект
-    public Defect(long id) {
-        this.id = id;
-    }
-
     public Defect(String resume, String severity, int daysToFix) {
         this.resume = resume;
         this.severity = severity;
@@ -23,16 +18,6 @@ public class Defect {
 
     public long getId() {
         return id;
-    }
-
-    // todo 3 - публикуется внутренняя информация
-    public static int getCountDefects() {
-        return countDefects;
-    }
-
-    // todo 5 - модифицируется внутренняя имнформация
-    public static void setCountDefects(int countDefects) {
-        Defect.countDefects = countDefects;
     }
 
     public String getResume() {
@@ -59,13 +44,12 @@ public class Defect {
         this.daysToFix = daysToFix;
     }
 
-    // todo - ?
-//    String getBugsInfo() {
-//        String bugsInfo = "Id дефекта: " + idBug + " | " + "Резюме: " + resumeBug +
-//                                " | " + "Критичность: " + severityBug + " | " +
-//                                "Дней на исправление: " + daysToFixBug;
-//        return bugsInfo;
-//    }
+    String getBugsInfo() {
+        String bugsInfo = "Id дефекта: " + id + " | " + "Резюме: " + resume +
+                                " | " + "Критичность: " + severity + " | " +
+                                "Дней на исправление: " + daysToFix;
+        return bugsInfo;
+    }
 
 }
 

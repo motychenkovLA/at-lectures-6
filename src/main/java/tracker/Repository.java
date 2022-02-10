@@ -1,22 +1,30 @@
 package tracker;
 
+import java.util.Arrays;
+
 public class Repository {
     private Defect[] defectsList;
-    public int maxBugs; // todo 3 - не приватное
+    private int maxBugs;
+    private int countDefects = 0;
+
     public Repository(int maxBugs) {
         this.maxBugs = maxBugs;
         defectsList = new Defect[maxBugs];
     }
 
-    // todo 1 - параметр id не используется
-    public void addDefect(int id, Defect defect) {
-        // todo 5 - содержание дефекта не имеет никакого отношения к его положению в массиве
-        defectsList[Defect.getCountDefects()] = defect;
+    public void addDefect(Defect defect) {
+        defectsList[countDefects] = defect;
+        countDefects++;
     }
 
-    // todo 3 - возвращается не список дефектов, а список дефектов и нуллов,
-    //  + происходит утечка ссылки на приватные данные
     public Defect[] getAllDefects() {
-        return defectsList;
+        Defect copyOfDefectList[] = Arrays.copyOf(defectsList, countDefects);
+        return copyOfDefectList;
     }
+
+    public boolean repositoryIsFull() {
+          boolean answer = (countDefects >= maxBugs);
+                return answer;
+    }
+
 }
