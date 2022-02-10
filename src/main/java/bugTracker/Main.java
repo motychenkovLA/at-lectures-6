@@ -4,24 +4,22 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        //final int WORK_DAYS_IN_WEEK = 5;
-        final int MAX_COUNT_OF_BUGS = 10;
+        System.out.println("Введите максимальное количество дефектов: ");
+        int maxCountOfDefects = scanner.nextInt();
+        scanner.nextLine();
+        Repository repository = new Repository(maxCountOfDefects);
 
-        Defect [] defects = new Defect[MAX_COUNT_OF_BUGS];
-        int numOfBug = 0;
-
-        while (true){
-            System.out.println("\n\n\t Главное меню\nВведите add для добавления нового дефекта\n" +
+        while (true) {
+            System.out.println("\n\t Главное меню\nВведите add для добавления нового дефекта\n" +
                     "Введите list, чтобы вывести список дефектов\n" +
                     "Введите quit для выхода из прогруммы ");
-            Scanner scanner = new Scanner(System.in);
 
             String selectionInTheMainMenu = scanner.nextLine();
 
-            if (selectionInTheMainMenu.equals("add")){
-
-                if (numOfBug<MAX_COUNT_OF_BUGS) {
+            if (selectionInTheMainMenu.equals("add")) {
+                if (repository.getNumOfBug() < maxCountOfDefects) {
                     System.out.println("Введите резюме дефекта: ");
                     String summary = scanner.nextLine();
 
@@ -32,25 +30,18 @@ public class Main {
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта: ");
                     int dayCount = scanner.nextInt();
 
-                    Defect newDefect = new Defect(numOfBug, summary, priority, dayCount);
-                    defects[numOfBug] = newDefect;
-                    numOfBug++;
-
+                    Defect newDefect = new Defect(summary, priority, dayCount);
+                    repository.add(newDefect);
                 } else {
-                    System.out.println("Достигнуто максимальное количество дефектов!");
+                    System.out.println("Достигнуто максимальное количество дефектов");
                 }
-            }
-            else if (selectionInTheMainMenu.equals("list")) {
-                for (int i = 0; i<numOfBug; i++){
-                    String info = defects[i].getInfo();
-                    System.out.println(info);
-                }
-            }
-            else if (selectionInTheMainMenu.equals("quit")) {
+
+            } else if (selectionInTheMainMenu.equals("list")) {
+                repository.getAll();
+            } else if (selectionInTheMainMenu.equals("quit")) {
                 System.out.println("До свидания!");
                 break;
-            }
-            else {
+            } else {
                 System.out.println("Нет такого пункта меню. Введите корректный пункт меню.");
             }
         }
