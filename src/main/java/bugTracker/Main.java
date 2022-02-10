@@ -15,7 +15,6 @@ public class Main {
             System.out.println("\n\t Главное меню\nВведите add для добавления нового дефекта\n" +
                     "Введите list, чтобы вывести список дефектов\n" +
                     "Введите quit для выхода из прогруммы ");
-
             String selectionInTheMainMenu = scanner.nextLine();
 
             if (selectionInTheMainMenu.equals("add")) {
@@ -29,6 +28,7 @@ public class Main {
 
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта: ");
                     int dayCount = scanner.nextInt();
+                    scanner.nextLine();
 
                     Defect newDefect = new Defect(summary, priority, dayCount);
                     repository.add(newDefect);
