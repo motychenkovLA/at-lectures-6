@@ -3,6 +3,7 @@ package tracker;
 
 import java.util.*;
 
+
 public class Main {
     final static int MAX_BUG = 2;                                       //первоначальная размерность репозитория
     private static final Repository repository = new Repository();     //создаем репозиторий
@@ -33,13 +34,30 @@ public class Main {
                     int daysToFix = scanner.nextInt();
                     scanner.nextLine();
 
-                    Defect bug = new Defect(resume, priority, daysToFix);
+                    System.out.print("Введите тип вложения (comment, defect): ");
+                    String attachmentType = scanner.nextLine();
+
+                    Attachment attachment = null;
+                    if (attachmentType.equals("comment")) {
+                        System.out.print("Введите комментарий: ");
+                        String comment = scanner.nextLine();
+                        attachment = new CommentAttachment(comment);
+                    } else if (attachmentType.equals("defect")) {
+                        System.out.print("Введите номер дефекта: ");
+                        int defectId = scanner.nextInt();
+                        scanner.nextLine();
+                        attachment = new DefectAttachment(defectId);
+                    } else {
+                        System.out.println("Ошибочное значение");
+                        attachment = new CommentAttachment("Пользователь ввел непонятно что");
+                    }
+
+                    Defect bug = new Defect(resume, priority, daysToFix, attachment);
                     repository.add(bug);
                     break;
                 }
                 case ("list"): {
-                    Defect[] defects;
-                    defects=repository.getAll();
+                    Defect[] defects = repository.getAll();
                     for(Defect bug : defects){
                         System.out.println(bug);
                     }
@@ -49,6 +67,7 @@ public class Main {
                     isRun = false;
                     break;
                 }
+                default: { System.out.println("Ошибочное значение"); break; }
             }
         }
     }

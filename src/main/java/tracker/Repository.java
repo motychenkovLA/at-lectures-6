@@ -22,8 +22,6 @@ public class Repository {
     }
 
     public Defect[] getAll() {
-        Defect[] defectsCopy;
-        defectsCopy = Arrays.copyOf(defects, currentDefectCount);
-        return defectsCopy;
+        return Arrays.copyOf(defects, currentDefectCount);
     }
 }

@@ -6,13 +6,15 @@ public class Defect {
     private String resume;
     private String priority;
     private int daysToFix;
+    private final Attachment attachment;
 
 
-    public Defect(String resume, String priority, int daysToFix) {
+    public Defect(String resume, String priority, int daysToFix, Attachment attachment) {
         this.resume = resume;
         this.priority = priority;
         this.daysToFix = daysToFix;
         this.id = counterOfBugs;
+        this.attachment = attachment;
         counterOfBugs++;
 
     }
@@ -47,7 +49,7 @@ public class Defect {
 
     public String toString() {
         return String.format(
-                "Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d",
-                id, resume, priority, daysToFix);
+                "Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d | Вложение: %s",
+                id, resume, priority, daysToFix, attachment.toString());
     }
 }
