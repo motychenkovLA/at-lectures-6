@@ -24,6 +24,7 @@ public class Main {
                         System.out.println("Невозможно добавить больше " + maxDefects + " дефектов");
                         break;
                     }
+
                     System.out.println("Введите резюме");
                     String resume = console.nextLine();
                     System.out.println("Введите критичность дефекта: критично, некритично или *****");
@@ -31,7 +32,19 @@ public class Main {
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта");
                     int numberOfDays = console.nextInt();
                     console.nextLine();
-                    repository.add(new Defect(resume, critical, numberOfDays));
+                    System.out.println("Введите номер типа вложения: 1 - комментарий, 2 - ссылка на другой дефект");
+                    int typeInclosure = console.nextInt();
+                    console.nextLine();
+                    if (typeInclosure == 1) {
+                        System.out.println("Введите комментарий");
+                        String comment = console.nextLine();
+                        repository.add(new Defect(resume, critical, numberOfDays, comment));
+                    } else {
+                        System.out.println("Введите id дефекта");
+                        long attachment = console.nextLong();
+                        console.nextLine();
+                        repository.add(new Defect(resume, critical, numberOfDays, attachment));
+                    }
                     break;
                 case "quit":
                     run = false;

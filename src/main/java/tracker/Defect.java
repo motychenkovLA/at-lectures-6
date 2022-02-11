@@ -7,14 +7,36 @@ public class Defect {
     private String critical;
     private int numberOfDays;
     private final long id;
-    public Defect(String resume, String critical, int numberOfDays) {
+    private String comment;
+    private long attachmentId;
+    private String attachment;
+
+    public Defect(String resume, String critical, int numberOfDays, String comment) {
         numberOfDefects++;
         this.id = numberOfDefects;
         this.resume = resume;
         this.critical = critical;
         this.numberOfDays = numberOfDays;
+        this.attachment = "comment";
+        this.comment = comment;
+    }
+    public Defect(String resume, String critical, int numberOfDays, long id) {
+        numberOfDefects++;
+        this.id = numberOfDefects;
+        this.resume = resume;
+        this.critical = critical;
+        this.numberOfDays = numberOfDays;
+        this.attachment = "id";
+        this.attachmentId = id;
     }
     public String getDefectInfo() {
-        return "" + id + " | " + resume + " | " + critical + " | " + numberOfDays;
+        if (attachment.equals("id")) {
+            DefectAttachment defectAttachment = new DefectAttachment(attachmentId);
+            return "" + id + " | " + resume + " | " + critical + " | " + numberOfDays + " | " + defectAttachment.toString();
+        } else {
+            CommentAttachment commentAttachment = new CommentAttachment(comment);
+            return "" + id + " | " + resume + " | " + critical + " | " + numberOfDays + " | " + commentAttachment.toString();
+        }
+
     }
 }
