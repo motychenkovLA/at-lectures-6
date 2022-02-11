@@ -5,6 +5,7 @@ import java.util.*;
 
 
 public class Main {
+    // todo 1 - не используется
     final static int MAX_BUG = 2;                                       //первоначальная размерность репозитория
     private static final Repository repository = new Repository();     //создаем репозиторий
 
@@ -67,7 +68,7 @@ public class Main {
                     isRun = false;
                     break;
                 }
-                default: { System.out.println("Ошибочное значение"); break; }
+                default: { System.out.println("Ошибочное значение"); break; } // todo 0 - на одной строке
             }
         }
     }
