@@ -1,28 +1,23 @@
 package bugTracker;
 
+import java.util.Arrays;
+
 public class Repository {
     private int countOfDefects;
     private int numOfBug = 0;
-    //todo инкапсулировать
-    Defect[] defects;
-
-    public Repository(int count){
-        this.countOfDefects = count;
-        defects = new Defect[count];
-    }
+    private Defect[] defects = new Defect[2];
 
     public int getNumOfBug() {return numOfBug;}
 
     void add (Defect defect){
+        if (numOfBug == defects.length) {
+            defects = Arrays.copyOf(defects, defects.length * 2);
+        }
         defects[numOfBug] = defect;
         numOfBug++;
     }
 
-    //todo сделать в соответствии с заданием
-    void getAll(){
-        for (int i = 0; i < numOfBug; i++){
-            String info = defects[i].getInfo();
-            System.out.println(info);
-        }
+    Defect[] getAll(){
+        return defects;
     }
 }
