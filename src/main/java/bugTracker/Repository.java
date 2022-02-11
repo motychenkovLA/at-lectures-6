@@ -3,6 +3,7 @@ package bugTracker;
 public class Repository {
     private int countOfDefects;
     private int numOfBug = 0;
+    //todo инкапсулировать
     Defect[] defects;
 
     public Repository(int count){
@@ -17,6 +18,7 @@ public class Repository {
         numOfBug++;
     }
 
+    //todo сделать в соответствии с заданием
     void getAll(){
         for (int i = 0; i < numOfBug; i++){
             String info = defects[i].getInfo();
