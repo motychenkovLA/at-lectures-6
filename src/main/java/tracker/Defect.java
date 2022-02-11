@@ -7,6 +7,7 @@ public class Defect {
     private String critical;
     private int numberOfDays;
     private final long id;
+    // todo 3 - нет атачмента, есть набор полей
     private String comment;
     private long attachmentId;
     private String attachment;

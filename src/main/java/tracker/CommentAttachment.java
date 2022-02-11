@@ -1,8 +1,8 @@
 package tracker;
 
 public class CommentAttachment extends Attachment {
-    String comment;
-    CommentAttachment(String comment) {
+    String comment; // todo 3 - не приватный
+    CommentAttachment(String comment) { // todo 3 - не публичны
         this.comment = comment;
     }
     @Override
