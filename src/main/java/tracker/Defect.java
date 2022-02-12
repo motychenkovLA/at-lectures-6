@@ -7,11 +7,14 @@ public class Defect {
     private String resume;
     private String severity;
     private int daysToFix;
+    private String attachment;
 
-    public Defect(String resume, String severity, int daysToFix) {
+
+    public Defect(String resume, String severity, int daysToFix, String attachment) {
         this.resume = resume;
         this.severity = severity;
         this.daysToFix = daysToFix;
+        this.attachment = attachment;
         this.id = countDefects;
         countDefects++;
     }
@@ -44,10 +47,18 @@ public class Defect {
         this.daysToFix = daysToFix;
     }
 
+    public String getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(String attachment) {
+        this.attachment = attachment;
+    }
+
     String getBugsInfo() {
         return "Id дефекта: " + id + " | " + "Резюме: " + resume +
                 " | " + "Критичность: " + severity + " | " +
-                "Дней на исправление: " + daysToFix;
+                "Дней на исправление: " + daysToFix + " | " + "Вложение: " + attachment;
     }
 
 }

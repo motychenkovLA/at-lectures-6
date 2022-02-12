@@ -8,6 +8,7 @@ public class Main {
         Repository repository = new Repository(10);
         Scanner scanner = new Scanner(System.in);
         String command = null;
+        String attachmentBug = null;
 
 
         while (!Objects.equals(command, "quit")) {
@@ -18,13 +19,29 @@ public class Main {
                     if (!repository.repositoryIsFull()) {
                         System.out.println("Введите резюме дефекта");
                         String resumeBug = scanner.nextLine();
+
                         System.out.println("Введите критичность дефекта");
                         String severityBug = scanner.nextLine();
+
                         System.out.println("Введите количество дней на исправление дефекта");
                         int daysToFixBug = scanner.nextInt();
                         scanner.nextLine();
 
-                        repository.addDefect (new Defect(resumeBug, severityBug, daysToFixBug));
+                        System.out.println("Выберите тип вложение");
+                        attachmentBug = scanner.nextLine();
+                        switch (attachmentBug) {
+                            case "comment":
+                                System.out.println("Введите комментарий");
+                                String commentAttachment = scanner.nextLine();
+                                repository.addDefect(new Defect(resumeBug, severityBug, daysToFixBug,
+                                        commentAttachment));
+                                break;
+                            case "link":
+                                System.out.println("Введите ссылку (id) дефекта");
+                                String defectAttachment = scanner.nextLine();
+                                repository.addDefect(new Defect(resumeBug, severityBug, daysToFixBug, defectAttachment));
+                                break;
+                        }
 
                     } else {
                         System.out.println("Превышено максимально допустимое кол-во дефектов");
