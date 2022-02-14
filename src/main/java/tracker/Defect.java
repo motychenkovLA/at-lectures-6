@@ -32,7 +32,7 @@ public class Defect {
         else this.criticality = "major";
     }
 
-    String getInfo() {
+    public String getInfo() {
         return "ID: " + id + ", Резюме дефекта: " + name + ", Критичность: " + criticality +
                 ", Количество дней на исправление: " + daysNumber;
     }

@@ -2,27 +2,26 @@ package tracker;
 
 public class Repository {
 
-    Defect[] listBug;
-    int countBug = 0;
+    static private int size = 100;
+    static Defect[] listBug = new Defect[size];
+    static public int countBug = 0;
 
-    public Repository(int size) {
-        listBug = new Defect[size];
+    static public void add(Defect def) {
 
-    }
-
-    public boolean check() {
-        return (countBug > listBug.length - 1);
-    }
-
-    public void add(Defect def) {
+        if (countBug > size - 10) {
+            size = size + 100;
+            System.out.println("Увеличили размер массива");
+            Defect[] temp = listBug;
+            listBug = new Defect[size];
+            for (int i = 0; i < temp.length; i++) {
+                listBug[i] = temp[i];
+            }
+        }
         listBug[countBug] = def;
         countBug++;
     }
 
-    public void getAll() {
-        for (int i = 0; i < countBug; i++) {
-            System.out.println(listBug[i].getInfo());
-        }
-        System.out.println("\n\n");
+    static public Defect[] getAll() {
+        return listBug;
     }
 }
