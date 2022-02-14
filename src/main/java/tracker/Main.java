@@ -34,20 +34,16 @@ public class Main {
                     int daysToFix = scanner.nextInt();
                     scanner.nextLine();
 
-                    // todo 1 - уже есть attachment который null пока его не введут, по сути дублирующая переменная
-                    boolean correctType = false; // показатель корректности введенного типа дефекта
-                    Attachment attachment = null;
+                    Attachment attachment=null;
 
-                    while (!correctType) {
+                    while (attachment == null) {
                         System.out.print("Введите тип вложения (comment, defect): ");
                         String attachmentType = scanner.nextLine();
                         if (attachmentType.equals("comment")) {
-                            correctType = true;
                             System.out.print("Введите комментарий: ");
                             String comment = scanner.nextLine();
                             attachment = new CommentAttachment(comment);
                         } else if (attachmentType.equals("defect")) {
-                            correctType = true;
                             System.out.print("Введите номер дефекта: ");
                             int defectId = scanner.nextInt();
                             scanner.nextLine();
