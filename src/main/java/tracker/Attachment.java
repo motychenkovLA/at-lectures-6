@@ -1,5 +1,6 @@
 package tracker;
 
+// todo 5 - класс нигде не используется
 public class Attachment {
     private String attachmentType;
 

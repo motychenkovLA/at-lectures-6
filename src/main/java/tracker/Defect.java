@@ -7,6 +7,7 @@ public class Defect {
     private String resume;
     private String severity;
     private int daysToFix;
+    // todo 3 - нет вложения, есть строка
     private String attachment;
 
 

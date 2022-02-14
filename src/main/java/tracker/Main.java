@@ -29,6 +29,7 @@ public class Main {
 
                         System.out.println("Выберите тип вложение");
                         attachmentBug = scanner.nextLine();
+                        // todo 3 - при вводе не comment, и не defect ничего не происходит, все введенные пользователем данные выкидываются
                         switch (attachmentBug) {
                             case "comment":
                                 System.out.println("Введите комментарий");
