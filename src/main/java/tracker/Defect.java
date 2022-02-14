@@ -7,37 +7,19 @@ public class Defect {
     private String critical;
     private int numberOfDays;
     private final long id;
-    Attachment attachment; // todo 3 - не приватное
-    private String typeOfAttachment; // todo 3 - поле ничего не делает
+    private Attachment attachment;
 
-    // todo 3 - конструктор принимает не атачмент;
-    //  писать 10 конструкторов на 10 видов атачментов такая себе идея
-    public Defect(String resume, String critical, int numberOfDays, String comment) {
+    public Defect(String resume, String critical, int numberOfDays, Attachment attachment) {
         numberOfDefects++;
         this.id = numberOfDefects;
         this.resume = resume;
         this.critical = critical;
         this.numberOfDays = numberOfDays;
-        this.typeOfAttachment = "comment";
-        attachment = new CommentAttachment(comment);
-    }
-
-    public Defect(String resume, String critical, int numberOfDays, long id) {
-        numberOfDefects++;
-        this.id = numberOfDefects;
-        this.resume = resume;
-        this.critical = critical;
-        this.numberOfDays = numberOfDays;
-        this.typeOfAttachment = "id";
-        attachment = new DefectAttachment(id);
+        this.attachment = attachment;
     }
 
     public String getDefectInfo() {
-        if (typeOfAttachment.equals("id")) {
-            return "" + id + " | " + resume + " | " + critical + " | " + numberOfDays + " | " + attachment.toString();
-        } else {
-            return "" + id + " | " + resume + " | " + critical + " | " + numberOfDays + " | " + attachment.toString();
-        }
+        return "" + id + " | " + resume + " | " + critical + " | " + numberOfDays + " | " + attachment.toString();
 
     }
 }

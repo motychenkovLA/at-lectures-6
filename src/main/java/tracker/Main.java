@@ -37,13 +37,11 @@ public class Main {
                     console.nextLine();
                     if (typeInclosure == 1) {
                         System.out.println("Введите комментарий");
-                        String comment = console.nextLine();
-                        repository.add(new Defect(resume, critical, numberOfDays, comment));
+                        repository.add(new Defect(resume, critical, numberOfDays, new CommentAttachment(console.nextLine())));
                     } else {
                         System.out.println("Введите id дефекта");
-                        long attachment = console.nextLong();
+                        repository.add(new Defect(resume, critical, numberOfDays, new DefectAttachment(console.nextLong())));
                         console.nextLine();
-                        repository.add(new Defect(resume, critical, numberOfDays, attachment));
                     }
                     break;
                 case "quit":
