@@ -34,6 +34,7 @@ public class Main {
                     int daysToFix = scanner.nextInt();
                     scanner.nextLine();
 
+                    // todo 1 - уже есть attachment который null пока его не введут, по сути дублирующая переменная
                     boolean correctType = false; // показатель корректности введенного типа дефекта
                     Attachment attachment = null;
 
