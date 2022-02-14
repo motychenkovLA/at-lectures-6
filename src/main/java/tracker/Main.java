@@ -27,24 +27,20 @@ public class Main {
                         int daysToFixBug = scanner.nextInt();
                         scanner.nextLine();
 
-                        System.out.println("Выберите тип вложение"); // todo 1 - неплохо бы вывести допустимые варианты
+                        System.out.println("Выберите тип вложение: comment или link");
                         attachmentBug = scanner.nextLine();
 
                         switch (attachmentBug) {
                             case "comment":
                                 System.out.println("Введите комментарий");
                                 String comment = scanner.nextLine();
-                                comment.toString(); // todo 1 - ничего не делающее выражение
                                 CommentAttachment commentAttachment = new CommentAttachment(comment);
-                                repository.addDefect(new Defect(resumeBug, severityBug, daysToFixBug, // todo 1 - лишний перенос
-                                        commentAttachment));
+                                repository.addDefect(new Defect(resumeBug, severityBug, daysToFixBug, commentAttachment));
                                 break;
                             case "link":
                                 System.out.println("Введите ссылку (id) дефекта");
                                 String idBug = scanner.nextLine();
-                                idBug.toString(); // todo 1 - ничего не делающее выражение
                                 DefectAttachment defectAttachment = new DefectAttachment(idBug);
-                                defectAttachment.toString(); // todo 1 - ничего не делающее выражение
                                 repository.addDefect(new Defect(resumeBug, severityBug, daysToFixBug, defectAttachment));
                                 break;
                             default:

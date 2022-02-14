@@ -15,11 +15,8 @@ public class DefectAttachment extends Attachment{
         this.idDefect = idDefect;
     }
 
-    // todo 1 - не очень читаемое представление
     @Override
     public String toString() {
-        return "DefectAttachment{" +
-                "idDefect='" + idDefect + '\'' +
-                '}';
+        return idDefect;
     }
 }

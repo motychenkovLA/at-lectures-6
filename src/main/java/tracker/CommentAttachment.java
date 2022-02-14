@@ -16,11 +16,8 @@ public class CommentAttachment extends Attachment {
         this.comment = comment;
     }
 
-    // todo 1 - не очень читаемое представление
     @Override
     public String toString() {
-        return "CommentAttachment{" +
-                "comment='" + comment + '\'' +
-                '}';
+        return comment;
     }
 }
