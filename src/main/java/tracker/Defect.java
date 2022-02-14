@@ -1,12 +1,13 @@
 package tracker;
 
-
+// todo 0 - нужны пустые строчки между членами класса
 public class Defect {
     private static long numberOfDefects=0;
     private String resume;
     private String critical;
     private int numberOfDays;
     private final long id;
+    // todo 3 - теперь тут два дефекта, а должен быть один
     CommentAttachment commentAttachment;
     DefectAttachment defectAttachment;
     private String attachment;
