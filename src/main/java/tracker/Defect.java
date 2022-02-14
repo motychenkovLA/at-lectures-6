@@ -7,9 +7,11 @@ public class Defect {
     private String critical;
     private int numberOfDays;
     private final long id;
-    Attachment attachment;
-    private String typeOfAttachment;
+    Attachment attachment; // todo 3 - не приватное
+    private String typeOfAttachment; // todo 3 - поле ничего не делает
 
+    // todo 3 - конструктор принимает не атачмент;
+    //  писать 10 конструкторов на 10 видов атачментов такая себе идея
     public Defect(String resume, String critical, int numberOfDays, String comment) {
         numberOfDefects++;
         this.id = numberOfDefects;
