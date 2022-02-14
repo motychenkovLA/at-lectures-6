@@ -1,12 +1,10 @@
 package tracker;
 
-// todo 5 - класс нигде не используется
-public class CommentAttachment extends Attachment{
+public class CommentAttachment extends Attachment {
 
     private String comment;
 
-    public CommentAttachment(String attachmentType, String comment) {
-        super(attachmentType);
+    public CommentAttachment(String comment) {
         this.comment = comment;
     }
 

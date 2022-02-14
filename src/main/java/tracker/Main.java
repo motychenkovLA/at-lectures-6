@@ -29,18 +29,26 @@ public class Main {
 
                         System.out.println("Выберите тип вложение");
                         attachmentBug = scanner.nextLine();
-                        // todo 3 - при вводе не comment, и не defect ничего не происходит, все введенные пользователем данные выкидываются
+
                         switch (attachmentBug) {
                             case "comment":
                                 System.out.println("Введите комментарий");
-                                String commentAttachment = scanner.nextLine();
+                                String comment = scanner.nextLine();
+                                comment.toString();
+                                CommentAttachment commentAttachment = new CommentAttachment(comment);
                                 repository.addDefect(new Defect(resumeBug, severityBug, daysToFixBug,
                                         commentAttachment));
                                 break;
                             case "link":
                                 System.out.println("Введите ссылку (id) дефекта");
-                                String defectAttachment = scanner.nextLine();
+                                String idBug = scanner.nextLine();
+                                idBug.toString();
+                                DefectAttachment defectAttachment = new DefectAttachment(idBug);
+                                defectAttachment.toString();
                                 repository.addDefect(new Defect(resumeBug, severityBug, daysToFixBug, defectAttachment));
+                                break;
+                            default:
+                                System.out.println("Не верный тип вложения, повторите попытку");
                                 break;
                         }
 

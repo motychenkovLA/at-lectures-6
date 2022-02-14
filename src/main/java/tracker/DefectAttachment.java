@@ -1,11 +1,9 @@
 package tracker;
 
-// todo 5 - класс нигде не используется
 public class DefectAttachment extends Attachment{
     private String idDefect;
 
-    public DefectAttachment(String attachmentType, String idDefect) {
-        super(attachmentType);
+    public DefectAttachment(String idDefect) {
         this.idDefect = idDefect;
     }
 

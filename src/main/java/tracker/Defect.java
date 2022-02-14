@@ -7,11 +7,10 @@ public class Defect {
     private String resume;
     private String severity;
     private int daysToFix;
-    // todo 3 - нет вложения, есть строка
-    private String attachment;
+    private Attachment attachment;
 
 
-    public Defect(String resume, String severity, int daysToFix, String attachment) {
+    public Defect(String resume, String severity, int daysToFix, Attachment attachment) {
         this.resume = resume;
         this.severity = severity;
         this.daysToFix = daysToFix;
@@ -48,11 +47,12 @@ public class Defect {
         this.daysToFix = daysToFix;
     }
 
-    public String getAttachment() {
+
+    public Attachment getAttachment() {
         return attachment;
     }
 
-    public void setAttachment(String attachment) {
+    public void setAttachment(Attachment attachment) {
         this.attachment = attachment;
     }
 
@@ -61,6 +61,5 @@ public class Defect {
                 " | " + "Критичность: " + severity + " | " +
                 "Дней на исправление: " + daysToFix + " | " + "Вложение: " + attachment;
     }
-
 }
 

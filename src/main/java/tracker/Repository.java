@@ -22,6 +22,7 @@ public class Repository {
     }
 
     public boolean repositoryIsFull() {
+
         return (countDefects >= maxBugs);
     }
 
