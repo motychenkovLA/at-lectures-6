@@ -1,8 +1,8 @@
 package tracker;
 
 public class DefectAttachment extends Attachment {
-    long id; // todo 3 - не приватный
-    DefectAttachment(long id) { // todo 3 - не публичный
+    private long id;
+    public DefectAttachment(long id) {
         this.id = id;
     }
     @Override

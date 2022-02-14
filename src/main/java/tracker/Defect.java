@@ -7,9 +7,8 @@ public class Defect {
     private String critical;
     private int numberOfDays;
     private final long id;
-    // todo 3 - нет атачмента, есть набор полей
-    private String comment;
-    private long attachmentId;
+    CommentAttachment commentAttachment;
+    DefectAttachment defectAttachment;
     private String attachment;
 
     public Defect(String resume, String critical, int numberOfDays, String comment) {
@@ -19,7 +18,7 @@ public class Defect {
         this.critical = critical;
         this.numberOfDays = numberOfDays;
         this.attachment = "comment";
-        this.comment = comment;
+        commentAttachment = new CommentAttachment(comment);
     }
     public Defect(String resume, String critical, int numberOfDays, long id) {
         numberOfDefects++;
@@ -28,14 +27,12 @@ public class Defect {
         this.critical = critical;
         this.numberOfDays = numberOfDays;
         this.attachment = "id";
-        this.attachmentId = id;
+        defectAttachment = new DefectAttachment(id);
     }
     public String getDefectInfo() {
         if (attachment.equals("id")) {
-            DefectAttachment defectAttachment = new DefectAttachment(attachmentId);
             return "" + id + " | " + resume + " | " + critical + " | " + numberOfDays + " | " + defectAttachment.toString();
         } else {
-            CommentAttachment commentAttachment = new CommentAttachment(comment);
             return "" + id + " | " + resume + " | " + critical + " | " + numberOfDays + " | " + commentAttachment.toString();
         }
 
