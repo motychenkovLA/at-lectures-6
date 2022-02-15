@@ -4,17 +4,19 @@ public class Defect {
     private static long counterOfBugs = 0;
     private final long id;
     private String resume;
-    private String priority;
+    private Critical critical;
+    private Status status;
     private int daysToFix;
     private final Attachment attachment;
 
 
-    public Defect(String resume, String priority, int daysToFix, Attachment attachment) {
+    public Defect(String resume, Critical critical, int daysToFix, Attachment attachment, Status status) {
         this.resume = resume;
-        this.priority = priority;
+        this.critical = critical;
         this.daysToFix = daysToFix;
         this.id = counterOfBugs;
         this.attachment = attachment;
+        this.status = status;
         counterOfBugs++;
 
     }
@@ -31,12 +33,20 @@ public class Defect {
         return resume;
     }
 
-    public void setPriority(String priority) {
-        this.priority = priority;
+    public void setCritical(Critical critical) {
+        this.critical = critical;
     }
 
-    public String getPriority() {
-        return priority;
+    public Critical getCritical() {
+        return critical;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     public void setDaysToFix(int daysToFix) {
@@ -49,7 +59,7 @@ public class Defect {
 
     public String toString() {
         return String.format(
-                "Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d | Вложение: %s",
-                id, resume, priority, daysToFix, attachment.toString());
+                "Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d | Статус: %s| Вложение: %s",
+                id, resume, critical, daysToFix, status.toString(), attachment.toString());
     }
 }
