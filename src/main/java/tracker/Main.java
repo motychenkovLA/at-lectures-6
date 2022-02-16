@@ -19,8 +19,12 @@ public class Main {
                     long id = console.nextLong();
                     console.nextLine();
                     System.out.println("Введите новый статус:");
+                    // todo 3 - с valueOf есть пара проблем
+                    //  - если введено не верное значение программа падает
+                    //  - они на английском, а весь остальной UI на русском
+                    //  стоит добавить в енамы возможность их нормального отображения и их безопасного получения по этому отображению
                     Status status = Status.valueOf(console.nextLine());
-                    repository.getDefect(id).changeStatus(status);
+                    repository.getDefect(id).changeStatus(status); // todo 5 - упадет если нет дефекта с таким ид
 
                     break;
                 case "list":

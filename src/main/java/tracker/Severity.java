@@ -2,7 +2,7 @@ package tracker;
 
 
 public enum Severity {
-    notCritical,
+    notCritical, // todo 1 - форматирование
     critical,
     veryCritical
 }

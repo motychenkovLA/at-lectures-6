@@ -21,7 +21,7 @@ public class Repository {
     }
 
     public Defect getDefect(long id) {
-        for (Defect defect : defectList) {
+        for (Defect defect : defectList) { // todo 5 - упадет как только выйдет за заведенные дефекты в пустую часть массива
             if (defect.getId() == id) {
                 return defect;
             }

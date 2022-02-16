@@ -1,6 +1,6 @@
 package tracker;
 
 public enum Status {
-    Open,
+    Open, // todo 1 - форматирование
     Close
 }

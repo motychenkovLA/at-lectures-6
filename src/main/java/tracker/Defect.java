@@ -32,6 +32,7 @@ public class Defect {
     }
 
 
+    // todo 3 - это сеттер
     public void changeStatus(Status status) {
         this.status = status;
 
