@@ -7,7 +7,7 @@ public enum Status {
     DELAYED("Отложен"),
     CLOSE("Закрыт");
 
-    final String statusName;
+    private final String statusName;
 
     Status(String statusName) {
         this.statusName = statusName;
