@@ -26,7 +26,8 @@ public class Repository {
     }
 
     public Defect getById(long id) {
-        for (Defect bug : defects) {
+        for (int j=0; j<currentDefectCount; j++) {
+            Defect bug = defects[j];
             if (id == bug.getId()) {
                 return bug;
             }
