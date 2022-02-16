@@ -5,7 +5,7 @@ public enum Severity {
     MEDIUM("Средняя"),
     HIGH("Высокая");
 
-    final String critName;
+    private final String critName;
 
     Severity(String critName) {
         this.critName = critName;
