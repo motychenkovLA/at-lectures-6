@@ -18,12 +18,26 @@ public class Repository {
     }
 
     public Defect[] getAllDefects() {
+
         return Arrays.copyOf(defectsList, countDefects);
     }
 
     public boolean repositoryIsFull() {
 
         return (countDefects >= maxBugs);
+    }
+
+    public boolean repositoryIsEmpty() {
+        return (countDefects <= 0);
+    }
+
+    public Defect findDefectById(long idDefect) {
+        for(Defect defect : defectsList) {
+            if (defect.getId() == idDefect) {
+                return defect;
+            }
+        }
+        return null;
     }
 
 }

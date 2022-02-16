@@ -8,11 +8,12 @@ public class Main {
         Repository repository = new Repository(10);
         Scanner scanner = new Scanner(System.in);
         String command = null;
-        String attachmentBug = null;
+        String attachmentBug;
+        String answer;
 
 
         while (!Objects.equals(command, "quit")) {
-            System.out.println("Введите: add, list или quit");
+            System.out.println("Введите: add, list, quit или change");
             command = scanner.nextLine();
             switch (command) {
                 case "add":
@@ -20,7 +21,11 @@ public class Main {
                         System.out.println("Введите резюме дефекта");
                         String resumeBug = scanner.nextLine();
 
-                        System.out.println("Введите критичность дефекта");
+                        System.out.println("Введите критичность дефекта из списка");
+                        Severity[] severitys = Severity.values();
+                        for (Severity severity : severitys)
+                            System.out.println(severity);
+                        System.out.println();
                         String severityBug = scanner.nextLine();
 
                         System.out.println("Введите количество дней на исправление дефекта");
@@ -47,7 +52,6 @@ public class Main {
                                 System.out.println("Не верный тип вложения, повторите попытку");
                                 break;
                         }
-
                     } else {
                         System.out.println("Превышено максимально допустимое кол-во дефектов");
                     }
@@ -59,6 +63,24 @@ public class Main {
                     }
                     break;
 
+                case "change":
+                    if(!repository.repositoryIsEmpty()) {
+                        repository.getAllDefects();
+                        System.out.println("Введине id дефекта, у которого необходимо поменять статус");
+                        long idDefectForChangeStatus = scanner.nextLong();
+                        scanner.nextLine();
+                        Defect defectForChangeStatus = repository.findDefectById(idDefectForChangeStatus);
+                        System.out.println("Выберите новый статус из списка");
+                        Status statuses[] = Status.values();
+                        for (Status status : statuses)
+                            System.out.println(status);
+                        System.out.println();
+                        Status newStatus = Status.valueOf(scanner.nextLine());
+                        defectForChangeStatus.setStatus(newStatus);
+                    } else {
+                        System.out.println("В репозитории нет дефектов");
+                    }
+                    break;
                 case "quit":
                     break;
 

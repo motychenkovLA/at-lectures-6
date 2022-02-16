@@ -8,6 +8,7 @@ public class Defect {
     private String severity;
     private int daysToFix;
     private Attachment attachment;
+    private Status status;
 
 
     public Defect(String resume, String severity, int daysToFix, Attachment attachment) {
@@ -15,6 +16,7 @@ public class Defect {
         this.severity = severity;
         this.daysToFix = daysToFix;
         this.attachment = attachment;
+        this.status = Status.OPEN;
         this.id = countDefects;
         countDefects++;
     }
@@ -56,10 +58,20 @@ public class Defect {
         this.attachment = attachment;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     String getBugsInfo() {
         return "Id дефекта: " + id + " | " + "Резюме: " + resume +
                 " | " + "Критичность: " + severity + " | " +
-                "Дней на исправление: " + daysToFix + " | " + "Вложение: " + attachment;
+                "Дней на исправление: " + daysToFix + " | " + "Вложение: " + attachment  +
+                " | " + "Статус: " + status;
     }
+
 }
 
