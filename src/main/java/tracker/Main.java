@@ -6,11 +6,11 @@ import java.util.*;
 
 public class Main {
 
-    private static final Repository repository = new Repository();     //создаем репозиторий // todo 0 - коммент излишний
+    private static final Repository repository = new Repository();
 
     public static void main(String[] args) {
 
-        boolean isRun = true; // показатель того, в работе мы или идем на выход // todo 0 - коммент излишний
+        boolean isRun = true;
         Scanner scanner = new Scanner(System.in);
 
 
@@ -31,8 +31,10 @@ public class Main {
 
                     System.out.println("Введите критичность дефекта (Низкая, Средняя, Высокая)");
                     Severity critical = Severity.getSeverityByValue(scanner.nextLine());
-                    // todo 5 - ниже проверяется когда водим не валидный статус, здесь проверки нет, null утекает дальше в код
-                    //  чтоб сильно не усложнять предлагаю если введено не валидное значение брать Среднее, только надо об это сообщить пользователю
+                    if (critical == null) {
+                        critical = Severity.getSeverityByValue("Средняя");
+                        System.out.println("Внимание, вы ввели несуществующую критичность - по умолчанию критичность установлена = Средняя");
+                    }
 
                     System.out.println("Введите ожидаемое кол-во дней на исправление дефекта");
                     int daysToFix = scanner.nextInt();
@@ -56,7 +58,7 @@ public class Main {
                             System.out.println("Ошибочное значение");
                         }
                     }
-                    Defect bug = new Defect(resume, critical, daysToFix, attachment, Status.OPEN);
+                    Defect bug = new Defect(resume, critical, daysToFix, attachment);
                     repository.add(bug);
                     break;
                 }
@@ -72,7 +74,7 @@ public class Main {
                     System.out.println("Введите номер дефекта, для которого нужно изменить статус:");
                     long defectId = scanner.nextInt();
                     scanner.nextLine();
-                    Defect bug = repository.getCheckId(defectId);
+                    Defect bug = repository.getById(defectId);
                     if (bug == null) {
                         System.out.println("Нет дефекта с таким номером!");
                     } else {
