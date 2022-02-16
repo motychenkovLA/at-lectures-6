@@ -20,12 +20,14 @@ public class Main {
                     console.nextLine();
                     System.out.println("Введите новый статус:");
                     String status = console.nextLine();
+                    // todo 3 - достаются все дефекты вместо одного нужного
                     for (Defect defect : repository.getAll()) {
                         if (defect.getId() == id) {
                             defect.changeStatus(status);
                         }
 
                     }
+                    // todo 1 - статус не всегда успешно изменен, пользователь может ввести неверный ид
                     System.out.println("Статус успешно изменен!");
 
                     break;

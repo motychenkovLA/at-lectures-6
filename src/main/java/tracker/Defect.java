@@ -10,6 +10,7 @@ public class Defect {
     private final long id;
     private Attachment attachment;
 
+    // todo 3 - конструктор принимает String critical, хотя дефект хранит енам
     public Defect(String resume, String critical, int numberOfDays, Attachment attachment) {
         numberOfDefects++;
         this.id = numberOfDefects;
@@ -30,6 +31,7 @@ public class Defect {
 
     }
 
+    // todo 3 - это сеттер, принимает строку, хотя хранится Status
     public void changeStatus(String status) {
         this.status = Status.valueOf(status);
 
