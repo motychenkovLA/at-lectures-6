@@ -29,13 +29,8 @@ public class Main {
                     System.out.println("Введите резюме дефекта");
                     String resume = scanner.nextLine();
 
-                    Critical critical; // todo 1 - объявление отдельно от инициализации
-                    System.out.println("Введите критичность дефекта (Low, Medium, High)");
-                    // todo 3 - есть 2 проблемы с использованием valueOf
-                    //  - на вход читаем английские названия, на выход пишем русские, что сбивает с толку
-                    //  - если вводится неправильное название, вся программа падает
-                    //  стоит сделать методы в енамах, которые будут возвращать значение по русскому названию или нулл, если неверное
-                    critical = Critical.valueOf(scanner.nextLine().toUpperCase());
+                    System.out.println("Введите критичность дефекта (Низкая, Средняя, Высокая)");
+                    Severity critical = Severity.getSeverityByValue(scanner.nextLine());
 
                     System.out.println("Введите ожидаемое кол-во дней на исправление дефекта");
                     int daysToFix = scanner.nextInt();
@@ -59,7 +54,7 @@ public class Main {
                             System.out.println("Ошибочное значение");
                         }
                     }
-                    Defect bug = new Defect(resume, critical, daysToFix, attachment, Status.valueOf("OPEN")); // todo 3 - есть более простой способ получить значение енума
+                    Defect bug = new Defect(resume, critical, daysToFix, attachment, Status.OPEN);
                     repository.add(bug);
                     break;
                 }
@@ -79,9 +74,15 @@ public class Main {
                     if (bug == null) {
                         System.out.println("Нет дефекта с таким номером!");
                     } else {
-                        System.out.println("Текущий статус дефекта - " + bug.getStatus() + "\nВведите новый статус (OPEN, TESTING, DELAYED, CLOSE): ");
-                        bug.setStatus(Status.valueOf(scanner.nextLine().toUpperCase()));
-                        System.out.println("Успешно! Текущий статус дефекта - " + bug.getStatus());
+                        System.out.println("Текущий статус дефекта - " + bug.getStatus() + "\nВведите новый статус (Исправление, Тестирование, Отложен, Закрыт): ");
+                        Status status=Status.getStatusByValue(scanner.nextLine());
+                        if (status == null) {
+                            System.out.println("Внимание, вы ввели несуществующий статус - статус изменен не будет");
+                        } else {
+                            bug.setStatus(status);
+                            System.out.println("Успешно! Текущий статус дефекта - " + bug.getStatus());
+                        }
+
                     }
                     break;
                 }

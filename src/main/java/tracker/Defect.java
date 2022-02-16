@@ -4,15 +4,15 @@ public class Defect {
     private static long counterOfBugs = 0;
     private final long id;
     private String resume;
-    private Critical critical;
+    private Severity severity;
     private Status status;
     private int daysToFix;
     private final Attachment attachment;
 
     // todo 3 - новые дефекты всегда имеют статус Открыто, этот конструктор позволяет создать в любом
-    public Defect(String resume, Critical critical, int daysToFix, Attachment attachment, Status status) {
+    public Defect(String resume, Severity severity, int daysToFix, Attachment attachment, Status status) {
         this.resume = resume;
-        this.critical = critical;
+        this.severity = severity;
         this.daysToFix = daysToFix;
         this.id = counterOfBugs;
         this.attachment = attachment;
@@ -33,12 +33,12 @@ public class Defect {
         return resume;
     }
 
-    public void setCritical(Critical critical) {
-        this.critical = critical;
+    public void setCritical(Severity severity) {
+        this.severity = severity;
     }
 
-    public Critical getCritical() {
-        return critical;
+    public Severity getCritical() {
+        return severity;
     }
 
     public void setStatus(Status status) {
@@ -60,6 +60,6 @@ public class Defect {
     public String toString() {
         return String.format(
                 "Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d | Статус: %s| Вложение: %s",
-                id, resume, critical, daysToFix, status.toString(), attachment.toString());
+                id, resume, severity, daysToFix, status.toString(), attachment.toString());
     }
 }

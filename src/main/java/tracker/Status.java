@@ -2,7 +2,7 @@ package tracker;
 
 public enum Status {
     OPEN("Открыт"),
-    INPROGRESS("Исправление"), // todo 0 - IN_PROGRESS
+    IN_PROGRESS("Исправление"),
     TESTING("Тестирование"),
     DELAYED("Отложен"),
     CLOSE("Закрыт");
@@ -16,5 +16,13 @@ public enum Status {
     @Override
     public String toString() {
         return statusName;
+    }
+    public static Status getStatusByValue(String value) {
+        for (Status item : Status.values()) {
+            if (item.toString().equals(value)) {
+                return item;
+            }
+        }
+        return null;
     }
 }
