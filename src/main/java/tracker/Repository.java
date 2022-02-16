@@ -25,7 +25,9 @@ public class Repository {
         return Arrays.copyOf(defects, currentDefectCount);
     }
 
+    // todo 0 - getById
     public Defect getCheckId(long id) {
+        // todo 3 - копирование здесь это лишняя работа, массив никуда наружу не отдается же
         for (Defect bug : Arrays.copyOf(defects, currentDefectCount)) {
             if (id == bug.getId()) {
                 return bug;

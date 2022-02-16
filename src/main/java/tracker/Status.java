@@ -2,7 +2,7 @@ package tracker;
 
 public enum Status {
     OPEN("Открыт"),
-    INPROGRESS("Исправление"),
+    INPROGRESS("Исправление"), // todo 0 - IN_PROGRESS
     TESTING("Тестирование"),
     DELAYED("Отложен"),
     CLOSE("Закрыт");

@@ -1,5 +1,6 @@
 package tracker;
 
+// todo 0 - скорее всего это Severity
 public enum Critical {
     LOW("Низкая"),
     MEDIUM("Средняя"),

@@ -29,8 +29,12 @@ public class Main {
                     System.out.println("Введите резюме дефекта");
                     String resume = scanner.nextLine();
 
-                    Critical critical;
+                    Critical critical; // todo 1 - объявление отдельно от инициализации
                     System.out.println("Введите критичность дефекта (Low, Medium, High)");
+                    // todo 3 - есть 2 проблемы с использованием valueOf
+                    //  - на вход читаем английские названия, на выход пишем русские, что сбивает с толку
+                    //  - если вводится неправильное название, вся программа падает
+                    //  стоит сделать методы в енамах, которые будут возвращать значение по русскому названию или нулл, если неверное
                     critical = Critical.valueOf(scanner.nextLine().toUpperCase());
 
                     System.out.println("Введите ожидаемое кол-во дней на исправление дефекта");
@@ -55,7 +59,7 @@ public class Main {
                             System.out.println("Ошибочное значение");
                         }
                     }
-                    Defect bug = new Defect(resume, critical, daysToFix, attachment, Status.valueOf("OPEN"));
+                    Defect bug = new Defect(resume, critical, daysToFix, attachment, Status.valueOf("OPEN")); // todo 3 - есть более простой способ получить значение енума
                     repository.add(bug);
                     break;
                 }

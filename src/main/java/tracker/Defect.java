@@ -9,7 +9,7 @@ public class Defect {
     private int daysToFix;
     private final Attachment attachment;
 
-
+    // todo 3 - новые дефекты всегда имеют статус Открыто, этот конструктор позволяет создать в любом
     public Defect(String resume, Critical critical, int daysToFix, Attachment attachment, Status status) {
         this.resume = resume;
         this.critical = critical;
