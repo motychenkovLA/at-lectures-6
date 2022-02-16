@@ -20,6 +20,15 @@ public class Repository {
         return defectListWithoutNull;
     }
 
+    public Defect getDefect(long id) {
+        for (Defect defect : defectList) {
+            if (defect.getId() == id) {
+                return defect;
+            }
+        }
+        return null;
+    }
+
 
     public boolean isFull() {
         return defectList.length == size;

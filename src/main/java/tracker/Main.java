@@ -19,16 +19,8 @@ public class Main {
                     long id = console.nextLong();
                     console.nextLine();
                     System.out.println("Введите новый статус:");
-                    String status = console.nextLine();
-                    // todo 3 - достаются все дефекты вместо одного нужного
-                    for (Defect defect : repository.getAll()) {
-                        if (defect.getId() == id) {
-                            defect.changeStatus(status);
-                        }
-
-                    }
-                    // todo 1 - статус не всегда успешно изменен, пользователь может ввести неверный ид
-                    System.out.println("Статус успешно изменен!");
+                    Status status = Status.valueOf(console.nextLine());
+                    repository.getDefect(id).changeStatus(status);
 
                     break;
                 case "list":
@@ -45,7 +37,7 @@ public class Main {
                     System.out.println("Введите резюме");
                     String resume = console.nextLine();
                     System.out.println("Введите критичность дефекта: критично, некритично или ахтунг");
-                    String critical = console.nextLine();
+                    Severity critical = Severity.valueOf(console.nextLine());
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта");
                     int numberOfDays = console.nextInt();
                     console.nextLine();
