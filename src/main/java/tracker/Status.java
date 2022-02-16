@@ -19,7 +19,7 @@ public enum Status {
     }
     public static Status getStatusByValue(String value) {
         for (Status item : Status.values()) {
-            if (item.toString().equals(value)) {
+            if (item.toString().equals(value)) { // todo 1 - toString сложно + публичный интерфейс, можно просто само поле вытащить
                 return item;
             }
         }

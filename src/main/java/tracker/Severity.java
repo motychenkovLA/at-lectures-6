@@ -18,7 +18,7 @@ public enum Severity {
 
     public static Severity getSeverityByValue(String value) {
         for (Severity item : Severity.values()) {
-            if (item.toString().equals(value)) {
+            if (item.toString().equals(value)) { // todo 1 - toString сложно + публичный интерфейс, можно просто само поле вытащить
                 return item;
             }
         }
