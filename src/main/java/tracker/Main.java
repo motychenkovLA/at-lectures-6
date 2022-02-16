@@ -6,11 +6,11 @@ import java.util.*;
 
 public class Main {
 
-    private static final Repository repository = new Repository();     //создаем репозиторий
+    private static final Repository repository = new Repository();     //создаем репозиторий // todo 0 - коммент излишний
 
     public static void main(String[] args) {
 
-        boolean isRun = true; // показатель того, в работе мы или идем на выход
+        boolean isRun = true; // показатель того, в работе мы или идем на выход // todo 0 - коммент излишний
         Scanner scanner = new Scanner(System.in);
 
 
@@ -31,6 +31,8 @@ public class Main {
 
                     System.out.println("Введите критичность дефекта (Низкая, Средняя, Высокая)");
                     Severity critical = Severity.getSeverityByValue(scanner.nextLine());
+                    // todo 5 - ниже проверяется когда водим не валидный статус, здесь проверки нет, null утекает дальше в код
+                    //  чтоб сильно не усложнять предлагаю если введено не валидное значение брать Среднее, только надо об это сообщить пользователю
 
                     System.out.println("Введите ожидаемое кол-во дней на исправление дефекта");
                     int daysToFix = scanner.nextInt();
