@@ -31,4 +31,7 @@ public class Defect {
 
     }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }

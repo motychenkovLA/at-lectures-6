@@ -16,7 +16,7 @@ public class Main {
             switch (action) {
                 case "change":
                     long id;
-                    do {
+                    while (true) {
                         System.out.println("Введите Id дефекта:");
                         id = console.nextLong();
                         console.nextLine();
@@ -25,18 +25,19 @@ public class Main {
                         } else {
                             break;
                         }
-                    } while (true);
+                    }
                     Status status;
-                    do {
+                    while (true) {
                         System.out.println("Введите новый статус: Открыто, Закрыто или В работе");
                         String inputStatus = console.nextLine();
-                        status = Status.getStatus(inputStatus);
+                        status= Status.getStatus(inputStatus);
                         if (status == null) {
                             System.out.println("Статус не найден");
                         } else {
+                            repository.getDefect(id).setStatus(status);
                             break;
                         }
-                    } while (true);
+                    }
                     break;
 
                 case "list":
@@ -53,7 +54,7 @@ public class Main {
                     System.out.println("Введите резюме");
                     String resume = console.nextLine();
                     Severity critical;
-                    do {
+                    while (true) {
                         System.out.println("Введите критичность дефекта: критично, не критично или очень критично");
                         String inputCritical = console.nextLine();
                         critical = Severity.getSeverity(inputCritical);
@@ -62,7 +63,7 @@ public class Main {
                         } else {
                             break;
                         }
-                    } while (true);
+                    }
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта");
                     int numberOfDays = console.nextInt();
                     console.nextLine();
