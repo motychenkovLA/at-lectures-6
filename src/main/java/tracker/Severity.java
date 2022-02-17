@@ -6,22 +6,25 @@ public enum Severity {
     CRITICAL("критично"),
     VERY_CRITICAL("очень критично");
 
-    public String ruSeverity;// todo 3 - поле публичное // todo 0 - лучше ruName или displayName
+    private String ruName;
 
-    Severity(String ruSeverity) {
-        this.ruSeverity = ruSeverity;
+    Severity(String ruName) {
+        this.ruName = ruName;
     }
 
+    public String getRuName() {
+        return ruName;
+    }
 
     public static Severity getSeverity(String inputCritical) {
         for (Severity severity : Severity.values()) {
-            if (severity.ruSeverity.equals(inputCritical)) {
+            if (severity.ruName.equals(inputCritical)) {
                 return severity;
             }
         }
-        System.out.println("Критичность не найдена");// todo 3 - не ответственность критичности сообщать что-то на консоль
         return null;
     }
+
 }
 
 

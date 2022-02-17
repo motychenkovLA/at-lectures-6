@@ -15,26 +15,30 @@ public class Main {
             String action = console.nextLine();
             switch (action) {
                 case "change":
-                    // todo 3 - код до начала цикла повторяется в цикле
-                    //  ниже реализован аналогичный ввод статуса через цикл без дублирования кода
-                    System.out.println("Введите Id дефекта:");
-                    long id = console.nextLong();
-                    console.nextLine();
-                    while (repository.getDefect(id) == null) {
-                        System.out.println("Нет дефекта с таким Id");
+                    long id;
+                    do {
                         System.out.println("Введите Id дефекта:");
                         id = console.nextLong();
                         console.nextLine();
-                    }
+                        if (repository.getDefect(id) == null) {
+                            System.out.println("Нет дефекта с таким Id");
+                        } else {
+                            break;
+                        }
+                    } while (true);
                     Status status;
                     do {
                         System.out.println("Введите новый статус: Открыто, Закрыто или В работе");
                         String inputStatus = console.nextLine();
                         status = Status.getStatus(inputStatus);
-                    } // todo 0 - while на этой строке должен быть
-                    while (status == null);
-
+                        if (status == null) {
+                            System.out.println("Статус не найден");
+                        } else {
+                            break;
+                        }
+                    } while (true);
                     break;
+
                 case "list":
                     for (Defect defect : repository.getAll()) {
                         System.out.println(defect.getDefectInfo());
@@ -53,8 +57,12 @@ public class Main {
                         System.out.println("Введите критичность дефекта: критично, не критично или очень критично");
                         String inputCritical = console.nextLine();
                         critical = Severity.getSeverity(inputCritical);
-                    }
-                    while (critical == null);
+                        if (critical == null) {
+                            System.out.println("Критичность не найдена");
+                        } else {
+                            break;
+                        }
+                    } while (true);
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта");
                     int numberOfDays = console.nextInt();
                     console.nextLine();

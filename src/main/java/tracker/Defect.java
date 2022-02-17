@@ -22,7 +22,7 @@ public class Defect {
     }
 
     public String getDefectInfo() {
-        return "" + id + " | " + status.ruStatus + " | " + resume + " | " + critical.ruSeverity + " | " + numberOfDays + " | " + attachment.toString();
+        return "" + id + " | " + status.getRuName() + " | " + resume + " | " + critical.getRuName() + " | " + numberOfDays + " | " + attachment.toString();
 
     }
 
