@@ -30,7 +30,7 @@ public class Main {
                     while (true) {
                         System.out.println("Введите новый статус: Открыто, Закрыто или В работе");
                         String inputStatus = console.nextLine();
-                        status= Status.getStatus(inputStatus);
+                        status = Status.getStatus(inputStatus);
                         if (status == null) {
                             System.out.println("Статус не найден");
                         } else {
