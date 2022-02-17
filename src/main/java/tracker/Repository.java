@@ -21,16 +21,16 @@ public class Repository {
     }
 
     public Defect getDefect(long id) {
-        for (Defect defect : defectList) { // todo 5 - упадет как только выйдет за заведенные дефекты в пустую часть массива
-            if (defect.getId() == id) {
-                return defect;
+        for (int i = 0; i < size; i++) {
+            if (defectList[i].getId() == id) {
+                return defectList[i];
             }
         }
         return null;
     }
 
-
     public boolean isFull() {
         return defectList.length == size;
     }
+
 }

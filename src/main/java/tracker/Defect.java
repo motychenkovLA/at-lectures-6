@@ -18,23 +18,16 @@ public class Defect {
         this.critical = critical;
         this.numberOfDays = numberOfDays;
         this.attachment = attachment;
-        status = Status.Open;
+        this.status = Status.OPEN;
     }
 
     public String getDefectInfo() {
-        return "" + id + " | " + status + " | " + resume + " | " + critical + " | " + numberOfDays + " | " + attachment.toString();
+        return "" + id + " | " + status.ruStatus + " | " + resume + " | " + critical.ruSeverity + " | " + numberOfDays + " | " + attachment.toString();
 
     }
 
     public long getId() {
         return id;
-
-    }
-
-
-    // todo 3 - это сеттер
-    public void changeStatus(Status status) {
-        this.status = status;
 
     }
 

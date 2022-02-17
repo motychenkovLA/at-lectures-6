@@ -18,13 +18,19 @@ public class Main {
                     System.out.println("Введите Id дефекта:");
                     long id = console.nextLong();
                     console.nextLine();
-                    System.out.println("Введите новый статус:");
-                    // todo 3 - с valueOf есть пара проблем
-                    //  - если введено не верное значение программа падает
-                    //  - они на английском, а весь остальной UI на русском
-                    //  стоит добавить в енамы возможность их нормального отображения и их безопасного получения по этому отображению
-                    Status status = Status.valueOf(console.nextLine());
-                    repository.getDefect(id).changeStatus(status); // todo 5 - упадет если нет дефекта с таким ид
+                    while (repository.getDefect(id) == null) {
+                        System.out.println("Нет дефекта с таким Id");
+                        System.out.println("Введите Id дефекта:");
+                        id = console.nextLong();
+                        console.nextLine();
+                    }
+                    Status status;
+                    do {
+                        System.out.println("Введите новый статус: Открыто, Закрыто или В работе");
+                        String inputStatus = console.nextLine();
+                        status = Status.getStatus(inputStatus);
+                    }
+                    while (status == null);
 
                     break;
                 case "list":
@@ -40,8 +46,13 @@ public class Main {
 
                     System.out.println("Введите резюме");
                     String resume = console.nextLine();
-                    System.out.println("Введите критичность дефекта: критично, некритично или ахтунг");
-                    Severity critical = Severity.valueOf(console.nextLine());
+                    Severity critical;
+                    do {
+                        System.out.println("Введите критичность дефекта: критично, не критично или очень критично");
+                        String inputCritical = console.nextLine();
+                        critical = Severity.getSeverity(inputCritical);
+                    }
+                    while (critical == null);
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта");
                     int numberOfDays = console.nextInt();
                     console.nextLine();
