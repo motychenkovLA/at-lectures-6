@@ -32,7 +32,7 @@ public class Repository {
     }
 
     public Defect findDefectById(long idDefect) {
-        for(Defect defect : defectsList) {
+        for(Defect defect : defectsList) { // todo 5 - упадет когда начнет перебирать пустую часть массива
             if (defect.getId() == idDefect) {
                 return defect;
             }

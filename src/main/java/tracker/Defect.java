@@ -5,7 +5,7 @@ public class Defect {
     private static int countDefects = 0;
     private final long id;
     private String resume;
-    private String severity;
+    private String severity; // todo 3 - не Severity
     private int daysToFix;
     private Attachment attachment;
     private Status status;

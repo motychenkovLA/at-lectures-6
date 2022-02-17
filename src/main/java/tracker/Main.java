@@ -8,8 +8,8 @@ public class Main {
         Repository repository = new Repository(10);
         Scanner scanner = new Scanner(System.in);
         String command = null;
-        String attachmentBug;
-        String answer;
+        String attachmentBug; // todo 1 - Объявление задолго до использования
+        String answer; // todo 1 - неиспользуемая переменная
 
 
         while (!Objects.equals(command, "quit")) {
@@ -65,16 +65,21 @@ public class Main {
 
                 case "change":
                     if(!repository.repositoryIsEmpty()) {
-                        repository.getAllDefects();
+                        repository.getAllDefects(); // todo 3 - выражение ничего не делает
                         System.out.println("Введине id дефекта, у которого необходимо поменять статус");
                         long idDefectForChangeStatus = scanner.nextLong();
                         scanner.nextLine();
                         Defect defectForChangeStatus = repository.findDefectById(idDefectForChangeStatus);
+                        // todo 5 - нет проверки что дефект нашелся по id
                         System.out.println("Выберите новый статус из списка");
                         Status statuses[] = Status.values();
                         for (Status status : statuses)
                             System.out.println(status);
                         System.out.println();
+                        // todo 3 - с valueOf есть проблемы
+                        //  - значения выводятся на английском (вернее даже на джававском), хотя весь остальной UI на русском
+                        //  - метод падает если вводим неправильное название
+                        //  хотелось бы сделать enum так, чтобы у него было читаемое русскоязычное отображение и возможность по этому отображению безопасно получить значение
                         Status newStatus = Status.valueOf(scanner.nextLine());
                         defectForChangeStatus.setStatus(newStatus);
                     } else {
