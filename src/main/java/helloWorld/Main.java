@@ -2,62 +2,40 @@ package helloWorld;
 
 import java.util.Scanner;
 
-public class Main {
+class Main {
+    public static void addDefect() {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите резюме дефекта");
+        String name = scanner.nextLine();
+        Defect def = new Defect(name);
+        System.out.println("Введите критичность дефекта:\nLow\nMedium\nHigh\nCritical");
+        def.setCritical(scanner.nextLine());
+        System.out.println("Введите ожидаемое количество дней на исправление дефекта");
+        def.setDaysNumber(scanner.nextInt());
+        scanner.nextLine();
+        Repository.add(def);
+    }
+
     public static void main(String[] args) {
-
-        int maxBugs = 10;
-        Defect[] listBug = new Defect[maxBugs];
-        int numberOfBug = 0;
-
-
+        Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("add - добавить новый дефект" + "\nlist - вывести список дефектов" + "\nquit - выход из программы ");
-
-
-            Scanner scanner = new Scanner(System.in);
-            String menu = scanner.nextLine();
-
-
-            switch (menu) {
+            String operation = scanner.nextLine();
+            switch (operation) {
                 case "add":
-
-                    if (numberOfBug < maxBugs) {
-                        System.out.println("Введите резюме дефекта");
-
-                        String description = scanner.nextLine();
-                        System.out.println("Введите критичность дефекта:\nLow\nMedium\nHigh\nCritical");
-                        String critical = scanner.nextLine();
-                        System.out.println("Введите ожидаемое количество дней на исправление дефекта");
-                        int daysNumber = scanner.nextInt();
-
-
-                        Defect def = new Defect(description, critical, daysNumber);
-                        listBug[numberOfBug] = def;
-
-                        numberOfBug++;
-
-                    } else {
-                        System.out.println("Достигнуто максимальное количество дефектов");
-                    }
+                    addDefect();
                     break;
-
-
                 case "list":
-                    for (int i = 0; i < numberOfBug; i++) {
-
-
-                        System.out.println(listBug[i].getInfo());
+                    for (int i = 0; i < Repository.countOfBug; i++) {
+                        System.out.println(Repository.getAll()[i].getInfo());
                     }
                     System.out.println("\n\n");
-
-
                     break;
                 case "quit":
-                    System.out.println("Выход из программы");
                     return;
                 default:
-                    System.out.println("Введена несуществующая операция\n");
-                    break;
+                    System.out.println("Введена неизвестная команда\n");
             }
         }
     }
