@@ -6,7 +6,7 @@ public enum Severity {
     CRITICAL("критично"),
     VERY_CRITICAL("очень критично");
 
-    public String ruSeverity;
+    public String ruSeverity;// todo 3 - поле публичное // todo 0 - лучше ruName или displayName
 
     Severity(String ruSeverity) {
         this.ruSeverity = ruSeverity;
@@ -19,7 +19,7 @@ public enum Severity {
                 return severity;
             }
         }
-        System.out.println("Критичность не найдена");
+        System.out.println("Критичность не найдена");// todo 3 - не ответственность критичности сообщать что-то на консоль
         return null;
     }
 }

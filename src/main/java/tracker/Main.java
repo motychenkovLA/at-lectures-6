@@ -15,6 +15,8 @@ public class Main {
             String action = console.nextLine();
             switch (action) {
                 case "change":
+                    // todo 3 - код до начала цикла повторяется в цикле
+                    //  ниже реализован аналогичный ввод статуса через цикл без дублирования кода
                     System.out.println("Введите Id дефекта:");
                     long id = console.nextLong();
                     console.nextLine();
@@ -29,7 +31,7 @@ public class Main {
                         System.out.println("Введите новый статус: Открыто, Закрыто или В работе");
                         String inputStatus = console.nextLine();
                         status = Status.getStatus(inputStatus);
-                    }
+                    } // todo 0 - while на этой строке должен быть
                     while (status == null);
 
                     break;
