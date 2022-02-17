@@ -6,19 +6,17 @@ public class Main {
     public static void main(String[] args) {
 
         int maxBugs = 10;
-
-
-        String[] descriptions = new String[maxBugs];
-        String[] criticals = new String[maxBugs];
-        int[] daysNumbers = new int[maxBugs];
+        Defect[] listBug = new Defect[maxBugs];
         int numberOfBug = 0;
 
-                while (true) {
+
+        while (true) {
             System.out.println("add - добавить новый дефект" + "\nlist - вывести список дефектов" + "\nquit - выход из программы ");
 
 
             Scanner scanner = new Scanner(System.in);
             String menu = scanner.nextLine();
+
 
             switch (menu) {
                 case "add":
@@ -33,25 +31,32 @@ public class Main {
                         int daysNumber = scanner.nextInt();
 
 
-                        descriptions[numberOfBug] = description;
-                        criticals[numberOfBug] = critical;
-                        daysNumbers[numberOfBug] = daysNumber;
+                        Defect def = new Defect(description, critical, daysNumber);
+                        listBug[numberOfBug] = def;
+
                         numberOfBug++;
 
                     } else {
                         System.out.println("Достигнуто максимальное количество дефектов");
                     }
                     break;
+
+
                 case "list":
                     for (int i = 0; i < numberOfBug; i++) {
-                        int workWeek = 5;
-                        boolean moreThanWorkWeek = daysNumbers[i] >= workWeek;
-                        System.out.println(descriptions[i] + " | " + criticals[i] + " | " + daysNumbers[i] + " | Займёт больше рабочей недели:" + moreThanWorkWeek);
+
+
+                        System.out.println(listBug[i].getInfo());
                     }
+                    System.out.println("\n\n");
+
 
                     break;
                 case "quit":
                     System.out.println("Выход из программы");
+                    return;
+                default:
+                    System.out.println("Введена несуществующая операция\n");
                     break;
             }
         }
