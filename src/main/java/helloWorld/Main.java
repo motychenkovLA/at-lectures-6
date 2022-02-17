@@ -30,7 +30,6 @@ class Main {
                     for (int i = 0; i < Repository.countOfBug; i++) {
                         System.out.println(Repository.getAll()[i].getInfo());
                     }
-                    System.out.println("\n\n");
                     break;
                 case "quit":
                     return;
