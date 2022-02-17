@@ -8,9 +8,6 @@ public class Main {
         Repository repository = new Repository(10);
         Scanner scanner = new Scanner(System.in);
         String command = null;
-        String attachmentBug; // todo 1 - Объявление задолго до использования
-        String answer; // todo 1 - неиспользуемая переменная
-
 
         while (!Objects.equals(command, "quit")) {
             System.out.println("Введите: add, list, quit или change");
@@ -21,37 +18,58 @@ public class Main {
                         System.out.println("Введите резюме дефекта");
                         String resumeBug = scanner.nextLine();
 
-                        System.out.println("Введите критичность дефекта из списка");
+                        System.out.println("Выберите критичность дефекта из списка:");
                         Severity[] severitys = Severity.values();
                         for (Severity severity : severitys)
                             System.out.println(severity);
                         System.out.println();
-                        String severityBug = scanner.nextLine();
-
-                        System.out.println("Введите количество дней на исправление дефекта");
-                        int daysToFixBug = scanner.nextInt();
+                        System.out.println("Введите цифру которая, соответствует критичности: 1 - блокирующий, " +
+                                "2 - критический, 3 - значительный, 4 - незначительный");
+                        Severity severityBug = null;
+                        int numSeverity = scanner.nextInt();
                         scanner.nextLine();
-
-                        System.out.println("Выберите тип вложение: comment или link");
-                        attachmentBug = scanner.nextLine();
-
-                        switch (attachmentBug) {
-                            case "comment":
-                                System.out.println("Введите комментарий");
-                                String comment = scanner.nextLine();
-                                CommentAttachment commentAttachment = new CommentAttachment(comment);
-                                repository.addDefect(new Defect(resumeBug, severityBug, daysToFixBug, commentAttachment));
+                        switch (numSeverity) {
+                            case 1:
+                                severityBug = Severity.BLOCKER;
                                 break;
-                            case "link":
-                                System.out.println("Введите ссылку (id) дефекта");
-                                String idBug = scanner.nextLine();
-                                DefectAttachment defectAttachment = new DefectAttachment(idBug);
-                                repository.addDefect(new Defect(resumeBug, severityBug, daysToFixBug, defectAttachment));
+                            case 2:
+                                severityBug = Severity.CRITICAL;
+                                break;
+                            case 3:
+                                severityBug = Severity.MAJOR;
+                                break;
+                            case 4:
+                                severityBug = Severity.MINOR;
                                 break;
                             default:
-                                System.out.println("Не верный тип вложения, повторите попытку");
+                                System.out.println("Такого значения не существует");
                                 break;
                         }
+
+                            System.out.println("Введите количество дней на исправление дефекта");
+                            int daysToFixBug = scanner.nextInt();
+                            scanner.nextLine();
+
+                            System.out.println("Выберите тип вложение: comment или link");
+                            String attachmentBug = scanner.nextLine();
+
+                            switch (attachmentBug) {
+                                case "comment":
+                                    System.out.println("Введите комментарий");
+                                    String comment = scanner.nextLine();
+                                    CommentAttachment commentAttachment = new CommentAttachment(comment);
+                                    repository.addDefect(new Defect(resumeBug, severityBug, daysToFixBug, commentAttachment));
+                                    break;
+                                case "link":
+                                    System.out.println("Введите ссылку (id) дефекта");
+                                    String idBug = scanner.nextLine();
+                                    DefectAttachment defectAttachment = new DefectAttachment(idBug);
+                                    repository.addDefect(new Defect(resumeBug, severityBug, daysToFixBug, defectAttachment));
+                                    break;
+                                default:
+                                    System.out.println("Не верный тип вложения, повторите попытку");
+                                    break;
+                            }
                     } else {
                         System.out.println("Превышено максимально допустимое кол-во дефектов");
                     }
@@ -65,23 +83,37 @@ public class Main {
 
                 case "change":
                     if(!repository.repositoryIsEmpty()) {
-                        repository.getAllDefects(); // todo 3 - выражение ничего не делает
                         System.out.println("Введине id дефекта, у которого необходимо поменять статус");
                         long idDefectForChangeStatus = scanner.nextLong();
                         scanner.nextLine();
                         Defect defectForChangeStatus = repository.findDefectById(idDefectForChangeStatus);
-                        // todo 5 - нет проверки что дефект нашелся по id
-                        System.out.println("Выберите новый статус из списка");
-                        Status statuses[] = Status.values();
-                        for (Status status : statuses)
-                            System.out.println(status);
-                        System.out.println();
-                        // todo 3 - с valueOf есть проблемы
-                        //  - значения выводятся на английском (вернее даже на джававском), хотя весь остальной UI на русском
-                        //  - метод падает если вводим неправильное название
-                        //  хотелось бы сделать enum так, чтобы у него было читаемое русскоязычное отображение и возможность по этому отображению безопасно получить значение
-                        Status newStatus = Status.valueOf(scanner.nextLine());
-                        defectForChangeStatus.setStatus(newStatus);
+                        if (defectForChangeStatus != null) {
+                            System.out.println("Выберите новый статус из списка:");
+                            Status statuses[] = Status.values();
+                            for (Status status : statuses)
+                                System.out.println(status.getInRus());
+                            System.out.println("Введите цифру которая, соответствует статусу: 1 - открыт, 2 - в работе, 3 - закрыт");
+                            int numStatus = scanner.nextInt();
+                            scanner.nextLine();
+                            switch (numStatus) {
+                                case 1:
+                                    defectForChangeStatus.setStatus(Status.OPEN);
+                                    break;
+                                case 2:
+                                    defectForChangeStatus.setStatus(Status.INWORK);
+                                    break;
+                                case 3:
+                                    defectForChangeStatus.setStatus(Status.CLOSED);
+                                    break;
+                                default:
+                                    System.out.println("Такого значения не существует");
+                                    break;
+                            }
+
+                        }
+                        if (defectForChangeStatus == null) {
+                            System.out.println("Дефекта с таким id не существует");
+                        }
                     } else {
                         System.out.println("В репозитории нет дефектов");
                     }

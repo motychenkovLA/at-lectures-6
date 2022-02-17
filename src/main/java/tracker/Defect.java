@@ -5,13 +5,13 @@ public class Defect {
     private static int countDefects = 0;
     private final long id;
     private String resume;
-    private String severity; // todo 3 - не Severity
+    private Severity severity;
     private int daysToFix;
     private Attachment attachment;
     private Status status;
 
 
-    public Defect(String resume, String severity, int daysToFix, Attachment attachment) {
+    public Defect(String resume, Severity severity, int daysToFix, Attachment attachment) {
         this.resume = resume;
         this.severity = severity;
         this.daysToFix = daysToFix;
@@ -33,11 +33,11 @@ public class Defect {
         this.resume = resume;
     }
 
-    public String getSeverity() {
+    public Severity getSeverity() {
         return severity;
     }
 
-    public void setSeverity(String severity) {
+    public void setSeverity(Severity severity) {
         this.severity = severity;
     }
 
@@ -68,9 +68,9 @@ public class Defect {
 
     String getBugsInfo() {
         return "Id дефекта: " + id + " | " + "Резюме: " + resume +
-                " | " + "Критичность: " + severity + " | " +
+                " | " + "Критичность: " + severity.getInRus() + " | " +
                 "Дней на исправление: " + daysToFix + " | " + "Вложение: " + attachment  +
-                " | " + "Статус: " + status;
+                " | " + "Статус: " + status.getInRus();
     }
 
 }

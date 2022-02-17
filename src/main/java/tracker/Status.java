@@ -1,8 +1,17 @@
 package tracker;
 
 public enum Status {
-    OPEN,
-    INWORK,
-    CLOSED,
-    ANALYSIS
+    OPEN("открыт"),
+    INWORK("в работе"),
+    CLOSED("закрыт");
+
+    private final String inRus;
+
+    Status(String inRus) {
+        this.inRus = inRus;
+    }
+
+    public String getInRus() {
+        return inRus;
+    }
 }
