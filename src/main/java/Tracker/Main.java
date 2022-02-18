@@ -1,6 +1,14 @@
 package Tracker;
 
-import java.util.Scanner;
+        import java.util.Scanner;
+
+//при создании дефекта также предложить пользователю выбрать тип вложения: комментарий или ссылка на другой дефект
+//при вводе комментария принять от пользователя строку
+//при вводе ссылки на дефект принять id этого дефекта
+//прикрепление реализовать в виде класса Attachment с двумя наследниками CommentAttachment для комментария и DefectAttachment для ссылки на дефект
+//в классе Attachment создать метод String asString(), возвращающий его строковое представление, переопределить метод в наследниках
+//при выводе дефекта на консоль выводить также и вложение, используя его метод asString
+
 
 public class Main {
     public static void main(String[] args) {
@@ -26,8 +34,46 @@ public class Main {
                     String priority = scanner.nextLine(); //заполняем критичность
                     System.out.println("Введите ожидаемое количество дней на исправление");
                     int daysToFix = scanner.nextInt(); //заполняем количество дней на исправление
-                    Defect defect = new Defect(resume, priority, daysToFix);
-                    repository.add(defect);
+                    System.out.println("Добавить вложение к дефекту?\n" +
+                            "1.Да\n" +
+                            "2.Нет");
+                    menuItem = scanner.nextInt();
+                    scanner.nextLine();
+
+                    switch (menuItem){
+                        case 1:{
+                            System.out.println("Выберите тип вложения:\n"+
+                                    "1.Комментарий\n"+
+                                    "2.Ссылка на другой дефект");
+                            menuItem = scanner.nextInt();
+                            scanner.nextLine();
+                            switch (menuItem){
+                                case 1:{
+                                    System.out.println("Введите комментарий");
+                                    CommentAttachment commentAttachment = new CommentAttachment(scanner.nextLine());
+                                    Defect defect = new Defect(resume, priority, daysToFix, commentAttachment.asString());
+                                    repository.add(defect);
+                                    System.out.println("Дефект создан");
+                                    break;
+                                }
+                                case 2:{
+                                    System.out.println("Введите id дефекта");
+                                    DefectAttachment defectAttachment = new DefectAttachment(scanner.nextLine());
+                                    Defect defect = new Defect(resume, priority, daysToFix, defectAttachment.asString());
+                                    repository.add(defect);
+                                    System.out.println("Дефект создан");
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                        case 2: {
+                            Defect defect = new Defect(resume, priority, daysToFix, "Вложений нет");
+                            repository.add(defect);
+                            System.out.println("Дефект создан");
+                            break;
+                        }
+                    }
                     break;
                 }
                 case 2: {
