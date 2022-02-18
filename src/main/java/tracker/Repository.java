@@ -7,8 +7,8 @@ public class Repository {
     static public int countBug = 0;
 
     static public void add(Defect def) {
-
-        if (countBug > size - 10) {
+        int checkSize = 10;
+        if (countBug > size - checkSize) {
             size = size + 100;
             Defect[] temp = listBug;
             listBug = new Defect[size];

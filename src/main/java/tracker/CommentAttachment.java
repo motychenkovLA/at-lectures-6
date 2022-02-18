@@ -1,13 +1,13 @@
 package tracker;
 
 public class CommentAttachment extends Attachment {
-    String attachmentСomment;
+    private String comment;
 
-    public CommentAttachment(String attachmentСomment) {
-        this.attachmentСomment = attachmentСomment;
+    public CommentAttachment(String comment) {
+        this.comment = comment;
     }
 
     public String toString() {
-        return "Комментарий: " + attachmentСomment;
+        return "Комментарий: " + comment;
     }
 }

@@ -2,13 +2,13 @@ package tracker;
 
 public class DefectAttachment extends Attachment {
 
-    int attachmentID;
+    private int link;
 
-    public DefectAttachment(int attachmentID) {
-        this.attachmentID = attachmentID;
+    public DefectAttachment(int link) {
+        this.link = link;
     }
 
     public String toString() {
-        return "Ссылка на дефект: " + attachmentID;
+        return "Ссылка на дефект: " + link;
     }
 }
