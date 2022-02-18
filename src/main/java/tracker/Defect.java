@@ -5,10 +5,12 @@ public class Defect {
     final private String name;
     private String criticality;
     private int daysNumber;
+    Attachment attachment;
     static private int counter = 1;
 
-    public Defect(String name) {
+    public Defect(String name, Attachment attachment) {
         this.name = name;
+        this.attachment = attachment;
         id = counter++;
     }
 
@@ -16,9 +18,9 @@ public class Defect {
         return daysNumber;
     }
 
-    public void setDaysNumber(int daysnumber) {
-        if (daysnumber < 1) this.daysNumber = 1;
-        else this.daysNumber = daysnumber;
+    public void setDaysNumber(int daysNumber) {
+        if (daysNumber < 1) this.daysNumber = 1;
+        else this.daysNumber = daysNumber;
     }
 
     public String getCriticality() {
@@ -34,6 +36,6 @@ public class Defect {
 
     public String getInfo() {
         return "ID: " + id + ", Резюме дефекта: " + name + ", Критичность: " + criticality +
-                ", Количество дней на исправление: " + daysNumber;
+                ", Количество дней на исправление: " + daysNumber + ", Вложение: " + attachment;
     }
 }

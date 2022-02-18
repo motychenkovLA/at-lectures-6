@@ -10,7 +10,6 @@ public class Repository {
 
         if (countBug > size - 10) {
             size = size + 100;
-            System.out.println("Увеличили размер массива");
             Defect[] temp = listBug;
             listBug = new Defect[size];
             for (int i = 0; i < temp.length; i++) {
