@@ -23,11 +23,15 @@ public class Main {
                         for (Severity severity : severitys)
                             System.out.println(severity);
                         System.out.println();
+                        // todo 3 - дублирование вывода критичностей на консоль
                         System.out.println("Введите цифру которая, соответствует критичности: 1 - блокирующий, " +
                                 "2 - критический, 3 - значительный, 4 - незначительный");
                         Severity severityBug = null;
                         int numSeverity = scanner.nextInt();
                         scanner.nextLine();
+                        // todo 3 - со switch проблем еще больше чем с valueOf
+                        //  - дублирование кода
+                        //  - Main зачем-то держит полную копию состояния Severity
                         switch (numSeverity) {
                             case 1:
                                 severityBug = Severity.BLOCKER;
@@ -43,9 +47,10 @@ public class Main {
                                 break;
                             default:
                                 System.out.println("Такого значения не существует");
-                                break;
+                                break; // todo 3 - допускается null в значении
                         }
 
+                        // todo 1 - отступ
                             System.out.println("Введите количество дней на исправление дефекта");
                             int daysToFixBug = scanner.nextInt();
                             scanner.nextLine();
@@ -89,12 +94,13 @@ public class Main {
                         Defect defectForChangeStatus = repository.findDefectById(idDefectForChangeStatus);
                         if (defectForChangeStatus != null) {
                             System.out.println("Выберите новый статус из списка:");
-                            Status statuses[] = Status.values();
+                            Status statuses[] = Status.values(); // todo 1 - не java-вское объявление типа массива
                             for (Status status : statuses)
                                 System.out.println(status.getInRus());
                             System.out.println("Введите цифру которая, соответствует статусу: 1 - открыт, 2 - в работе, 3 - закрыт");
                             int numStatus = scanner.nextInt();
                             scanner.nextLine();
+                            // todo 3 - аналогично выше
                             switch (numStatus) {
                                 case 1:
                                     defectForChangeStatus.setStatus(Status.OPEN);
