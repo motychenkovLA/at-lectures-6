@@ -32,10 +32,11 @@ public class Repository {
     }
 
     public Defect findDefectById(long idDefect) {
-        // todo 3 - лишняя копия, массив все равно никуда не публикуется
-        for (Defect defect : Arrays.copyOf(defectsList, countDefects))
+        for (Defect defect : defectsList)
             if (defect.getId() == idDefect) {
                 return defect;
+            } else {
+                return null;
             }
         return null;
     }

@@ -10,11 +10,13 @@ public enum Severity {
     private final String inRus;
 
     Severity(String inRus) {
+
         this.inRus = inRus;
     }
 
     public String getInRus() {
         return inRus;
     }
+
 }
 
