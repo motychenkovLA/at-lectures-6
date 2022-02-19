@@ -8,9 +8,7 @@ public class Defect {
     private String summary;
     private String priority;
     private int dayCount;
-    private long defectAttachment;
-    private String commentAttachment;
-    private String finalAttachment;
+    private Attachment attachment;
 
 
     public Defect(String summary, String priority, int dayCount){
@@ -19,18 +17,11 @@ public class Defect {
         this.dayCount = dayCount;
     }
 
-    public Defect(String summary, String priority, int dayCount, String commentAttachment){
+    public Defect(String summary, String priority, int dayCount, Attachment attachment){
         this.summary = summary;
         this.priority = priority;
         this.dayCount = dayCount;
-        this.commentAttachment = commentAttachment;
-    }
-
-    public Defect(String summary, String priority, int dayCount, long comment){
-        this.summary = summary;
-        this.priority = priority;
-        this.dayCount = dayCount;
-        this.defectAttachment = comment;
+        this.attachment = attachment;
     }
 
     public long getId() { return ID; }
@@ -57,19 +48,10 @@ public class Defect {
     }
 
     public String getInfo(){
-        if (commentAttachment != null) {
-            CommentAttachment commentAttach = new CommentAttachment();
-            finalAttachment = commentAttach.toString(commentAttachment);;
-        } else if (defectAttachment != 0) {
-            DefectAttachment defectAttach = new DefectAttachment();
-            finalAttachment = defectAttach.toString(defectAttachment);
-        } else {
-            finalAttachment = "Нет комментариев";
-        }
 
         String info = "ID: " + ID + " | Резюме: " + summary + " | Серьезность: " +
                 priority + " | Количество дней на исправление: " +
-                dayCount + " | " + finalAttachment;
+                dayCount + " | " + attachment;
         return info;
     }
 

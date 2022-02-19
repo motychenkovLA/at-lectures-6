@@ -34,13 +34,17 @@ public class Main {
                 if (attachmentType.equals("1")) {
                     System.out.println("Введите комментарий: ");
                     String commentAttachment = scanner.nextLine();
-                    Defect newDefect = new Defect(summary, priority, dayCount, commentAttachment);
+                    Attachment attachment = new CommentAttachment(commentAttachment);
+
+                    Defect newDefect = new Defect(summary, priority, dayCount, attachment);
                     repository.add(newDefect);
                 } else if (attachmentType.equals("2")) {
                     System.out.println("Введите ссылку на другой дефект: ");
                     long defectAttachment = scanner.nextLong();
                     scanner.nextLine();
-                    Defect newDefect = new Defect(summary, priority, dayCount, defectAttachment);
+                    Attachment attachment = new DefectAttachment(defectAttachment);
+
+                    Defect newDefect = new Defect(summary, priority, dayCount, attachment);
                     repository.add(newDefect);
                 } else {
                     System.out.println("Нет такого типа вложения.");

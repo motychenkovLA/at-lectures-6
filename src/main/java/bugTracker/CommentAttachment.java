@@ -1,8 +1,14 @@
 package bugTracker;
 
 public class CommentAttachment extends Attachment {
+    private String value;
 
-    public String toString(String comment) {
-        return "Комментарий во вложении: " + comment;
+    public CommentAttachment(String value){
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "Комментарий во вложении: " + value;
     }
 }
