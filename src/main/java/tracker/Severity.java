@@ -15,8 +15,18 @@ public enum Severity {
     }
 
     public String getInRus() {
+
         return inRus;
     }
 
+    public static Severity getSeverity(String severityInput) {
+        for (Severity severity : Severity.values()) {
+            if (severity.getInRus().equals(severityInput)) {
+                return severity;
+            }
+        }
+        return null;
+    }
 }
+
 

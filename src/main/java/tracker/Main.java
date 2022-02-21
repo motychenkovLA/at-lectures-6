@@ -19,41 +19,16 @@ public class Main {
                         System.out.println("Введите резюме дефекта");
                         String resumeBug = scanner.nextLine();
 
-                        // todo 3 - дублирование списка критичностей в строке
-                        System.out.println("Введите цифру которая, соответствует критичности: 1 - блокирующий, " +
-                                "2 - критический, 3 - значительный, 4 - незначительный");
                         Severity severity;
-
-                        // todo 3 - со switch/if-else проблем еще больше чем с valueOf
-                        //  - дублирование кода в ветках
-                        //  - Main зачем-то держит полную копию списка критичностей
-                        //  хотелось бы сделать enum так, чтобы у критичности была возможность безопасно получить ее по текстовому отображения
-                        while (true) {
-                            int numSeverity = scanner.nextInt();
-                            scanner.nextLine();
-                            if (numSeverity == 1) {
-                                severity = Severity.BLOCKER;
-                                System.out.println(severity.getInRus());
-                                break;
-                            }
-                            if (numSeverity == 2) {
-                                severity = Severity.CRITICAL;
-                                System.out.println(severity.getInRus());
-                                break;
-                            }
-                            if (numSeverity == 3) {
-                                severity = Severity.MAJOR;
-                                System.out.println(severity.getInRus());
-                                break;
-                            }
-                            if (numSeverity == 4) {
-                                severity = Severity.MINOR;
-                                System.out.println(severity.getInRus());
-                                break;
-                            } else {
-                                System.out.println("Такого значения не существует, повторите попытку");
-                            }
+                        System.out.println("Введите критичность дефекта: блокирующий, критический, значительный, " +
+                                "незначительный");
+                        String severityInput = scanner.nextLine();
+                        severity = Severity.getSeverity(severityInput);
+                        if (severity == null) {
+                            System.out.println("Такого значение не существует");
+                            break;
                         }
+
                         System.out.println("Введите количество дней на исправление дефекта");
                         int daysToFixBug = scanner.nextInt();
                         scanner.nextLine();
@@ -95,30 +70,14 @@ public class Main {
                         scanner.nextLine();
                         Defect defectForChangeStatus = repository.findDefectById(idDefectForChangeStatus);
                         if (defectForChangeStatus != null) {
-                            // todo 3 - аналогично замечаниям выше
-                            System.out.println("Введите цифру которая, соответствует статусу: 1 - открыт, 2 - в работе, 3 - закрыт");
-                            Status status;
-                            while (true) {
-                                int numStatus = scanner.nextInt();
-                                scanner.nextLine();
-                                if (numStatus == 1) {
-                                    status = Status.OPEN;
-                                    defectForChangeStatus.setStatus(status);
-                                    break;
-                                }
-                                if (numStatus == 2) {
-                                    status = Status.INWORK;
-                                    defectForChangeStatus.setStatus(status);
-                                    break;
-                                }
-                                if (numStatus == 3) {
-                                    status = Status.CLOSED;
-                                    defectForChangeStatus.setStatus(status);
-                                    break;
-                                } else {
-                                    System.out.println("Такого значения не существует, повторите попытку");
-                                }
+                            Status newStatus;
+                            System.out.println("Введите новый статус дефекта: открыт, в работе, закрыт");
+                            String statusInput = scanner.nextLine();
+                            newStatus = Status.getStatus(statusInput);
+                            if (newStatus == null) {
+                                System.out.println("Такого значение не существует");
                             }
+                            else defectForChangeStatus.setStatus(newStatus);
                         }
                         if (defectForChangeStatus == null) {
                             System.out.println("Дефекта с таким id не существует");

@@ -14,4 +14,13 @@ public enum Status {
     public String getInRus() {
         return inRus;
     }
+
+    public static Status getStatus(String statusInput) {
+        for (Status status : Status.values()) {
+            if (status.getInRus().equals(statusInput)) {
+                return status;
+            }
+        }
+        return null;
+    }
 }
