@@ -19,9 +19,15 @@ public class Main {
                         System.out.println("Введите резюме дефекта");
                         String resumeBug = scanner.nextLine();
 
+                        // todo 3 - дублирование списка критичностей в строке
                         System.out.println("Введите цифру которая, соответствует критичности: 1 - блокирующий, " +
                                 "2 - критический, 3 - значительный, 4 - незначительный");
                         Severity severity;
+
+                        // todo 3 - со switch/if-else проблем еще больше чем с valueOf
+                        //  - дублирование кода в ветках
+                        //  - Main зачем-то держит полную копию списка критичностей
+                        //  хотелось бы сделать enum так, чтобы у критичности была возможность безопасно получить ее по текстовому отображения
                         while (true) {
                             int numSeverity = scanner.nextInt();
                             scanner.nextLine();
@@ -89,6 +95,7 @@ public class Main {
                         scanner.nextLine();
                         Defect defectForChangeStatus = repository.findDefectById(idDefectForChangeStatus);
                         if (defectForChangeStatus != null) {
+                            // todo 3 - аналогично замечаниям выше
                             System.out.println("Введите цифру которая, соответствует статусу: 1 - открыт, 2 - в работе, 3 - закрыт");
                             Status status;
                             while (true) {

@@ -32,11 +32,11 @@ public class Repository {
     }
 
     public Defect findDefectById(long idDefect) {
-        for (Defect defect : defectsList)
+        for (Defect defect : defectsList) // todo 5 - выходит за границы не пустых элементов
             if (defect.getId() == idDefect) {
                 return defect;
             } else {
-                return null;
+                return null; // todo 5 - не найдет дефект если он не первый в массиве
             }
         return null;
     }
