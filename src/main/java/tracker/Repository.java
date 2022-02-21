@@ -23,4 +23,13 @@ public class Repository {
     static public Defect[] getAll() {
         return listBug;
     }
+
+    static public Defect getDefect(long id) {
+        for ( int i=0; i < countBug; i++) {
+           if (listBug[i].getId() == id ) {
+               return listBug[i];
+           }
+        }
+        return null;
+    }
 }

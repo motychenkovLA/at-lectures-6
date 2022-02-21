@@ -3,15 +3,21 @@ package tracker;
 public class Defect {
     final private long id;
     final private String name;
-    private String criticality;
+    Criticality criticality;
     private int daysNumber;
     Attachment attachment;
+    Status status = Status.OPENED;
     static private int counter = 1;
 
-    public Defect(String name, Attachment attachment) {
+    public Defect(String name, Criticality criticality, Attachment attachment) {
         this.name = name;
         this.attachment = attachment;
+        this.criticality = criticality;
         id = counter++;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public int getDaysNumber() {
@@ -23,19 +29,12 @@ public class Defect {
         else this.daysNumber = daysNumber;
     }
 
-    public String getCriticality() {
-        return criticality;
+    public void changeStatus(Status status) {
+        this.status = status;
     }
 
-    public void setCriticality(String criticality) {
-        if (criticality.equals("blocker") || criticality.equals("critical") ||
-                criticality.equals("major") || criticality.equals("minor") || criticality.equals("trivial"))
-            this.criticality = criticality;
-        else this.criticality = "major";
-    }
-
-    public String getInfo() {
-        return "ID: " + id + ", Резюме дефекта: " + name + ", Критичность: " + criticality +
+    public String toString() {
+        return "ID: " + id + ", Статус: " + status + ", Резюме дефекта: " + name + ", Критичность: " + criticality +
                 ", Количество дней на исправление: " + daysNumber + ", Вложение: " + attachment;
     }
 }
