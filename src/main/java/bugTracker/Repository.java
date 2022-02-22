@@ -1,13 +1,9 @@
 package bugTracker;
-
 import java.util.Arrays;
 
 public class Repository {
-    private int countOfDefects;
     private int numOfBug = 0;
-    private Defect[] defects = new Defect[2];
-
-    public int getNumOfBug() {return numOfBug;}
+    private Defect[] defects = new Defect[10];
 
     void add (Defect defect){
         if (numOfBug == defects.length) {
@@ -16,8 +12,25 @@ public class Repository {
         defects[numOfBug] = defect;
         numOfBug++;
     }
+    public Defect getById(int id) {
+        for (Defect defect : defects) {
+            if (defect == null) {
+                continue;
+            }
+            if (id == defect.getId()) {
+                return defect;
+            }
+        }
+        return null;
+    }
 
     Defect[] getAll(){
         return defects;
+    }
+
+    void changeStatus(int id, String name) {
+        if (getById(id) != null) {
+            getById(id).setStatus(Status.findByName(name));
+        }
     }
 }
