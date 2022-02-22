@@ -13,7 +13,7 @@ class Main {
         System.out.println("Введите ожидаемое количество дней на исправление дефекта");
         def.setDaysNumber(scanner.nextInt());
         scanner.nextLine();
-        System.out.println(" Выберите тип вложения: comment или link");
+        System.out.println("Выберите тип вложения: comment или link");
 
         String attachmentOfBug = scanner.nextLine();
         switch (attachmentOfBug) {
