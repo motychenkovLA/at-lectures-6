@@ -19,10 +19,13 @@ public class Main {
                         System.out.println("Введите резюме дефекта");
                         String resumeBug = scanner.nextLine();
 
-                        Severity severity; // todo 0 - объявление до использования
-                        System.out.println("Введите критичность дефекта: блокирующий, критический, значительный, " +
-                                "незначительный"); // todo 1  - в строке скопированы значения енума, до этого выводились через цикл и все норм было
+                        System.out.println("Введите критичность дефекта из списка");
+                        Severity[] severitys = Severity.values();
+                        for (Severity severity : severitys) {
+                            System.out.println(severity.getInRus());
+                        }
                         String severityInput = scanner.nextLine();
+                        Severity severity;
                         severity = Severity.getSeverity(severityInput);
                         if (severity == null) {
                             System.out.println("Такого значение не существует");
@@ -35,7 +38,6 @@ public class Main {
 
                         System.out.println("Выберите тип вложение: comment или link");
                         String attachmentBug = scanner.nextLine();
-
                         switch (attachmentBug) {
                             case "comment":
                                 System.out.println("Введите комментарий");
@@ -70,14 +72,20 @@ public class Main {
                         scanner.nextLine();
                         Defect defectForChangeStatus = repository.findDefectById(idDefectForChangeStatus);
                         if (defectForChangeStatus != null) {
-                            Status newStatus; // todo 0 - объявление до использования
-                            System.out.println("Введите новый статус дефекта: открыт, в работе, закрыт"); // todo 1  - в строке скопированы значения енума, до этого выводились через цикл и все норм было
+                            System.out.println("Введите новый статус дефекта из списка");
+                            Status[] statuses = Status.values();
+                            for (Status status : statuses) {
+                                System.out.println(status.getInRus());
+                            }
                             String statusInput = scanner.nextLine();
+                            Status newStatus;
                             newStatus = Status.getStatus(statusInput);
                             if (newStatus == null) {
                                 System.out.println("Такого значение не существует");
-                            } // todo 1 - else съехал, лучше либо обе ветки в {} оборачивать либо обе не оборачивать, разные стили на разных ветках плохо читаются
-                            else defectForChangeStatus.setStatus(newStatus);
+                            }
+                            else {
+                                defectForChangeStatus.setStatus(newStatus);
+                            }
                         }
                         if (defectForChangeStatus == null) {
                             System.out.println("Дефекта с таким id не существует");

@@ -21,7 +21,7 @@ public enum Severity {
 
     public static Severity getSeverity(String severityInput) {
         for (Severity severity : Severity.values()) {
-            if (severity.getInRus().equals(severityInput)) { // todo 1 - раз внутри класса, можно не вызывать геттер а взять поле напрямую
+            if (severity.inRus.equals(severityInput)) {
                 return severity;
             }
         }
