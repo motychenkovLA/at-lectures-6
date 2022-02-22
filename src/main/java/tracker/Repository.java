@@ -32,7 +32,8 @@ public class Repository {
     }
 
     public Defect findDefectById(long idDefect) {
-        for (Defect defect : getAllDefects()) {
+        for (Defect defect : getAllDefects()) { // todo 3 - getAllDefects делает копирование массива, это слишком тяжелая операция,
+                                                //  можно перебрать до нужного элемента, не залезая в нуллы, без копирования
             if (defect.getId() == idDefect) {
                 return defect;
             }

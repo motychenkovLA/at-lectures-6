@@ -19,9 +19,9 @@ public class Main {
                         System.out.println("Введите резюме дефекта");
                         String resumeBug = scanner.nextLine();
 
-                        Severity severity;
+                        Severity severity; // todo 0 - объявление до использования
                         System.out.println("Введите критичность дефекта: блокирующий, критический, значительный, " +
-                                "незначительный");
+                                "незначительный"); // todo 1  - в строке скопированы значения енума, до этого выводились через цикл и все норм было
                         String severityInput = scanner.nextLine();
                         severity = Severity.getSeverity(severityInput);
                         if (severity == null) {
@@ -70,13 +70,13 @@ public class Main {
                         scanner.nextLine();
                         Defect defectForChangeStatus = repository.findDefectById(idDefectForChangeStatus);
                         if (defectForChangeStatus != null) {
-                            Status newStatus;
-                            System.out.println("Введите новый статус дефекта: открыт, в работе, закрыт");
+                            Status newStatus; // todo 0 - объявление до использования
+                            System.out.println("Введите новый статус дефекта: открыт, в работе, закрыт"); // todo 1  - в строке скопированы значения енума, до этого выводились через цикл и все норм было
                             String statusInput = scanner.nextLine();
                             newStatus = Status.getStatus(statusInput);
                             if (newStatus == null) {
                                 System.out.println("Такого значение не существует");
-                            }
+                            } // todo 1 - else съехал, лучше либо обе ветки в {} оборачивать либо обе не оборачивать, разные стили на разных ветках плохо читаются
                             else defectForChangeStatus.setStatus(newStatus);
                         }
                         if (defectForChangeStatus == null) {
