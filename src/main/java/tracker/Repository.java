@@ -32,11 +32,10 @@ public class Repository {
     }
 
     public Defect findDefectById(long idDefect) {
-        for (Defect defect : defectsList) {
-            if (defect.getId() == idDefect) {
-                return defect;
+        for (int i = 0; i < countDefects; i++) {
+            if (defectsList[i].getId() == idDefect) {
+                return defectsList[i];
             }
-            break;
         }
         return null;
     }
