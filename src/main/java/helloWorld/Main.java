@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 class Main {
     public static void addDefect() {
-
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите резюме дефекта");
         String name = scanner.nextLine();
@@ -14,8 +13,32 @@ class Main {
         System.out.println("Введите ожидаемое количество дней на исправление дефекта");
         def.setDaysNumber(scanner.nextInt());
         scanner.nextLine();
-        Repository.add(def);
-    }
+        System.out.println(" Выберите тип вложения: comment или link");
+
+        String attachmentOfBug = scanner.nextLine();
+        switch (attachmentOfBug) {
+            case "comment":
+                System.out.println("Введите комментарий");
+                String comment = scanner.nextLine();
+                CommentAttachment commentAttachment = new CommentAttachment(comment);
+                def.setCommentAttachment(commentAttachment);
+                Repository.add(def);
+                break;
+
+            case "link":
+                System.out.println("Введите ссылку (id) дефекта");
+                int idBug = scanner.nextInt();
+                scanner.nextLine();
+                DefectAttachment defectAttachment = new DefectAttachment(idBug);
+                def.setDefectAttachment(defectAttachment);
+                Repository.add(def);
+                break;
+
+            default:
+                System.out.println("Не верный тип вложения, повторите попытку");
+                break;
+        }
+     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
