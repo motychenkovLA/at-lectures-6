@@ -2,12 +2,14 @@ package Tracker;
 
 public class CommentAttachment extends Attachment{
 
-    public CommentAttachment(String attachment) {
-        super(attachment);
+    String commentAttachment;
+
+    public CommentAttachment(String commentAttachment) {
+        this.commentAttachment = commentAttachment;
     }
 
     @Override
     public String asString() {
-        return "Комментарий: " + super.asString();
+        return "Комментарий: " + commentAttachment;
     }
 }
