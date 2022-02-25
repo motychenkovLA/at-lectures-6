@@ -3,22 +3,25 @@ package helloWorld;
 public class Defect {
     final private long id;
     final private String description;
-    private String critical;
+   private Criticality  critical;
     private int daysNumber;
    private Attachment attachment;
     static private int numberOfBug = 1;
+        Status status = Status.OPEN;
 
-    public Defect(String description, String critical, int daysNumber, Attachment attachment) {
+    public Defect(String description, Criticality critical, int daysNumber, Attachment attachment) {
         this(description);
         this.critical=critical;
         this.daysNumber=daysNumber;
         this.attachment=attachment;
-
-    }
+            }
 
     public Defect(String description) {
         this.description = description;
                id = numberOfBug++;
+    }
+    public long getId() {
+        return id;
     }
 
 
@@ -33,23 +36,31 @@ public class Defect {
     public void setCommentAttachment(CommentAttachment comment) {
         this.attachment = comment;
     }
-    public String getCritical() {
-                return critical;
-    }
+
 
     public void setDefectAttachment(DefectAttachment defectAttachment) {
         this.attachment = defectAttachment;
     }
 
 
-
-
-    public void setCritical(String critical) {
-        this.critical = critical;
-    }
-
     public int getDaysNumber() {
         return daysNumber;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public  Criticality getCritical(){
+        return critical;
+    }
+
+    public void setCritical(Criticality critical){
+        this.critical = critical;
     }
 
 
@@ -59,7 +70,7 @@ public class Defect {
     }
 
     String getInfo() {
-        return id + " | " + description + "|  " + critical + " | " + daysNumber + "|" + "Вложение: " + attachment;
+        return id + " | " + description + " |  " + critical + " | " + daysNumber + " | " + "Вложение: " + attachment + " | " + status;
     }
 }
 
