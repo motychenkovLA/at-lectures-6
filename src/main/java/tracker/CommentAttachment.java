@@ -23,10 +23,11 @@ public class CommentAttachment extends Attachment {
         if (obj == null) {
             return false;
         }
-        // todo 5 - если obj не CommentAttachment упадет
-        CommentAttachment attachment = (CommentAttachment) obj;
-        // todo 5 - сравнение строк через ==
-        return comment == attachment.comment;
+        if (obj instanceof CommentAttachment) {
+            CommentAttachment attachment = (CommentAttachment) obj;
+            return comment.equals(attachment.comment);
+        }
+        return false;
     }
 
     @Override
