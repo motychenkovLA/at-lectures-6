@@ -23,6 +23,7 @@ public class DefectAttachment extends Attachment {
         if (obj == null) {
             return false;
         }
+        // todo 5 - если obj не DefectAttachment упадет
         DefectAttachment attachment = (DefectAttachment) obj;
         return defectId == attachment.defectId;
     }

@@ -73,6 +73,7 @@ public class Defect {
         if (obj == null) {
             return false;
         }
+        // todo 5 - если obj не Defect упадет
         Defect defect = (Defect) obj;
         return id == defect.id &&
                 status == defect.status &&
