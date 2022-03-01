@@ -23,6 +23,7 @@ public class CommentAttachment extends Attachment {
         if (obj == null) {
             return false;
         }
+        // todo 1 - лучше инвертировать условие
         if (obj instanceof CommentAttachment) {
             CommentAttachment attachment = (CommentAttachment) obj;
             return comment.equals(attachment.comment);

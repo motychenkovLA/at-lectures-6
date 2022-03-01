@@ -23,6 +23,7 @@ public class DefectAttachment extends Attachment {
         if (obj == null) {
             return false;
         }
+        // todo 1 - лучше инвертировать условие
         if (obj instanceof DefectAttachment) {
             DefectAttachment attachment = (DefectAttachment) obj;
             return defectId == attachment.defectId;

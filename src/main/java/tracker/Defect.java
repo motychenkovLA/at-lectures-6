@@ -73,6 +73,7 @@ public class Defect {
         if (obj == null) {
             return false;
         }
+        // todo 1 - лучше инвертировать условие
         if (obj instanceof Defect) {
             Defect defect = (Defect) obj;
             return id == defect.id &&

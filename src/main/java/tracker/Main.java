@@ -56,6 +56,9 @@ public class Main {
         System.out.println("Введите резюме дефекта");
         String resume = scanner.nextLine();
 
+        // todo 3 - енамы все равно вручную вписаны кодом
+        //  main получается постоянно нужно знать наверняка как устроен Severity
+        //  лучше циклом перебрать все существующие
         System.out.println("Введите критичность дефекта (" + Severity.LOW + ", " + Severity.MEDIUM +", " + Severity.HIGH+")");
         Severity critical = Severity.getSeverityByValue(scanner.nextLine());
         if (critical == null) {
@@ -105,6 +108,7 @@ public class Main {
             System.out.println("Нет дефекта с таким номером!");
             return;
         }
+        // todo 3 - аналогично с енамом выше
         System.out.println("Текущий статус дефекта - " + bug.getStatus() +
                 "\nВведите новый статус (" + Status.IN_PROGRESS + ", " + Status.TESTING + ", " + Status.DELAYED + ", " + Status.CLOSE + "): ");
         Status status = Status.getStatusByValue(scanner.nextLine());
