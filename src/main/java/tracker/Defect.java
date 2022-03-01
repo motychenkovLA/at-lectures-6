@@ -2,6 +2,7 @@ package tracker;
 
 import java.util.Objects;
 
+
 public class Defect {
     private static long counterOfBugs = 0;
     private final long id;
@@ -70,20 +71,18 @@ public class Defect {
             return true;
         }
 
-        if (obj == null) {
+        if (!(obj instanceof Defect)) {
             return false;
         }
-        // todo 1 - лучше инвертировать условие
-        if (obj instanceof Defect) {
-            Defect defect = (Defect) obj;
-            return id == defect.id &&
-                    status == defect.status &&
-                    resume.equals(defect.resume) &&
-                    severity == defect.severity &&
-                    daysToFix == defect.daysToFix &&
-                    attachment.equals(defect.attachment);
-        }
-        return false;
+
+        Defect defect = (Defect) obj;
+        return id == defect.id &&
+                status == defect.status &&
+                resume.equals(defect.resume) &&
+                severity == defect.severity &&
+                daysToFix == defect.daysToFix &&
+                attachment.equals(defect.attachment);
+
     }
 
     @Override

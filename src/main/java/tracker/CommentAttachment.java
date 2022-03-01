@@ -20,15 +20,13 @@ public class CommentAttachment extends Attachment {
             return true;
         }
 
-        if (obj == null) {
+        if (!(obj instanceof CommentAttachment)){
             return false;
         }
-        // todo 1 - лучше инвертировать условие
-        if (obj instanceof CommentAttachment) {
-            CommentAttachment attachment = (CommentAttachment) obj;
-            return comment.equals(attachment.comment);
-        }
-        return false;
+
+        CommentAttachment attachment = (CommentAttachment) obj;
+        return comment.equals(attachment.comment);
+
     }
 
     @Override

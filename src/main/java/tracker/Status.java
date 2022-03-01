@@ -1,5 +1,7 @@
 package tracker;
 
+import java.util.StringJoiner;
+
 public enum Status {
     OPEN("Открыт"),
     IN_PROGRESS("Исправление"),
@@ -24,5 +26,13 @@ public enum Status {
             }
         }
         return null;
+    }
+
+    public static String list() {
+        StringJoiner joiner = new StringJoiner(" / ");
+        for (Status item : Status.values()) {
+            joiner.add(item.statusName);
+        }
+        return joiner.toString();
     }
 }

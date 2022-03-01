@@ -20,15 +20,12 @@ public class DefectAttachment extends Attachment {
             return true;
         }
 
-        if (obj == null) {
+        if (!(obj instanceof DefectAttachment)) {
             return false;
         }
-        // todo 1 - лучше инвертировать условие
-        if (obj instanceof DefectAttachment) {
-            DefectAttachment attachment = (DefectAttachment) obj;
-            return defectId == attachment.defectId;
-        }
-        return false;
+
+        DefectAttachment attachment = (DefectAttachment) obj;
+        return defectId == attachment.defectId;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package tracker;
 
+import java.util.StringJoiner;
+
 public enum Severity {
     LOW("Низкая"),
     MEDIUM("Средняя"),
@@ -23,5 +25,14 @@ public enum Severity {
             }
         }
         return null;
+    }
+
+    public static String list() {
+        String severityes = "";
+        StringJoiner joiner = new StringJoiner(" / ");
+        for (Severity item : Severity.values()) {
+            joiner.add(item.critName);
+        }
+        return joiner.toString();
     }
 }
