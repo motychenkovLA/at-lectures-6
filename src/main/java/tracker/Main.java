@@ -10,8 +10,8 @@ public class Main {
 
     public static void main(String[] args) {
         boolean run = true;
-        Main main = new Main();
-        int maxDefects;
+        Main main = new Main(); // todo 3 - зачем экземпляр?
+        int maxDefects; // todo 1 - слишком рано объявлен
         try (Scanner console = new Scanner(System.in)) {
             while (true) {
                 try {
@@ -45,7 +45,7 @@ public class Main {
                         break;
                 }
             }
-        } catch (Exception e) {
+        } catch (Exception e) { // todo 3 - откуда тут Exception?
             System.out.println("Что-то пошло не так");
         }
     }
@@ -54,9 +54,9 @@ public class Main {
 
         if (repository.isFull()) {
             System.out.println("Невозможно добавить больше " + maxDefects + " дефектов");
-
+            // todo 5 - добавить невозможно, но метод продолжает дальше работать
         }
-        String resume;
+        String resume; // todo 1 - объявление отдельно от инициализации
 
         System.out.println("Введите резюме");
         resume = console.nextLine();
@@ -77,6 +77,7 @@ public class Main {
 
         }
         int numberOfDays;
+        // todo 3 - дублирующийся код для ввода инта с консоли
         while (true) {
             try {
                 System.out.println("Введите ожидаемое количество дней на исправление дефекта");
@@ -87,6 +88,7 @@ public class Main {
             }
         }
         int typeInclosure;
+        // todo 3 - дублирующийся код для ввода инта с консоли
         while (true) {
             try {
 
@@ -124,6 +126,7 @@ public class Main {
     private void change(Scanner console, Repository repository) {
         long id;
         while (true) {
+            // todo 3 - дублирующийся код для ввода инта с консоли
             while (true) {
                 try {
                     System.out.println("Введите Id дефекта:");
@@ -154,6 +157,7 @@ public class Main {
 
     }
 
+    // todo 3 - метод в одну строчку, вызов такой же длины как само тело
     private Defect getDefect(long id, Repository repository) {
         return repository.getDefect(id);
     }
