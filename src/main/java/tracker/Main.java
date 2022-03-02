@@ -2,18 +2,6 @@ package tracker;
 import java.util.Objects;
 import java.util.Scanner;
 
-// todo 3 - сложные конструкции методов
-//   if (проверка валидности) {
-//       // валидный кейс
-//   } else {
-//       // негативный кейс
-//   }
-//   можно заменить на
-//   if (!проверка валидности) {
-//      // негативный кейс
-//      return;
-//   }
-//   // валидный кейс
 public class Main {
 
     public static void main(String[] args) {
@@ -50,112 +38,113 @@ public class Main {
         }
     }
 
-        public static void addDefect (Repository repository, Scanner scanner) {
-            if (!repository.repositoryIsFull()) {
+    public static int parsInt(String forPars) {
+        return Integer.parseInt(forPars);
+    }
 
-                System.out.println("Введите резюме дефекта");
-                String resumeBug = scanner.nextLine();
+    public static void addDefect(Repository repository, Scanner scanner) {
+        if (repository.repositoryIsFull()) {
+            System.out.println("Превышено максимально допустимое кол-во дефектов");
+            return;
+        }
+        System.out.println("Введите резюме дефекта");
+        String resumeBug = scanner.nextLine();
 
-                System.out.println("Введите критичность дефекта из списка");
-                Severity[] severitys = Severity.values();
-                for (Severity severity : severitys) {
-                    System.out.println(severity.getInRus());
-                }
-                String severityInput = scanner.nextLine();
-                Severity severity = Severity.getSeverity(severityInput);
-                if (severity == null) {
-                    System.out.println("Такого значение не существует");
-                    return;
-                }
-                System.out.println("Введите количество дней на исправление дефекта");
-                // todo 3 - код по считыванию инта дублируется несколько раз в разных местах
-                int daysToFixBug;
+        System.out.println("Введите критичность дефекта из списка");
+        Severity[] severitys = Severity.values();
+        for (Severity severity : severitys) {
+            System.out.println(severity.getInRus());
+        }
+        String severityInput = scanner.nextLine();
+        Severity severity = Severity.getSeverity(severityInput);
+        if (severity == null) {
+            System.out.println("Такого значение не существует");
+            return;
+        }
+        System.out.println("Введите количество дней на исправление дефекта");
+        int daysToFixBug;
+        while (true) {
+            try {
+                daysToFixBug = parsInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                System.out.println("Не верный формат введенного значения, потворите попытку");
+            }
+        }
+
+        System.out.println("Выберите тип вложение: comment или link");
+        // todo по желанию - лучше переработать, потому что сейчас из-за ошибки в названии типа дефекта,
+        //  приходится заново вводить все остальные данные
+        // Пока не нашла решения как это сделать
+
+        String attachmentBug = scanner.nextLine();
+        switch (attachmentBug) {
+            case "comment":
+                System.out.println("Введите комментарий");
+                String comment = scanner.nextLine();
+                CommentAttachment commentAttachment = new CommentAttachment(comment);
+                repository.addDefect(new Defect(resumeBug, severity, daysToFixBug, commentAttachment));
+                break;
+            case "link":
+                System.out.println("Введите ссылку (id) дефекта");
+                long idBug;
                 while (true) {
                     try {
-                        daysToFixBug = Integer.parseInt(scanner.nextLine());
+                        idBug = parsInt(scanner.nextLine());
                         break;
                     } catch (NumberFormatException e) {
                         e.printStackTrace();
                         System.out.println("Не верный формат введенного значения, потворите попытку");
                     }
                 }
-
-                System.out.println("Выберите тип вложение: comment или link");
-                // todo по желанию - лучше переработать, потому что сейчас из-за ошибки в названии типа дефекта, приходится заново вводить все остальные данные
-                String attachmentBug = scanner.nextLine();
-                switch (attachmentBug) {
-                    case "comment":
-                        System.out.println("Введите комментарий");
-                        String comment = scanner.nextLine();
-                        CommentAttachment commentAttachment = new CommentAttachment(comment);
-                        repository.addDefect(new Defect(resumeBug, severity, daysToFixBug, commentAttachment));
-                        break;
-                    case "link":
-                        System.out.println("Введите ссылку (id) дефекта");
-                        long idBug;
-                        // todo 3 - код по считыванию инта дублируется несколько раз в разных местах
-                        while (true) {
-                            try {
-                                idBug = Integer.parseInt(scanner.nextLine());
-                                break;
-                            } catch (NumberFormatException e) {
-                                e.printStackTrace();
-                                System.out.println("Не верный формат введенного значения, потворите попытку");
-                            }
-                        }
-                        DefectAttachment defectAttachment = new DefectAttachment(idBug);
-                        repository.addDefect(new Defect(resumeBug, severity, daysToFixBug, defectAttachment));
-                        break;
-                    default:
-                        System.out.println("Не верный тип вложения, повторите попытку");
-                        break;
-                }
-            } else {
-                System.out.println("Превышено максимально допустимое кол-во дефектов");
-            }
+                DefectAttachment defectAttachment = new DefectAttachment(idBug);
+                repository.addDefect(new Defect(resumeBug, severity, daysToFixBug, defectAttachment));
+                break;
+            default:
+                System.out.println("Не верный тип вложения, повторите попытку");
+                break;
         }
+    }
 
     public static void displayDefectList(Repository repository) {
         for (Defect defect : repository.getAllDefects()) {
             System.out.println(defect.getBugsInfo());
         }
     }
-
     public static void changeDefectStatus(Repository repository, Scanner scanner) {
-
-        if (!repository.repositoryIsEmpty()) {
-            System.out.println("Введине id дефекта, у которого необходимо поменять статус");
-            long idDefectForChangeStatus;
-            // todo 3 - код по считыванию инта дублируется несколько раз в разных местах
-            while (true) {
-                try {
-                    idDefectForChangeStatus = Integer.parseInt(scanner.nextLine());
-                    break;
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                    System.out.println("Не верный формат введенного значения, потворите попытку");
-                }
-            }
-            Defect defectForChangeStatus = repository.findDefectById(idDefectForChangeStatus);
-            if (defectForChangeStatus == null) {
-                System.out.println("Дефекта с таким id не существует");
-            }
-            if (defectForChangeStatus != null) {
-                System.out.println("Введите новый статус дефекта из списка");
-                Status[] statuses = Status.values();
-                for (Status status : statuses) {
-                    System.out.println(status.getInRus());
-                }
-                String statusInput = scanner.nextLine();
-                Status newStatus = Status.getStatus(statusInput);
-                if (newStatus == null) {
-                    System.out.println("Такого значение не существует");
-                } else {
-                    defectForChangeStatus.setStatus(newStatus);
-                }
-            }
-        } else {
+        if (repository.repositoryIsEmpty()) {
             System.out.println("В репозитории нет дефектов");
+            return;
+        }
+        System.out.println("Введине id дефекта, у которого необходимо поменять статус");
+        long idDefectForChangeStatus;
+        while (true) {
+            try {
+                idDefectForChangeStatus = parsInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                System.out.println("Не верный формат введенного значения, потворите попытку");
+            }
+        }
+        Defect defectForChangeStatus = repository.findDefectById(idDefectForChangeStatus);
+        if (defectForChangeStatus == null) {
+            System.out.println("Дефекта с таким id не существует");
+        }
+        if (defectForChangeStatus != null) {
+            System.out.println("Введите новый статус дефекта из списка");
+            Status[] statuses = Status.values();
+            for (Status status : statuses) {
+                System.out.println(status.getInRus());
+            }
+            String statusInput = scanner.nextLine();
+            Status newStatus = Status.getStatus(statusInput);
+            if (newStatus == null) {
+                System.out.println("Такого значение не существует");
+            } else {
+                defectForChangeStatus.setStatus(newStatus);
+            }
         }
     }
 }
