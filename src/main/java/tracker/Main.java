@@ -2,6 +2,18 @@ package tracker;
 import java.util.Objects;
 import java.util.Scanner;
 
+// todo 3 - сложные конструкции методов
+//   if (проверка валидности) {
+//       // валидный кейс
+//   } else {
+//       // негативный кейс
+//   }
+//   можно заменить на
+//   if (!проверка валидности) {
+//      // негативный кейс
+//      return;
+//   }
+//   // валидный кейс
 public class Main {
 
     public static void main(String[] args) {
@@ -56,6 +68,7 @@ public class Main {
                     return;
                 }
                 System.out.println("Введите количество дней на исправление дефекта");
+                // todo 3 - код по считыванию инта дублируется несколько раз в разных местах
                 int daysToFixBug;
                 while (true) {
                     try {
@@ -68,6 +81,7 @@ public class Main {
                 }
 
                 System.out.println("Выберите тип вложение: comment или link");
+                // todo по желанию - лучше переработать, потому что сейчас из-за ошибки в названии типа дефекта, приходится заново вводить все остальные данные
                 String attachmentBug = scanner.nextLine();
                 switch (attachmentBug) {
                     case "comment":
@@ -79,6 +93,7 @@ public class Main {
                     case "link":
                         System.out.println("Введите ссылку (id) дефекта");
                         long idBug;
+                        // todo 3 - код по считыванию инта дублируется несколько раз в разных местах
                         while (true) {
                             try {
                                 idBug = Integer.parseInt(scanner.nextLine());
@@ -111,6 +126,7 @@ public class Main {
         if (!repository.repositoryIsEmpty()) {
             System.out.println("Введине id дефекта, у которого необходимо поменять статус");
             long idDefectForChangeStatus;
+            // todo 3 - код по считыванию инта дублируется несколько раз в разных местах
             while (true) {
                 try {
                     idDefectForChangeStatus = Integer.parseInt(scanner.nextLine());
