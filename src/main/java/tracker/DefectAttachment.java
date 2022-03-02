@@ -3,7 +3,7 @@ package tracker;
 import java.util.Objects;
 
 public class DefectAttachment extends Attachment{
-    private String idDefect;
+    private String idDefect; // todo 3 - long же
 
     public DefectAttachment(String idDefect) {
         this.idDefect = idDefect;

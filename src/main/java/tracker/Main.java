@@ -17,6 +17,7 @@ public class Main {
                 command = scanner.nextLine();
                 switch (command) {
                     case "add":
+                        // todo 3 - if это все еще логика addDefect-а, должна быть в методе
                         if (!repository.repositoryIsFull()) {
                             addDefect(repository, scanner);
                         } else {
@@ -29,6 +30,7 @@ public class Main {
                         break;
 
                     case "change":
+                        // todo 3 - if это логика changeDefectStatus-а
                         if (!repository.repositoryIsEmpty()) {
                             changeDefectStatus(repository, scanner);
                         } else {
@@ -44,11 +46,12 @@ public class Main {
                         break;
                 }
             }
-        } catch (IllegalStateException e) {
+        } catch (IllegalStateException e) { // todo 3 - откуда тут IllegalStateException?
             e.printStackTrace();
         }
     }
 
+    // todo 1 - отступ
         public static void addDefect (Repository repository, Scanner scanner){
 
             System.out.println("Введите резюме дефекта");
@@ -64,7 +67,7 @@ public class Main {
             severity = Severity.getSeverity(severityInput);
             if (severity == null) {
                 System.out.println("Такого значение не существует");
-//                break;
+//                break; // todo 5 - продолжает дальше с null-ом в severity
             }
             System.out.println("Введите количество дней на исправление дефекта");
             int daysToFixBug;
@@ -107,7 +110,7 @@ public class Main {
 
     public static void changeDefectStatus(Repository repository, Scanner scanner) {
         System.out.println("Введине id дефекта, у которого необходимо поменять статус");
-        long idDefectForChangeStatus = scanner.nextLong();
+        long idDefectForChangeStatus = scanner.nextLong(); // todo 3 - используется nextLong вместо nextLine
         scanner.nextLine();
         Defect defectForChangeStatus = repository.findDefectById(idDefectForChangeStatus);
         if (defectForChangeStatus != null) {
@@ -117,7 +120,7 @@ public class Main {
                 System.out.println(status.getInRus());
             }
             String statusInput = scanner.nextLine();
-            Status newStatus;
+            Status newStatus; // todo 1 - объявление отдельно от инициализации
             newStatus = Status.getStatus(statusInput);
             if (newStatus == null) {
                 System.out.println("Такого значение не существует");
@@ -125,6 +128,7 @@ public class Main {
                 defectForChangeStatus.setStatus(newStatus);
             }
         }
+        // todo 3 - проверка на отсутствие дефекта уже после основного кейса
         if (defectForChangeStatus == null) {
             System.out.println("Дефекта с таким id не существует");
         }
