@@ -3,23 +3,24 @@ package tracker;
 import java.util.Objects;
 
 public class DefectAttachment extends Attachment{
-    private String idDefect; // todo 3 - long же
+    private long idDefect;
 
-    public DefectAttachment(String idDefect) {
+    public DefectAttachment(long idDefect) {
         this.idDefect = idDefect;
     }
 
-    public String getIdDefect() {
+    public long getIdDefect() {
         return idDefect;
     }
 
-    public void setIdDefect(String idDefect) {
+    public void setIdDefect(long idDefect) {
         this.idDefect = idDefect;
     }
 
     @Override
     public String toString() {
-        return idDefect;
+
+        return String.valueOf(idDefect);
     }
 
     @Override
