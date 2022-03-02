@@ -10,34 +10,23 @@ public class Main {
 
     public static void main(String[] args) {
         boolean run = true;
-        Main main = new Main(); // todo 3 - зачем экземпляр?
-        int maxDefects; // todo 1 - слишком рано объявлен
         try (Scanner console = new Scanner(System.in)) {
-            while (true) {
-                try {
-                    System.out.println("Введите максимальное количество дефектов:");
-                    maxDefects = parseInt(console.nextLine());
-
-                    break;
-                } catch (Exception e) {
-                    System.out.println("Введите корректные данные");
-                }
-            }
+            int maxDefects = takeInt(console, "Введите максимальное количество дефектов:");
             Repository repository = new Repository(maxDefects);
             while (run) {
                 System.out.println("Чтобы добавить новый дефект, введите \"add\". Чтобы вывести список дефектов, введите \"list\". Введите \"change\", чтобы изменить статус. Чтобы выйти, введите \"quit\"");
                 String action = console.nextLine();
                 switch (action) {
                     case "change":
-                        main.change(console, repository);
+                        change(console, repository);
                         break;
 
                     case "list":
-                        main.list(repository);
+                        list(repository);
 
                         break;
                     case "add":
-                        main.add(console, repository, maxDefects);
+                        add(console, repository, maxDefects);
 
                         break;
                     case "quit":
@@ -45,98 +34,60 @@ public class Main {
                         break;
                 }
             }
-        } catch (Exception e) { // todo 3 - откуда тут Exception?
-            System.out.println("Что-то пошло не так");
         }
     }
 
-    private void add(Scanner console, Repository repository, int maxDefects) {
+    private static void add(Scanner console, Repository repository, int maxDefects) {
 
         if (repository.isFull()) {
             System.out.println("Невозможно добавить больше " + maxDefects + " дефектов");
-            // todo 5 - добавить невозможно, но метод продолжает дальше работать
-        }
-        String resume; // todo 1 - объявление отдельно от инициализации
-
-        System.out.println("Введите резюме");
-        resume = console.nextLine();
-
-
-        Severity critical;
-        while (true) {
-
-            System.out.println("Введите критичность дефекта: критично, не критично или очень критично");
-            String inputCritical = console.nextLine();
-            critical = Severity.getSeverity(inputCritical);
-            if (critical == null) {
-                System.out.println("Критичность не найдена");
-            } else {
-                break;
-            }
-
-
-        }
-        int numberOfDays;
-        // todo 3 - дублирующийся код для ввода инта с консоли
-        while (true) {
-            try {
-                System.out.println("Введите ожидаемое количество дней на исправление дефекта");
-                numberOfDays = parseInt(console.nextLine());
-                break;
-            } catch (Exception e) {
-                System.out.println("Введите корректные данные");
-            }
-        }
-        int typeInclosure;
-        // todo 3 - дублирующийся код для ввода инта с консоли
-        while (true) {
-            try {
-
-                System.out.println("Введите номер типа вложения: 1 - комментарий, 2 - ссылка на другой дефект");
-                typeInclosure = parseInt(console.nextLine());
-                break;
-            } catch (Exception e) {
-                System.out.println("Введите корректные данные");
-            }
-        }
-        if (typeInclosure == 1) {
-            System.out.println("Введите комментарий");
-            repository.add(new Defect(resume, critical, numberOfDays, new CommentAttachment(console.nextLine())));
         } else {
+            System.out.println("Введите резюме");
+            String resume = console.nextLine();
+            Severity critical;
             while (true) {
-                try {
-                    System.out.println("Введите id дефекта");
-                    DefectAttachment defect = new DefectAttachment(parseLong(console.nextLine()));
-                    repository.add(new Defect(resume, critical, numberOfDays, defect));
+                System.out.println("Введите критичность дефекта: критично, не критично или очень критично");
+                String inputCritical = console.nextLine();
+                critical = Severity.getSeverity(inputCritical);
+                if (critical == null) {
+                    System.out.println("Критичность не найдена");
+                } else {
                     break;
-                } catch (Exception e) {
-                    System.out.println("Введите корректные данные");
                 }
             }
+            int numberOfDays = takeInt(console, "Введите ожидаемое количество дней на исправление дефекта");
+            int typeInclosure = takeInt(console, "Введите номер типа вложения: 1 - комментарий, 2 - ссылка на другой дефект");
 
+            if (typeInclosure == 1) {
+                System.out.println("Введите комментарий");
+                repository.add(new Defect(resume, critical, numberOfDays, new CommentAttachment(console.nextLine())));
+            } else {
+                while (true) {
+                    try {
+                        System.out.println("Введите id дефекта");
+                        DefectAttachment defect = new DefectAttachment(parseLong(console.nextLine()));
+                        repository.add(new Defect(resume, critical, numberOfDays, defect));
+                        break;
+                    } catch (Exception e) {
+                        System.out.println("Введите корректные данные");
+                    }
+                }
+
+            }
         }
     }
 
-    private void list(Repository repository) {
+    private static void list(Repository repository) {
         for (Defect defect : repository.getAll()) {
             System.out.println(defect.getDefectInfo());
         }
     }
 
-    private void change(Scanner console, Repository repository) {
+    private static void change(Scanner console, Repository repository) {
         long id;
         while (true) {
-            // todo 3 - дублирующийся код для ввода инта с консоли
-            while (true) {
-                try {
-                    System.out.println("Введите Id дефекта:");
-                    id = parseLong(console.nextLine());
-                    break;
-                } catch (Exception e) {
-                    System.out.println("Введите корректные данные");
-                }
-            }
-            if (getDefect(id, repository) == null) {
+            id = takeLong(console, "Введите Id дефекта:");
+            if (repository.getDefect(id) == null) {
                 System.out.println("Нет дефекта с таким Id");
             } else {
                 break;
@@ -157,9 +108,28 @@ public class Main {
 
     }
 
-    // todo 3 - метод в одну строчку, вызов такой же длины как само тело
-    private Defect getDefect(long id, Repository repository) {
-        return repository.getDefect(id);
+    private static int takeInt(Scanner console, String notification) {
+        while (true) {
+            try {
+                System.out.println(notification);
+                return parseInt(console.nextLine());
+            } catch (Exception e) {
+                System.out.println("Введите корректные данные");
+            }
+        }
+
+    }
+
+    private static long takeLong(Scanner console, String notification) {
+        while (true) {
+            try {
+                System.out.println(notification);
+                return parseLong(console.nextLine());
+            } catch (Exception e) {
+                System.out.println("Введите корректные данные");
+            }
+        }
+
     }
 
 
