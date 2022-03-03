@@ -37,9 +37,17 @@ public class Main {
         }
     }
 
-    // todo 3 - метод всё ещё в одну строчку, выкидывает исключение, каждый вызов обернут в одинаковый трай
-    public static int parsInt(String forPars) throws NumberFormatException {
-        return Integer.parseInt(forPars);
+    public static int canParseInt(Scanner scanner) throws NumberFormatException {
+        int forPars;
+        while (true) {
+            try {
+                forPars = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Не верный формат введенного значения, потворите попытку");
+            }
+        }
+        return forPars;
     }
 
     public static void addDefect(Repository repository, Scanner scanner) {
@@ -62,15 +70,7 @@ public class Main {
             return;
         }
         System.out.println("Введите количество дней на исправление дефекта");
-        int daysToFixBug;
-        while (true) {
-            try {
-                daysToFixBug = parsInt(scanner.nextLine());
-                break;
-            } catch (NumberFormatException e) {
-                System.out.println("Не верный формат введенного значения, потворите попытку");
-            }
-        }
+        int daysToFixBug = canParseInt(scanner);
 
         System.out.println("Выберите тип вложение: comment или link");
         // todo по желанию - лучше переработать, потому что сейчас из-за ошибки в названии типа дефекта,
@@ -87,15 +87,7 @@ public class Main {
                 break;
             case "link":
                 System.out.println("Введите ссылку (id) дефекта");
-                long idBug;
-                while (true) {
-                    try {
-                        idBug = parsInt(scanner.nextLine());
-                        break;
-                    } catch (NumberFormatException e) {
-                        System.out.println("Не верный формат введенного значения, потворите попытку");
-                    }
-                }
+                long idBug = canParseInt(scanner);
                 DefectAttachment defectAttachment = new DefectAttachment(idBug);
                 repository.addDefect(new Defect(resumeBug, severity, daysToFixBug, defectAttachment));
                 break;
@@ -117,20 +109,12 @@ public class Main {
         }
         System.out.println("Введине id дефекта, у которого необходимо поменять статус");
         long idDefectForChangeStatus;
-        while (true) {
-            try {
-                idDefectForChangeStatus = parsInt(scanner.nextLine());
-                break;
-            } catch (NumberFormatException e) {
-                System.out.println("Не верный формат введенного значения, потворите попытку");
-            }
-        }
+        idDefectForChangeStatus = canParseInt(scanner);
         Defect defectForChangeStatus = repository.findDefectById(idDefectForChangeStatus);
         if (defectForChangeStatus == null) {
             System.out.println("Дефекта с таким id не существует");
             return;
         }
-        if (defectForChangeStatus != null) { // todo 3 - warning
             System.out.println("Введите новый статус дефекта из списка");
             Status[] statuses = Status.values();
             for (Status status : statuses) {
@@ -140,10 +124,9 @@ public class Main {
             Status newStatus = Status.getStatus(statusInput);
             if (newStatus == null) {
                 System.out.println("Такого значение не существует");
-                return; // todo 3 - надо с return, но без warning
+                return;
             } else {
                 defectForChangeStatus.setStatus(newStatus);
             }
-        }
     }
 }
