@@ -36,6 +36,8 @@ public class Main {
             }
         }
     }
+
+    // todo 3 - метод всё ещё в одну строчку, выкидывает исключение, каждый вызов обернут в одинаковый трай
     public static int parsInt(String forPars) throws NumberFormatException {
         return Integer.parseInt(forPars);
     }
@@ -128,7 +130,7 @@ public class Main {
             System.out.println("Дефекта с таким id не существует");
             return;
         }
-        if (defectForChangeStatus != null) {
+        if (defectForChangeStatus != null) { // todo 3 - warning
             System.out.println("Введите новый статус дефекта из списка");
             Status[] statuses = Status.values();
             for (Status status : statuses) {
@@ -138,7 +140,7 @@ public class Main {
             Status newStatus = Status.getStatus(statusInput);
             if (newStatus == null) {
                 System.out.println("Такого значение не существует");
-                return;
+                return; // todo 3 - надо с return, но без warning
             } else {
                 defectForChangeStatus.setStatus(newStatus);
             }
