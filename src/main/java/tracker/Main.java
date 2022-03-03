@@ -5,18 +5,7 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 
-// todo 3 - сложные конструкции методов
-//   if (проверка валидности) {
-//       // валидный кейс
-//   } else {
-//       // негативный кейс
-//   }
-//   можно заменить на
-//   if (!проверка валидности) {
-//      // негативный кейс
-//      return;
-//   }
-//   // валидный кейс
+
 public class Main {
 
 
@@ -51,9 +40,7 @@ public class Main {
 
     private static void add(Scanner console, Repository repository, int maxDefects) {
 
-        if (repository.isFull()) {
-            System.out.println("Невозможно добавить больше " + maxDefects + " дефектов");
-        } else {
+        if (!repository.isFull()) {
             System.out.println("Введите резюме");
             String resume = console.nextLine();
             Severity critical;
@@ -61,33 +48,30 @@ public class Main {
                 System.out.println("Введите критичность дефекта: критично, не критично или очень критично");
                 String inputCritical = console.nextLine();
                 critical = Severity.getSeverity(inputCritical);
-                if (critical == null) {
-                    System.out.println("Критичность не найдена");
-                } else {
+                if (critical != null) {
                     break;
                 }
+                System.out.println("Критичность не найдена");
             }
             int numberOfDays = takeInt(console, "Введите ожидаемое количество дней на исправление дефекта");
             int typeInclosure = takeInt(console, "Введите номер типа вложения: 1 - комментарий, 2 - ссылка на другой дефект");
 
-            if (typeInclosure == 1) {
-                System.out.println("Введите комментарий");
-                repository.add(new Defect(resume, critical, numberOfDays, new CommentAttachment(console.nextLine())));
-            } else {
+            if (typeInclosure != 1) {
                 while (true) {
                     try {
-                        System.out.println("Введите id дефекта");
-                        // todo 3 - takeLong ?
-                        DefectAttachment defect = new DefectAttachment(parseLong(console.nextLine()));
+                        DefectAttachment defect = new DefectAttachment(takeLong(console, "Введите id дефекта"));
                         repository.add(new Defect(resume, critical, numberOfDays, defect));
-                        break;
+                        return;
                     } catch (Exception e) {
                         System.out.println("Введите корректные данные");
                     }
                 }
-
             }
+            System.out.println("Введите комментарий");
+            repository.add(new Defect(resume, critical, numberOfDays, new CommentAttachment(console.nextLine())));
+            return;
         }
+        System.out.println("Невозможно добавить больше " + maxDefects + " дефектов");
     }
 
     private static void list(Repository repository) {
@@ -100,25 +84,22 @@ public class Main {
         long id;
         while (true) {
             id = takeLong(console, "Введите Id дефекта:");
-            if (repository.getDefect(id) == null) {
-                System.out.println("Нет дефекта с таким Id");
-            } else {
+            if (repository.getDefect(id) != null) {
                 break;
             }
+            System.out.println("Нет дефекта с таким Id");
         }
         Status status;
         while (true) {
             System.out.println("Введите новый статус: Открыто, Закрыто или В работе");
             String inputStatus = console.nextLine();
             status = Status.getStatus(inputStatus);
-            if (status == null) {
-                System.out.println("Статус не найден");
-            } else {
+            if (status != null) {
                 repository.getDefect(id).setStatus(status);
                 break;
             }
+            System.out.println("Статус не найден");
         }
-
     }
 
     private static int takeInt(Scanner console, String notification) {
@@ -130,7 +111,6 @@ public class Main {
                 System.out.println("Введите корректные данные");
             }
         }
-
     }
 
     private static long takeLong(Scanner console, String notification) {
@@ -142,8 +122,5 @@ public class Main {
                 System.out.println("Введите корректные данные");
             }
         }
-
     }
-
-
 }
