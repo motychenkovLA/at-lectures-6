@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         Repository repository = new Repository(10);
-        String command = null;
+        String command = null; // todo 1 - рано объявлен
 
         try (Scanner scanner = new Scanner(System.in)) {
 
@@ -38,6 +38,7 @@ public class Main {
         }
     }
 
+    // todo 3 - метод в одну строчку, выкидывает исключение
     public static int parsInt(String forPars) {
         return Integer.parseInt(forPars);
     }
@@ -68,7 +69,7 @@ public class Main {
                 daysToFixBug = parsInt(scanner.nextLine());
                 break;
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                e.printStackTrace(); // todo 1 - зачем тут пользователю стек трейс?
                 System.out.println("Не верный формат введенного значения, потворите попытку");
             }
         }
@@ -131,6 +132,7 @@ public class Main {
         Defect defectForChangeStatus = repository.findDefectById(idDefectForChangeStatus);
         if (defectForChangeStatus == null) {
             System.out.println("Дефекта с таким id не существует");
+            // todo 3 - return?
         }
         if (defectForChangeStatus != null) {
             System.out.println("Введите новый статус дефекта из списка");
@@ -142,6 +144,7 @@ public class Main {
             Status newStatus = Status.getStatus(statusInput);
             if (newStatus == null) {
                 System.out.println("Такого значение не существует");
+                // todo 3 - return?
             } else {
                 defectForChangeStatus.setStatus(newStatus);
             }
