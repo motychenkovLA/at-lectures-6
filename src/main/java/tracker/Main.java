@@ -5,6 +5,18 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 
+// todo 3 - сложные конструкции методов
+//   if (проверка валидности) {
+//       // валидный кейс
+//   } else {
+//       // негативный кейс
+//   }
+//   можно заменить на
+//   if (!проверка валидности) {
+//      // негативный кейс
+//      return;
+//   }
+//   // валидный кейс
 public class Main {
 
 
@@ -65,6 +77,7 @@ public class Main {
                 while (true) {
                     try {
                         System.out.println("Введите id дефекта");
+                        // todo 3 - takeLong ?
                         DefectAttachment defect = new DefectAttachment(parseLong(console.nextLine()));
                         repository.add(new Defect(resume, critical, numberOfDays, defect));
                         break;
