@@ -37,11 +37,12 @@ public class Main {
         }
     }
 
+    // todo 3 - он теперь не throws
     public static int canParseInt(Scanner scanner) throws NumberFormatException {
         int forPars;
         while (true) {
             try {
-                forPars = Integer.parseInt(scanner.nextLine());
+                forPars = Integer.parseInt(scanner.nextLine()); // todo 1 - можно return-уть тут
                 break;
             } catch (NumberFormatException e) {
                 System.out.println("Не верный формат введенного значения, потворите попытку");
@@ -108,13 +109,14 @@ public class Main {
             return;
         }
         System.out.println("Введине id дефекта, у которого необходимо поменять статус");
-        long idDefectForChangeStatus;
+        long idDefectForChangeStatus; // todo 1 - объявление отдельно от инициализации
         idDefectForChangeStatus = canParseInt(scanner);
         Defect defectForChangeStatus = repository.findDefectById(idDefectForChangeStatus);
         if (defectForChangeStatus == null) {
             System.out.println("Дефекта с таким id не существует");
             return;
         }
+        // todo 1 - отступ
             System.out.println("Введите новый статус дефекта из списка");
             Status[] statuses = Status.values();
             for (Status status : statuses) {
@@ -124,7 +126,7 @@ public class Main {
             Status newStatus = Status.getStatus(statusInput);
             if (newStatus == null) {
                 System.out.println("Такого значение не существует");
-                return;
+                return; // todo 4 - надо с return, но без warning
             } else {
                 defectForChangeStatus.setStatus(newStatus);
             }
