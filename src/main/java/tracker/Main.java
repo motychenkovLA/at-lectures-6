@@ -36,7 +36,6 @@ public class Main {
             }
         }
     }
-
     public static int canParseInt(Scanner scanner) {
         while (true) {
             try {
@@ -46,7 +45,6 @@ public class Main {
             }
         }
     }
-
     public static void addDefect(Repository repository, Scanner scanner) {
         if (repository.repositoryIsFull()) {
             System.out.println("Превышено максимально допустимое кол-во дефектов");
