@@ -37,18 +37,14 @@ public class Main {
         }
     }
 
-    // todo 3 - он теперь не throws
-    public static int canParseInt(Scanner scanner) throws NumberFormatException {
-        int forPars;
+    public static int canParseInt(Scanner scanner) {
         while (true) {
             try {
-                forPars = Integer.parseInt(scanner.nextLine()); // todo 1 - можно return-уть тут
-                break;
+                return Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
-                System.out.println("Не верный формат введенного значения, потворите попытку");
+                System.out.println("Не верный формат введенного значения, повторите попытку");
             }
         }
-        return forPars;
     }
 
     public static void addDefect(Repository repository, Scanner scanner) {
@@ -97,7 +93,6 @@ public class Main {
                 break;
         }
     }
-
     public static void displayDefectList(Repository repository) {
         for (Defect defect : repository.getAllDefects()) {
             System.out.println(defect.getBugsInfo());
@@ -109,26 +104,23 @@ public class Main {
             return;
         }
         System.out.println("Введине id дефекта, у которого необходимо поменять статус");
-        long idDefectForChangeStatus; // todo 1 - объявление отдельно от инициализации
-        idDefectForChangeStatus = canParseInt(scanner);
+        long idDefectForChangeStatus = canParseInt(scanner);
         Defect defectForChangeStatus = repository.findDefectById(idDefectForChangeStatus);
         if (defectForChangeStatus == null) {
             System.out.println("Дефекта с таким id не существует");
             return;
         }
-        // todo 1 - отступ
-            System.out.println("Введите новый статус дефекта из списка");
-            Status[] statuses = Status.values();
-            for (Status status : statuses) {
-                System.out.println(status.getInRus());
-            }
-            String statusInput = scanner.nextLine();
-            Status newStatus = Status.getStatus(statusInput);
-            if (newStatus == null) {
-                System.out.println("Такого значение не существует");
-                return; // todo 4 - надо с return, но без warning
-            } else {
-                defectForChangeStatus.setStatus(newStatus);
-            }
+        System.out.println("Введите новый статус дефекта из списка");
+        Status[] statuses = Status.values();
+        for (Status status : statuses) {
+            System.out.println(status.getInRus());
+        }
+        String statusInput = scanner.nextLine();
+        Status newStatus = Status.getStatus(statusInput);
+        if (newStatus == null) {
+            System.out.println("Такого значение не существует");
+            return;
+        }
+        defectForChangeStatus.setStatus(newStatus);
     }
 }
