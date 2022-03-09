@@ -62,4 +62,13 @@ public class Defect {
         return info;
     }
 
+    @Override
+    public boolean equals(Object bug) {
+        return (this == bug);
+    }
+
+    @Override
+    public native int hashCode();
+
+
 }

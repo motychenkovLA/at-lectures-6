@@ -11,4 +11,12 @@ public class CommentAttachment extends Attachment {
     public String toString() {
         return "Комментарий во вложении: " + value;
     }
+
+    @Override
+    public boolean equals(Object comment) {
+        return (this == comment);
+    }
+
+    @Override
+    public native int hashCode();
 }

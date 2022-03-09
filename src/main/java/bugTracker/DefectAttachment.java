@@ -11,4 +11,12 @@ public class DefectAttachment extends Attachment {
     public String toString() {
         return "Ссылка на другой дефект во вложении: " + value;
     }
+
+    @Override
+    public boolean equals(Object bugId) {
+        return (this == bugId);
+    }
+
+    @Override
+    public native int hashCode();
 }
