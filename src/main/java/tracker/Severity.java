@@ -28,7 +28,6 @@ public enum Severity {
     }
 
     public static String list() {
-        String severityes = "";
         StringJoiner joiner = new StringJoiner(" / ");
         for (Severity item : Severity.values()) {
             joiner.add(item.critName);
