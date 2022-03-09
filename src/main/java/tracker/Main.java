@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-
 public class Main {
 
     public static void main(String[] args) {
@@ -89,11 +88,9 @@ public class Main {
     }
 
     public static void listBug(Repository repository) {
-        Defect[] defects = repository.getAll();
-        for (Defect bug : defects) {
+        for (Defect bug : repository.getAll()) {
             System.out.println(bug);
         }
-        System.out.println();
     }
 
     public static void changeStatusBug(@NotNull Scanner scanner, Repository repository) {
@@ -105,15 +102,18 @@ public class Main {
             System.out.println("Нет дефекта с таким номером!");
             return;
         }
+        Status status = bug.getStatus();
 
-        System.out.println("Текущий статус дефекта - " + bug.getStatus() +
-                "\nВведите новый статус (" + Status.list() + "): ");
-        Status status = Status.getStatusByValue(scanner.nextLine());
-        if (status == null) {
-            System.out.println("Внимание, вы ввели несуществующий статус - статус изменен не будет");
+        List<Status> statusList = Transition.statusList(status);
+
+        System.out.println("Текущий статус дефекта - " + status);
+        System.out.println("Введите новый статус дефекта. Допустимые статусы - " + statusList.toString().replace("[", "/ ").replace("]", " /").replace(",", " /"));
+        Status statusTo = Status.getStatusByValue(scanner.nextLine());
+        if ((statusTo == null) |  (!statusList.contains(statusTo))) {
+            System.out.println("Внимание, вы ввели несуществующий или недопустимый статус - статус изменен не будет");
             return;
         }
-        bug.setStatus(status);
+        bug.setStatus(statusTo);
         System.out.println("Успешно! Текущий статус дефекта - " + bug.getStatus());
     }
 

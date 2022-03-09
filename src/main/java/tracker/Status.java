@@ -7,6 +7,7 @@ public enum Status {
     IN_PROGRESS("Исправление"),
     TESTING("Тестирование"),
     DELAYED("Отложен"),
+    REOPEN("Переоткрыт"),
     CLOSE("Закрыт");
 
     private final String statusName;
