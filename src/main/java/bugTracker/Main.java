@@ -1,8 +1,7 @@
 package bugTracker;
-import java.io.IOException;
 import java.util.Scanner;
 
-public class Main implements AutoCloseable{
+public class Main{
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
             Repository repository = new Repository();
@@ -34,10 +33,5 @@ public class Main implements AutoCloseable{
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void close() throws Exception {
-        System.out.println("Сканер закрыт.");
     }
 }
