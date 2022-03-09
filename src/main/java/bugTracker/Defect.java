@@ -1,4 +1,5 @@
 package bugTracker;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Defect {
@@ -62,13 +63,17 @@ public class Defect {
         return info;
     }
 
+
     @Override
-    public boolean equals(Object bug) {
-        return (this == bug);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Defect defect = (Defect) o;
+        return ID.equals(defect.ID);
     }
 
     @Override
-    public native int hashCode();
-
-
+    public int hashCode() {
+        return Objects.hash(ID);
+    }
 }

@@ -1,5 +1,7 @@
 package bugTracker;
 
+import java.util.Objects;
+
 public class DefectAttachment extends Attachment {
     private long value;
 
@@ -13,10 +15,15 @@ public class DefectAttachment extends Attachment {
     }
 
     @Override
-    public boolean equals(Object bugId) {
-        return (this == bugId);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DefectAttachment that = (DefectAttachment) o;
+        return value == that.value;
     }
 
     @Override
-    public native int hashCode();
+    public int hashCode() {
+        return Objects.hash(value);
+    }
 }
