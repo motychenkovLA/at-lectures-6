@@ -5,6 +5,8 @@ public class DefectAttachment extends Attachment {
     private int idDefect;
 
     public DefectAttachment(int idDefect) {
+
+
         this.idDefect = idDefect;
     }
 

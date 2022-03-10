@@ -1,8 +1,91 @@
 package helloWorld;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 class Main {
+
+    public static Criticality setCriticality() {
+        Scanner scanner = new Scanner(System.in);
+        Boolean completed = false;
+        Criticality critical = null;
+
+        while (!completed) {
+            try {
+                System.out.println("Введите критичность дефекта:\nLOW\nMEDIUM\nHIGH\nCRITICAL");
+                String criticalString = scanner.nextLine();
+                critical = Criticality.valueOf(criticalString);
+                completed = true;
+            } catch (Exception ex) {
+                System.out.println("Введено некорректное значение. Повторите ввод");
+            }
+        }
+
+        return critical;
+    }
+
+
+    public static Command setCommand() {
+        Scanner scanner = new Scanner(System.in);
+        Boolean completed = false;
+        Command command = null;
+
+        while (!completed) {
+            try {
+                System.out.println("add - добавить новый дефект" + "\nchange - изменить статус" + "\nlist - вывести список дефектов" + "\nquit - выход из программы");
+                String inputCommand = scanner.nextLine();
+                command = Command.valueOf(inputCommand);
+                completed = true;
+            }
+            catch (Exception ex) {
+                System.out.println("Введена неизвестная команда");
+            }
+        }
+
+        return command;
+    }
+
+
+    public static Status setStatus() {
+        Scanner scanner = new Scanner(System.in);
+        Boolean completed = false;
+        Status status = null;
+
+        while (!completed) {
+            try {
+                System.out.println("Введите новый статус: \nOPEN\nINWORK\nCLOSED\nANALYSIS");
+                String inputStatus = scanner.nextLine();
+                status = Status.valueOf(inputStatus);
+                completed = true;
+            }
+            catch (Exception ex) {
+                System.out.println("Статус не найден. Повторите ввод.");
+            }
+        }
+
+        return status;
+    }
+
+    public static Integer setDays() {
+        Scanner scanner = new Scanner(System.in);
+        Boolean completed = false;
+        Integer days = null;
+
+        while (!completed) {
+            try {
+                System.out.println("Введите ожидаемое количество дней на исправление дефекта");
+                String daysString = scanner.nextLine();
+                days = Integer.parseInt(daysString);
+                completed = true;
+            } catch (Exception ex) {
+
+                System.out.println("Введено некорректное значение. Повторите ввод");
+            }
+        }
+        return days;
+    }
+
+
     public static void addDefect() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите резюме дефекта");
@@ -11,15 +94,15 @@ class Main {
 
         Status status;
         Defect def = new Defect(name);
-        System.out.println("Введите критичность дефекта:\nLOW\nMEDIUM\nHIGH\nCRITICAL");
-        String criticalString = scanner.nextLine();
-        Criticality critical = Criticality.valueOf(criticalString);
-        def.setCritical(critical);
+//        System.out.println("Введите критичность дефекта:\nLOW\nMEDIUM\nHIGH\nCRITICAL");
+//        String criticalString = scanner.nextLine();
+//        Criticality critical = Criticality.valueOf(criticalString);
+        def.setCritical(setCriticality());
 
 
-        System.out.println("Введите ожидаемое количество дней на исправление дефекта");
-        def.setDaysNumber(scanner.nextInt());
-        scanner.nextLine();
+        //    System.out.println("Введите ожидаемое количество дней на исправление дефекта");
+        def.setDaysNumber(setDays());
+        //scanner.nextLine();
         System.out.println("Выберите тип вложения: comment или link");
 
         String attachmentOfBug = scanner.nextLine();
@@ -50,13 +133,11 @@ class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("add - добавить новый дефект" + "\nchange - изменить статус" + "\nlist - вывести список дефектов" + "\nquit - выход из программы");
-            String operation = scanner.nextLine();
-
+            Command operation = setCommand();
 
             switch (operation) {
 
-                case "change":
+                case CHANGE:
                     long id;
                     while (true) {
                         System.out.println("Введите Id дефекта:");
@@ -65,33 +146,22 @@ class Main {
                         if (Repository.getDefect(id) == null) {
                             System.out.println("Нет дефекта с таким Id");
                         } else {
-                            break;
-                        }
-                    }
-                    Status status;
-                    while (true) {
-                        System.out.println("Введите новый статус: \nOPEN\nINWORK\nCLOSED\nANALYSIS");
-                        String inputStatus = scanner.nextLine();
-                        status = Status.valueOf(inputStatus);
-                        if (status == null) {
-                            System.out.println("Статус не найден");
-                        } else {
-                            Repository.getDefect(id).setStatus(status);
+                            Repository.getDefect(id).setStatus(setStatus());
                             break;
                         }
                     }
                     break;
 
 
-                case "add":
+                case ADD:
                     addDefect();
                     break;
-                case "list":
+                case LIST:
                     for (int i = 0; i < Repository.countOfBug; i++) {
                         System.out.println(Repository.getAll()[i].getInfo());
                     }
                     break;
-                case "quit":
+                case QUIT:
                     return;
                 default:
                     System.out.println("Введена неизвестная команда\n");
