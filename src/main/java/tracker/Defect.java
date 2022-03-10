@@ -4,7 +4,6 @@ package tracker;
 import java.util.Objects;
 
 public class Defect {
-    private static long numberOfDefects = 0;
     private String resume;
     private Severity critical;
     private Status status;
@@ -13,9 +12,8 @@ public class Defect {
     private Attachment attachment;
 
 
-    public Defect(String resume, Severity critical, int numberOfDays, Attachment attachment) {
-        numberOfDefects++;
-        this.id = numberOfDefects;
+    public Defect(Long id, String resume, Severity critical, int numberOfDays, Attachment attachment) {
+        this.id = id;
         this.resume = resume;
         this.critical = critical;
         this.numberOfDays = numberOfDays;
@@ -35,6 +33,10 @@ public class Defect {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     @Override
