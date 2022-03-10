@@ -51,7 +51,7 @@ public class Main {
         }
     }
 
-    public static void addBug(@NotNull Scanner scanner, Repository repository) {
+    private static void addBug(@NotNull Scanner scanner, Repository repository) {
         System.out.println("Введите резюме дефекта");
         String resume = scanner.nextLine();
 
@@ -84,16 +84,16 @@ public class Main {
             }
         }
         Defect bug = new Defect(resume, critical, daysToFix, attachment);
-        repository.add(bug.getId(), bug);
+        repository.add(bug);
     }
 
-    public static void listBug(Repository repository) {
+    private static void listBug(Repository repository) {
         for (Defect bug : repository.getAll()) {
             System.out.println(bug);
         }
     }
 
-    public static void changeStatusBug(@NotNull Scanner scanner, Repository repository) {
+    private static void changeStatusBug(@NotNull Scanner scanner, Repository repository) {
         System.out.println("Введите номер дефекта, для которого нужно изменить статус:");
         int defectId = inInt(scanner);
         Defect bug = repository.getById(defectId);
@@ -118,7 +118,7 @@ public class Main {
         System.out.println("Успешно! Текущий статус дефекта - " + bug.getStatus());
     }
 
-    public static int inInt(@NotNull Scanner scanner) {
+    private static int inInt(@NotNull Scanner scanner) {
         while (true) {
             try {
                 return Integer.parseInt(scanner.nextLine());
@@ -128,7 +128,7 @@ public class Main {
         }
     }
 
-    public static String statusesByChange(List<Status> statusList) {
+    private static String statusesByChange(List<Status> statusList) {
         return statusList.toString().replace("[", "/ ").replace("]", " /").replace(",", " /");
     }
 
