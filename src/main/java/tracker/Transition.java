@@ -7,8 +7,7 @@ import java.util.Set;
 
 public class Transition {
 
-    // todo 3 - публичное поле, утекает, можно поменять извне
-    public static final Set<Transition> transitions = new HashSet<>();
+    private static final Set<Transition> transitions = new HashSet<>();
 
     static  {
         transitions.add(new Transition(Status.OPEN, Status.IN_PROGRESS));
@@ -38,12 +37,9 @@ public class Transition {
         return to;
     }
 
-
-    // todo 1 - getValidStatuses ?
-    public static List<Status> statusList(Status status) {
+    public static List<Status> getValidStatuses(Status status) {
         List<Status> statusList = new ArrayList<>();
-        for (Transition item : transitions // todo 1 - лишний перенос
-        ) {
+        for (Transition item : transitions) {
             if (item.getFrom().equals(status)) {
                 statusList.add(item.getTo());
             }

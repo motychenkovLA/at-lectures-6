@@ -84,7 +84,7 @@ public class Main {
             }
         }
         Defect bug = new Defect(resume, critical, daysToFix, attachment);
-        repository.add(bug);
+        repository.add(bug.getId(), bug);
     }
 
     public static void listBug(Repository repository) {
@@ -104,14 +104,13 @@ public class Main {
         }
         Status status = bug.getStatus();
 
-        List<Status> statusList = Transition.statusList(status);
+        List<Status> statusList = Transition.getValidStatuses(status);
 
         System.out.println("Текущий статус дефекта - " + status);
-        // todo 3 - чтоб тут не собирать длинную цепочку лучше в отдельный метод формирование строки из списка статусов вынести
-        System.out.println("Введите новый статус дефекта. Допустимые статусы - " + statusList.toString().replace("[", "/ ").replace("]", " /").replace(",", " /"));
+        System.out.println("Введите новый статус дефекта. Допустимые статусы - " + statusesByChange(statusList));
         Status statusTo = Status.getStatusByValue(scanner.nextLine());
-        // todo 3 - немного лишних скобок, | вместо ||
-        if ((statusTo == null) |  (!statusList.contains(statusTo))) {
+
+        if (statusTo == null ||  !statusList.contains(statusTo)) {
             System.out.println("Внимание, вы ввели несуществующий или недопустимый статус - статус изменен не будет");
             return;
         }
@@ -127,6 +126,10 @@ public class Main {
                 System.out.println("Введите число");
             }
         }
+    }
+
+    public static String statusesByChange(List<Status> statusList) {
+        return statusList.toString().replace("[", "/ ").replace("]", " /").replace(",", " /");
     }
 
 }
