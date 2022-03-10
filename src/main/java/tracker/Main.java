@@ -107,8 +107,10 @@ public class Main {
         List<Status> statusList = Transition.statusList(status);
 
         System.out.println("Текущий статус дефекта - " + status);
+        // todo 3 - чтоб тут не собирать длинную цепочку лучше в отдельный метод формирование строки из списка статусов вынести
         System.out.println("Введите новый статус дефекта. Допустимые статусы - " + statusList.toString().replace("[", "/ ").replace("]", " /").replace(",", " /"));
         Status statusTo = Status.getStatusByValue(scanner.nextLine());
+        // todo 3 - немного лишних скобок, | вместо ||
         if ((statusTo == null) |  (!statusList.contains(statusTo))) {
             System.out.println("Внимание, вы ввели несуществующий или недопустимый статус - статус изменен не будет");
             return;
