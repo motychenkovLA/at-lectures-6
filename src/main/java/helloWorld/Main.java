@@ -36,8 +36,7 @@ class Main {
                 String inputCommand = scanner.nextLine();
                 command = Command.valueOf(inputCommand);
                 completed = true;
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 System.out.println("Введена неизвестная команда");
             }
         }
@@ -57,8 +56,7 @@ class Main {
                 String inputStatus = scanner.nextLine();
                 status = Status.valueOf(inputStatus);
                 completed = true;
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 System.out.println("Статус не найден. Повторите ввод.");
             }
         }
@@ -94,15 +92,11 @@ class Main {
 
         Status status;
         Defect def = new Defect(name);
-//        System.out.println("Введите критичность дефекта:\nLOW\nMEDIUM\nHIGH\nCRITICAL");
-//        String criticalString = scanner.nextLine();
-//        Criticality critical = Criticality.valueOf(criticalString);
+
         def.setCritical(setCriticality());
 
 
-        //    System.out.println("Введите ожидаемое количество дней на исправление дефекта");
         def.setDaysNumber(setDays());
-        //scanner.nextLine();
         System.out.println("Выберите тип вложения: comment или link");
 
         String attachmentOfBug = scanner.nextLine();
