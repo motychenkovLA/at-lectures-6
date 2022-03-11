@@ -21,6 +21,7 @@ public class Main {
                         "\n add (Добавить новый дефект)" +
                         "\n list (Вывести список дефектов)" +
                         "\n change (Изменить статус дефекта)" +
+                        "\n stats (Вывести статистику по дефектам)" +
                         "\n quit (Вернуться в главное меню)");
 
                 String action = scanner.nextLine();
@@ -38,6 +39,9 @@ public class Main {
                         changeStatusBug(scanner, repository);
                         break;
                     }
+                    case "stats":
+                        listStatistics(scanner, repository);
+                        break;
                     case ("quit"): {
                         isRun = false;
                         break;
@@ -130,6 +134,21 @@ public class Main {
 
     private static String statusesByChange(List<Status> statusList) {
         return statusList.toString().replace("[", "/ ").replace("]", " /").replace(",", " /");
+    }
+
+    private static void listStatistics(Scanner scanner, Repository repository) {
+
+        System.out.println("\nСтатитистика по дефектам:");
+
+        repository.getStatisticsByStatus().forEach((key, value) -> {
+            System.out.printf("Дефектов в статусе %s: %d", key, value);
+            System.out.println();
+        });
+
+        IntSummaryStatistics daysToFixStatistics = repository.getStatisticsByDaysToFix();
+        System.out.println("Минимальное кол-во дней на исправление дефекта: " + daysToFixStatistics.getMin());
+        System.out.println("Максимальное кол-во дней на исправление дефекта: " + daysToFixStatistics.getMax());
+        System.out.println("Среднее кол-во дней на исправление дефекта: " + daysToFixStatistics.getAverage());
     }
 
 }
