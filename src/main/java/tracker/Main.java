@@ -41,6 +41,7 @@ public class Main {
 
     private static void add(Scanner console, Map<Long, Defect> map, int maxDefects) {
 
+        // todo 1 - if стоит инвертировать
         if (map.size() < maxDefects) {
             System.out.println("Введите резюме");
             String resume = console.nextLine();
@@ -59,6 +60,7 @@ public class Main {
 
             if (typeInclosure != 1) {
                 while (true) {
+                    // todo 3 - что ловит try-catch ?
                     try {
                         DefectAttachment defect = new DefectAttachment(takeLong(console, "Введите id дефекта"));
                         map.put(++id, new Defect(id, resume, critical, numberOfDays, defect));

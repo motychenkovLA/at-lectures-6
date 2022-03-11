@@ -13,6 +13,8 @@ public class Transition {
         this.from = from;
         this.to = to;
     }
+    // todo 3 - работает с консолью и с репо, не ответственность транзишена
+    // todo 5 - не валидирует перевод статуса
     public static void dataValidation(Scanner console, Map<Long, Defect> map, Set<Transition> transitions) {
         Defect defect;
         while (true) {
