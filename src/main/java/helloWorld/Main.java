@@ -32,7 +32,7 @@ class Main {
 
         while (!completed) {
             try {
-                System.out.println("add - добавить новый дефект" + "\nchange - изменить статус" + "\nlist - вывести список дефектов" + "\nquit - выход из программы");
+                System.out.println("ADD - добавить новый дефект" + "\nCHANGE - изменить статус" + "\nLIST - вывести список дефектов" + "\nQUIT - выход из программы");
                 String inputCommand = scanner.nextLine();
                 command = Command.valueOf(inputCommand);
                 completed = true;
