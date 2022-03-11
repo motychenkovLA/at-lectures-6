@@ -14,7 +14,7 @@ public class Main {
         try (Scanner console = new Scanner(System.in)) {
             int maxDefects = takeInt(console, "Введите максимальное количество дефектов:");
             Map<Long, Defect> map = new HashMap<>();
-            Set<Transition> transitions = new HashSet<>();
+            Set<Transition> transitions = new HashSet<>(); // todo 3 - ничего не делает
             while (run) {
                 System.out.println("Чтобы добавить новый дефект, введите \"add\". Чтобы вывести список дефектов, введите \"list\". Введите \"change\", чтобы изменить статус. Чтобы выйти, введите \"quit\"");
                 String action = console.nextLine();
