@@ -1,13 +1,13 @@
 package tracker;
-import java.util.Objects;
-import java.util.Scanner;
+
+import java.util.*;
 
 public class Main {
+    private static final Map<Long, Defect> defectHashMap = new HashMap<>();
+    static long keyDefect = 0;
+
 
     public static void main(String[] args) {
-
-        Repository repository = new Repository(10);
-
         try (Scanner scanner = new Scanner(System.in)) {
             String command = null;
             while (!Objects.equals(command, "quit")) {
@@ -15,20 +15,16 @@ public class Main {
                 command = scanner.nextLine();
                 switch (command) {
                     case "add":
-                        addDefect(repository, scanner);
+                        addDefect(scanner);
                         break;
-
                     case "list":
-                        displayDefectList(repository);
+                        displayDefectList();
                         break;
-
                     case "change":
-                        changeDefectStatus(repository, scanner);
+                        changeDefectStatus(scanner);
                         break;
-
                     case "quit":
                         break;
-
                     default:
                         System.out.println("Введено не корректное значение, повторите попытку");
                         break;
@@ -36,6 +32,7 @@ public class Main {
             }
         }
     }
+
     public static int canParseInt(Scanner scanner) {
         while (true) {
             try {
@@ -45,11 +42,8 @@ public class Main {
             }
         }
     }
-    public static void addDefect(Repository repository, Scanner scanner) {
-        if (repository.repositoryIsFull()) {
-            System.out.println("Превышено максимально допустимое кол-во дефектов");
-            return;
-        }
+
+    public static void addDefect(Scanner scanner) {
         System.out.println("Введите резюме дефекта");
         String resumeBug = scanner.nextLine();
 
@@ -73,38 +67,42 @@ public class Main {
         // Пока не нашла решения как это сделать
 
         String attachmentBug = scanner.nextLine();
+
         switch (attachmentBug) {
             case "comment":
                 System.out.println("Введите комментарий");
                 String comment = scanner.nextLine();
                 CommentAttachment commentAttachment = new CommentAttachment(comment);
-                repository.addDefect(new Defect(resumeBug, severity, daysToFixBug, commentAttachment));
+                defectHashMap.put(keyDefect, new Defect(resumeBug, severity, daysToFixBug, commentAttachment));
                 break;
             case "link":
                 System.out.println("Введите ссылку (id) дефекта");
                 long idBug = canParseInt(scanner);
                 DefectAttachment defectAttachment = new DefectAttachment(idBug);
-                repository.addDefect(new Defect(resumeBug, severity, daysToFixBug, defectAttachment));
+                defectHashMap.put(keyDefect, new Defect(resumeBug, severity, daysToFixBug, defectAttachment));
                 break;
             default:
                 System.out.println("Не верный тип вложения, повторите попытку");
                 break;
         }
+        keyDefect++;
     }
-    public static void displayDefectList(Repository repository) {
-        for (Defect defect : repository.getAllDefects()) {
-            System.out.println(defect.getBugsInfo());
+
+    public static void displayDefectList() {
+        for (Defect defect : defectHashMap.values()) {
+            System.out.println(defect);
         }
     }
-    public static void changeDefectStatus(Repository repository, Scanner scanner) {
-        if (repository.repositoryIsEmpty()) {
+
+    public static void changeDefectStatus(Scanner scanner) {
+        if (defectHashMap.isEmpty()) {
             System.out.println("В репозитории нет дефектов");
             return;
         }
         System.out.println("Введине id дефекта, у которого необходимо поменять статус");
         long idDefectForChangeStatus = canParseInt(scanner);
-        Defect defectForChangeStatus = repository.findDefectById(idDefectForChangeStatus);
-        if (defectForChangeStatus == null) {
+        Defect defectForChangeStatus = defectHashMap.get(idDefectForChangeStatus);
+        if (!defectHashMap.containsKey(idDefectForChangeStatus)) {
             System.out.println("Дефекта с таким id не существует");
             return;
         }
@@ -113,12 +111,16 @@ public class Main {
         for (Status status : statuses) {
             System.out.println(status.getInRus());
         }
+
+        Status currentStatus = defectForChangeStatus.getStatus();
         String statusInput = scanner.nextLine();
-        Status newStatus = Status.getStatus(statusInput);
-        if (newStatus == null) {
+        Status newStatusTo = Status.getStatus(statusInput);
+
+        List<Status> statusList = Transition.getValidStatus(currentStatus);
+        if (newStatusTo == null || !statusList.contains(newStatusTo)) {
             System.out.println("Такого значение не существует");
             return;
         }
-        defectForChangeStatus.setStatus(newStatus);
+        defectForChangeStatus.setStatus(newStatusTo);
     }
 }

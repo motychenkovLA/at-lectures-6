@@ -2,7 +2,7 @@ package tracker;
 
 import java.util.Arrays;
 
-public class Repository {
+public class Repository  {
     private final Defect[] defectsList;
     private final int maxBugs;
     private int countDefects = 0;
@@ -39,4 +39,5 @@ public class Repository {
         }
         return null;
     }
+
 }
