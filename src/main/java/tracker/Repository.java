@@ -2,6 +2,7 @@ package tracker;
 
 import java.util.Arrays;
 
+// todo 1 - не используется, можно удалить
 public class Repository  {
     private final Defect[] defectsList;
     private final int maxBugs;

@@ -86,6 +86,8 @@ public class Main {
                 break;
         }
         keyDefect++;
+        // todo 5 - дефект кладется в мапу по некоему keyDefect за которые отвечает Main,
+        //  а позже извлекается в changeDefectStatus по своему собственному id за который отвечает Defect
     }
 
     public static void displayDefectList() {
@@ -101,6 +103,7 @@ public class Main {
         }
         System.out.println("Введине id дефекта, у которого необходимо поменять статус");
         long idDefectForChangeStatus = canParseInt(scanner);
+        // todo 1 - извлечение стоит до проверки на наличие
         Defect defectForChangeStatus = defectHashMap.get(idDefectForChangeStatus);
         if (!defectHashMap.containsKey(idDefectForChangeStatus)) {
             System.out.println("Дефекта с таким id не существует");

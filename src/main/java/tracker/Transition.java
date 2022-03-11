@@ -3,6 +3,7 @@ package tracker;
 import java.util.*;
 
 public class Transition {
+    // todo 3 - видимость
     Status statusFrom;
     Status statusTo;
     private static final Set<Transition> transitions = new HashSet<>();
@@ -12,6 +13,7 @@ public class Transition {
         this.statusTo = statusTo;
     }
 
+    // todo 5 - метод никогда не вызывается, список никогда не инициализируется
     public static void addValidTransitions() {
         transitions.add(new Transition(Status.OPEN, Status.INWORK));
         transitions.add(new Transition(Status.INWORK, Status.CLOSED));
