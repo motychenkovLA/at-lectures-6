@@ -20,10 +20,12 @@ public class Repository {
     }
 
     public Map<Status, Long> getStatisticsByStatus() {
+        // todo 1 - перенос перед collect
         return data.values().stream().collect(Collectors.groupingBy(Defect::getStatus, Collectors.counting()));
     }
 
     public IntSummaryStatistics getStatisticsByDaysToFix() {
+        // todo 1 - перенос перед collect
         return data.values().stream().collect(Collectors.summarizingInt(Defect::getDaysToFix));
     }
 }

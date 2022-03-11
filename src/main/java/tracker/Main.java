@@ -81,7 +81,7 @@ public class Main {
             } else if (attachmentType.equals("defect")) {
                 System.out.println("Введите номер дефекта: ");
                 int defectId = inInt(scanner);
-                scanner.nextLine();
+                scanner.nextLine(); // todo 3 - ?
                 attachment = new DefectAttachment(defectId);
             } else {
                 System.out.println("Ошибочное значение");
@@ -136,6 +136,7 @@ public class Main {
         return statusList.toString().replace("[", "/ ").replace("]", " /").replace(",", " /");
     }
 
+    // todo 1 - scanner не используется
     private static void listStatistics(Scanner scanner, Repository repository) {
 
         System.out.println("\nСтатитистика по дефектам:");
