@@ -40,7 +40,7 @@ public class Main {
                         break;
                     }
                     case "stats":
-                        listStatistics(scanner, repository);
+                        listStatistics(repository);
                         break;
                     case ("quit"): {
                         isRun = false;
@@ -136,8 +136,7 @@ public class Main {
         return statusList.toString().replace("[", "/ ").replace("]", " /").replace(",", " /");
     }
 
-    // todo 1 - scanner не используется
-    private static void listStatistics(Scanner scanner, Repository repository) {
+    private static void listStatistics(Repository repository) {
 
         System.out.println("\nСтатитистика по дефектам:");
 
