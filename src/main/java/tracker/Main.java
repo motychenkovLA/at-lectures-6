@@ -41,40 +41,36 @@ public class Main {
 
     private static void add(Scanner console, Map<Long, Defect> map, int maxDefects) {
 
-        // todo 1 - if стоит инвертировать
-        if (map.size() < maxDefects) {
-            System.out.println("Введите резюме");
-            String resume = console.nextLine();
-            Severity critical;
-            while (true) {
-                System.out.println("Введите критичность дефекта: критично, не критично или очень критично");
-                String inputCritical = console.nextLine();
-                critical = Severity.getSeverity(inputCritical);
-                if (critical != null) {
-                    break;
-                }
-                System.out.println("Критичность не найдена");
-            }
-            int numberOfDays = takeInt(console, "Введите ожидаемое количество дней на исправление дефекта");
-            int typeInclosure = takeInt(console, "Введите номер типа вложения: 1 - комментарий, 2 - ссылка на другой дефект");
 
-            if (typeInclosure != 1) {
-                while (true) {
-                    // todo 3 - что ловит try-catch ?
-                    try {
-                        DefectAttachment defect = new DefectAttachment(takeLong(console, "Введите id дефекта"));
-                        map.put(++id, new Defect(id, resume, critical, numberOfDays, defect));
-                        return;
-                    } catch (Exception e) {
-                        System.out.println("Введите корректные данные");
-                    }
-                }
-            }
-            System.out.println("Введите комментарий");
-            map.put(++id, new Defect(id, resume, critical, numberOfDays, new CommentAttachment(console.nextLine())));
+        if (map.size() >= maxDefects) {
+            System.out.println("Невозможно добавить больше " + maxDefects + " дефектов");
             return;
         }
-        System.out.println("Невозможно добавить больше " + maxDefects + " дефектов");
+        System.out.println("Введите резюме");
+        String resume = console.nextLine();
+        Severity critical;
+        while (true) {
+            System.out.println("Введите критичность дефекта: критично, не критично или очень критично");
+            String inputCritical = console.nextLine();
+            critical = Severity.getSeverity(inputCritical);
+            if (critical != null) {
+                break;
+            }
+            System.out.println("Критичность не найдена");
+        }
+        int numberOfDays = takeInt(console, "Введите ожидаемое количество дней на исправление дефекта");
+        int typeInclosure = takeInt(console, "Введите номер типа вложения: 1 - комментарий, 2 - ссылка на другой дефект");
+
+        if (typeInclosure != 1) {
+
+            DefectAttachment defect = new DefectAttachment(takeLong(console, "Введите id дефекта"));
+            map.put(++id, new Defect(id, resume, critical, numberOfDays, defect));
+
+        }
+        System.out.println("Введите комментарий");
+        map.put(++id, new Defect(id, resume, critical, numberOfDays, new CommentAttachment(console.nextLine())));
+
+
     }
 
     private static void list(Map<Long, Defect> map) {
@@ -86,7 +82,32 @@ public class Main {
     }
 
     private static void change(Scanner console, Map<Long, Defect> map, Set<Transition> transitions) {
-        Transition.dataValidation(console, map, transitions);
+        Defect defect;
+        while (true) {
+            defect = map.get((takeLong(console, "Введите Id дефекта:")));
+            if (defect != null) {
+                break;
+            }
+            System.out.println("Нет дефекта с таким Id");
+        }
+        while (true) {
+            System.out.println("Введите новый статус: Открыто, Закрыто или В работе");
+
+            String inputStatus = console.nextLine();
+            Status newStatus = Status.getStatus(inputStatus);
+            if (newStatus == null) {
+                System.out.println("Статус не найден");
+                continue;
+            }
+            if (!Transition.dataValidation(defect.getStatus(), newStatus)) {
+                System.out.println("Невозможно перевести дефект в этот статус");
+                continue;
+            }
+            transitions.add(new Transition(defect.getStatus(), newStatus));
+            defect.setStatus(newStatus);
+            break;
+
+        }
 
     }
 
