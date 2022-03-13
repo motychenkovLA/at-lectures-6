@@ -1,7 +1,8 @@
 package bugTracker;
+
 import java.util.*;
 
-public class Main{
+public class Main {
 
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
@@ -11,15 +12,18 @@ public class Main{
                 System.out.println("\n\t Главное меню\nВведите add для добавления нового дефекта\n" +
                         "Введите change, чтобы изменить статус дефекта\n" +
                         "Введите list, чтобы вывести список дефектов\n" +
+                        "Введите stat, чтобы вывести статистику\n" +
                         "Введите quit для выхода из прогруммы ");
                 String selectionInTheMainMenu = scanner.nextLine();
 
                 if (selectionInTheMainMenu.equals("add")) {
-                    addDefect(repository,scanner);
+                    addDefect(repository, scanner);
                 } else if (selectionInTheMainMenu.equals("change")) {
-                    changeStatusOfDefect(repository,scanner);
+                    changeStatusOfDefect(repository, scanner);
                 } else if (selectionInTheMainMenu.equals("list")) {
                     repository.forEach((id, defect) -> System.out.println(defect.getInfo()));
+                } else if (selectionInTheMainMenu.equals("stat")) {
+                    getStat(repository);
                 } else if (selectionInTheMainMenu.equals("quit")) {
                     System.out.println("До свидания!");
                     break;
@@ -47,7 +51,7 @@ public class Main{
         if (repository.get(idForChangeStatus) != null) {
             System.out.println("Введите новый статус дефекта: ");
             String newStatus = scanner.nextLine();
-            if(!Transition.checkTransition(repository.get(idForChangeStatus).getStatus().getName(),newStatus)){
+            if (!Transition.checkTransition(repository.get(idForChangeStatus).getStatus().getName(), newStatus)) {
                 System.out.println("Данный переход по статусу не валиден. Статус изменен не будет.");
             } else {
                 repository.get(idForChangeStatus).setStatus(Status.findByName(newStatus));
@@ -117,5 +121,63 @@ public class Main{
             Defect newDefect = new Defect(summary, priority, dayCount);
             repository.put(newDefect.getId(), newDefect);
         }
+    }
+
+    //Вывод статистики
+    private static void getStat(Map<Long, Defect> repository) {
+        int maxCount = repository
+                .values()
+                .stream()
+                .mapToInt(Defect::getDayCount)
+                .max()
+                .orElse(0);
+
+        int minCount = repository
+                .values()
+                .stream()
+                .mapToInt(Defect::getDayCount)
+                .min()
+                .orElse(0);
+
+        double averageCount = repository
+                .values()
+                .stream()
+                .mapToInt(Defect::getDayCount)
+                .average()
+                .orElse(0);
+
+        long countOpen = repository
+                .values()
+                .stream()
+                .filter(defect -> defect.getStatus() == Status.OPEN)
+                .count();
+
+        long countInWork = repository
+                .values()
+                .stream()
+                .filter(defect -> defect.getStatus() == Status.IN_WORK)
+                .count();
+
+        long countRejected = repository
+                .values()
+                .stream()
+                .filter(defect -> defect.getStatus() == Status.REJECTED)
+                .count();
+
+        long countClosed = repository
+                .values()
+                .stream()
+                .filter(defect -> defect.getStatus() == Status.CLOSED)
+                .count();
+
+        System.out.println("Максимальное количество дней на исправление: " + maxCount + "\n" +
+                "Среднее количество дней на исправление: " + averageCount + "\n" +
+                "Минимальное количество дней на исправление: " + minCount + "\n\n" +
+                "Статус    |  Количество дефектов в этом статусе\n" +
+                "------------------------------------------------\n" +
+                "открыт:   | " + countOpen + "\n" +
+                "в работе: | " + countInWork + "\n" +
+                "отклонен: | " + countRejected + "\n" +
+                "закрыт:   | " + countClosed);
     }
 }
