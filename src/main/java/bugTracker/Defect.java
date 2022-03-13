@@ -1,11 +1,11 @@
 package bugTracker;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Defect {
-    private static final AtomicInteger idGenerator = new AtomicInteger(1);
+    private static final AtomicLong idGenerator = new AtomicLong(1000);
 
-    private final Integer ID = idGenerator.getAndIncrement();
+    private final Long ID = idGenerator.getAndIncrement();
     private String summary;
     private String priority;
     private int dayCount;
@@ -28,7 +28,7 @@ public class Defect {
         this.status=Status.OPEN;
     }
 
-    public int getId() { return ID; }
+    public long getId() { return ID; }
     public String getSummary(){
         return summary;
     }
@@ -38,6 +38,7 @@ public class Defect {
     public int getDayCount(){
         return dayCount;
     }
+    public Status getStatus(){ return status; }
 
     public void setSummary(String summary) {
         this.summary = summary;

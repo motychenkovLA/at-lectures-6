@@ -1,11 +1,12 @@
 package bugTracker;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main{
 
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
-            Repository repository = new Repository();
+            Map<Long, Defect> repository = new HashMap<>();
+
             while (true) {
                 System.out.println("\n\t Главное меню\nВведите add для добавления нового дефекта\n" +
                         "Введите change, чтобы изменить статус дефекта\n" +
@@ -18,12 +19,7 @@ public class Main{
                 } else if (selectionInTheMainMenu.equals("change")) {
                     changeStatusOfDefect(repository,scanner);
                 } else if (selectionInTheMainMenu.equals("list")) {
-                    for (Defect j : repository.getAll()){
-                        if (j == null){
-                            break;
-                        }
-                        System.out.println(j.getInfo());
-                    }
+                    repository.forEach((id, defect) -> System.out.println(defect.getInfo()));
                 } else if (selectionInTheMainMenu.equals("quit")) {
                     System.out.println("До свидания!");
                     break;
@@ -37,28 +33,32 @@ public class Main{
     }
 
     //Изменение статуса дефекта. Пункт меню.
-    private static void changeStatusOfDefect(Repository repository, Scanner scanner) {
-        int idForChangeStatus;
+    private static void changeStatusOfDefect(Map<Long, Defect> repository, Scanner scanner) {
+        long idForChangeStatus;
         while (true) {
             try {
                 System.out.println("Введите id дефекта для изменения статуса: ");
-                idForChangeStatus = Integer.parseInt(scanner.nextLine());
+                idForChangeStatus = Long.parseLong(scanner.nextLine());
                 break;
             } catch (NumberFormatException e) {
                 System.out.println("Вводимое значение должно быть числом.");
             }
         }
-        if (repository.getById(idForChangeStatus) != null) {
+        if (repository.get(idForChangeStatus) != null) {
             System.out.println("Введите новый статус дефекта: ");
             String newStatus = scanner.nextLine();
-            repository.changeStatus(idForChangeStatus,newStatus);
+            if(!Transition.checkTransition(repository.get(idForChangeStatus).getStatus().getName(),newStatus)){
+                System.out.println("Данный переход по статусу не валиден. Статус изменен не будет.");
+            } else {
+                repository.get(idForChangeStatus).setStatus(Status.findByName(newStatus));
+            }
         } else {
             System.out.println("Такого id дефекта нет.");
         }
     }
 
     //Добавление нового дефекта. Пункт меню.
-    private static void addDefect(Repository repository, Scanner scanner) {
+    private static void addDefect(Map<Long, Defect> repository, Scanner scanner) {
         String summary;
         Priority priority;
         int dayCount;
@@ -97,7 +97,7 @@ public class Main{
             Attachment attachment = new CommentAttachment(commentAttachment);
 
             Defect newDefect = new Defect(summary, priority, dayCount, attachment);
-            repository.add(newDefect);
+            repository.put(newDefect.getId(), newDefect);
         } else if (attachmentType.equals("2")) {
             while (true) {
                 try {
@@ -111,11 +111,11 @@ public class Main{
             Attachment attachment = new DefectAttachment(defectAttachment);
 
             Defect newDefect = new Defect(summary, priority, dayCount, attachment);
-            repository.add(newDefect);
+            repository.put(newDefect.getId(), newDefect);
         } else {
             System.out.println("Нет такого типа вложения.");
             Defect newDefect = new Defect(summary, priority, dayCount);
-            repository.add(newDefect);
+            repository.put(newDefect.getId(), newDefect);
         }
     }
 }
