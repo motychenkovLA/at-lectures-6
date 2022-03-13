@@ -4,8 +4,6 @@ import java.util.*;
 
 public class Main {
     private static final Map<Long, Defect> defectHashMap = new HashMap<>();
-    static long keyDefect = 0;
-
 
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
@@ -73,21 +71,20 @@ public class Main {
                 System.out.println("Введите комментарий");
                 String comment = scanner.nextLine();
                 CommentAttachment commentAttachment = new CommentAttachment(comment);
-                defectHashMap.put(keyDefect, new Defect(resumeBug, severity, daysToFixBug, commentAttachment));
+                Defect newDefectWithCommentAttachment = new Defect(resumeBug, severity, daysToFixBug, commentAttachment);
+                defectHashMap.put(newDefectWithCommentAttachment.getId(), newDefectWithCommentAttachment);
                 break;
             case "link":
                 System.out.println("Введите ссылку (id) дефекта");
                 long idBug = canParseInt(scanner);
                 DefectAttachment defectAttachment = new DefectAttachment(idBug);
-                defectHashMap.put(keyDefect, new Defect(resumeBug, severity, daysToFixBug, defectAttachment));
+                Defect newDefectWithDefectAttachment = new Defect(resumeBug, severity, daysToFixBug, defectAttachment);
+                defectHashMap.put(newDefectWithDefectAttachment.getId(), newDefectWithDefectAttachment);
                 break;
             default:
                 System.out.println("Не верный тип вложения, повторите попытку");
                 break;
         }
-        keyDefect++;
-        // todo 5 - дефект кладется в мапу по некоему keyDefect за которые отвечает Main,
-        //  а позже извлекается в changeDefectStatus по своему собственному id за который отвечает Defect
     }
 
     public static void displayDefectList() {
@@ -103,25 +100,28 @@ public class Main {
         }
         System.out.println("Введине id дефекта, у которого необходимо поменять статус");
         long idDefectForChangeStatus = canParseInt(scanner);
-        // todo 1 - извлечение стоит до проверки на наличие
-        Defect defectForChangeStatus = defectHashMap.get(idDefectForChangeStatus);
         if (!defectHashMap.containsKey(idDefectForChangeStatus)) {
             System.out.println("Дефекта с таким id не существует");
             return;
         }
+        Defect defectForChangeStatus = defectHashMap.get(idDefectForChangeStatus);
+        Status currentStatus = defectForChangeStatus.getStatus();
+        System.out.println("Текущий статус дефекта: " + currentStatus);
+        List<Status> statusList = Transition.getValidStatus(currentStatus);
+        System.out.println("Список валидных статусов для данного дефекта: " + statusList);
         System.out.println("Введите новый статус дефекта из списка");
         Status[] statuses = Status.values();
         for (Status status : statuses) {
             System.out.println(status.getInRus());
         }
-
-        Status currentStatus = defectForChangeStatus.getStatus();
         String statusInput = scanner.nextLine();
         Status newStatusTo = Status.getStatus(statusInput);
-
-        List<Status> statusList = Transition.getValidStatus(currentStatus);
-        if (newStatusTo == null || !statusList.contains(newStatusTo)) {
+        if (newStatusTo == null) {
             System.out.println("Такого значение не существует");
+            return;
+        }
+        if (!statusList.contains(newStatusTo)) {
+            System.out.println("Данный статус не валиден для данного дефекта");
             return;
         }
         defectForChangeStatus.setStatus(newStatusTo);

@@ -3,6 +3,8 @@ package tracker;
 import java.util.Arrays;
 
 // todo 1 - не используется, можно удалить
+// а можно не удалять, чтобы оставить для себя шпаргалку с методами?
+
 public class Repository  {
     private final Defect[] defectsList;
     private final int maxBugs;
