@@ -23,7 +23,7 @@ public class Main {
                 } else if (selectionInTheMainMenu.equals("list")) {
                     repository.forEach((id, defect) -> System.out.println(defect.getInfo()));
                 } else if (selectionInTheMainMenu.equals("stat")) {
-                    getStat(repository);
+                    printStat(repository);
                 } else if (selectionInTheMainMenu.equals("quit")) {
                     System.out.println("До свидания!");
                     break;
@@ -124,7 +124,7 @@ public class Main {
     }
 
     //Вывод статистики
-    private static void getStat(Map<Long, Defect> repository) {
+    private static void printStat(Map<Long, Defect> repository) {
         int maxCount = repository
                 .values()
                 .stream()
