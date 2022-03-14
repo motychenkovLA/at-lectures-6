@@ -30,9 +30,7 @@ public class Main {
             }
         }
     }
-
-    // todo - private
-    public static int canParseInt(Scanner scanner) {
+    private static int canParseInt(Scanner scanner) {
         while (true) {
             try {
                 return Integer.parseInt(scanner.nextLine());
@@ -41,9 +39,7 @@ public class Main {
             }
         }
     }
-
-    // todo - private
-    public static void addDefect(Scanner scanner) {
+    private static void addDefect(Scanner scanner) {
         System.out.println("Введите резюме дефекта");
         String resumeBug = scanner.nextLine();
 
@@ -67,7 +63,6 @@ public class Main {
         // Пока не нашла решения как это сделать
 
         String attachmentBug = scanner.nextLine();
-
         switch (attachmentBug) {
             case "comment":
                 System.out.println("Введите комментарий");
@@ -88,21 +83,17 @@ public class Main {
                 break;
         }
     }
-
-    // todo - private
-    public static void displayDefectList() {
+    private static void displayDefectList() {
         for (Defect defect : defectHashMap.values()) {
             System.out.println(defect);
         }
     }
-
-    // todo - private
-    public static void changeDefectStatus(Scanner scanner) {
+    private static void changeDefectStatus(Scanner scanner) {
         if (defectHashMap.isEmpty()) {
             System.out.println("В репозитории нет дефектов");
             return;
         }
-        System.out.println("Введине id дефекта, у которого необходимо поменять статус");
+        System.out.println("Введите id дефекта, у которого необходимо поменять статус");
         long idDefectForChangeStatus = canParseInt(scanner);
         if (!defectHashMap.containsKey(idDefectForChangeStatus)) {
             System.out.println("Дефекта с таким id не существует");
@@ -113,12 +104,6 @@ public class Main {
         System.out.println("Текущий статус дефекта: " + currentStatus);
         List<Status> statusList = Transition.getValidStatus(currentStatus);
         System.out.println("Список валидных статусов для данного дефекта: " + statusList);
-        System.out.println("Введите новый статус дефекта из списка");
-        // todo 1 - зачем выводить все возможные, если уже вывели список валидных?
-        Status[] statuses = Status.values();
-        for (Status status : statuses) {
-            System.out.println(status.getInRus());
-        }
         String statusInput = scanner.nextLine();
         Status newStatusTo = Status.getStatus(statusInput);
         if (newStatusTo == null) {
