@@ -17,6 +17,7 @@ public class Transition {
     }
 
     public static boolean dataValidation(Status oldStatus, Status newStatus) {
+        // todo 3 - Set.contains
         for (Transition transition: transitions) {
             if (transition.from.equals(oldStatus) && transition.to.equals(newStatus)) {
                 return true;
