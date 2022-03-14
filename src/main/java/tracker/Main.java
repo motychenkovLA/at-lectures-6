@@ -1,6 +1,8 @@
 package tracker;
 
 import java.util.*;
+//import java.util.stream.IntStream;
+//import java.util.stream.Stream;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
@@ -14,13 +16,12 @@ public class Main {
         try (Scanner console = new Scanner(System.in)) {
             int maxDefects = takeInt(console, "Введите максимальное количество дефектов:");
             Map<Long, Defect> map = new HashMap<>();
-            Set<Transition> transitions = new HashSet<>(); // todo 3 - ничего не делает
             while (run) {
                 System.out.println("Чтобы добавить новый дефект, введите \"add\". Чтобы вывести список дефектов, введите \"list\". Введите \"change\", чтобы изменить статус. Чтобы выйти, введите \"quit\"");
                 String action = console.nextLine();
                 switch (action) {
                     case "change":
-                        change(console, map, transitions);
+                        change(console, map);
                         break;
 
                     case "list":
@@ -29,8 +30,10 @@ public class Main {
                         break;
                     case "add":
                         add(console, map, maxDefects);
-
                         break;
+//                    case "stats":
+//                        stats(console, map, maxDefects);
+//                        break;
                     case "quit":
                         run = false;
                         break;
@@ -81,7 +84,7 @@ public class Main {
         }
     }
 
-    private static void change(Scanner console, Map<Long, Defect> map, Set<Transition> transitions) {
+    private static void change(Scanner console, Map<Long, Defect> map) {
         Defect defect;
         while (true) {
             defect = map.get((takeLong(console, "Введите Id дефекта:")));
@@ -103,13 +106,31 @@ public class Main {
                 System.out.println("Невозможно перевести дефект в этот статус");
                 continue;
             }
-            transitions.add(new Transition(defect.getStatus(), newStatus));
             defect.setStatus(newStatus);
             break;
 
         }
 
     }
+//    private static void stats (Scanner console, Map<Long, Defect> map, int maxDefects) {
+//        System.out.println("Максимальное количество дней на исправление дефекта - " + );
+//        System.out.println("Среднее количество дней на исправление дефекта - " + );
+//        System.out.println("Минимальное количество дней на исправление дефекта - " + );
+//        Stream stream = map.entrySet().stream();
+//        for (map:
+//             ) {
+//
+//        }
+//        for (Status status: Status.values()) {
+//            System.out.println("Статус " + status + "количество дефектов: " + );
+//        }
+//        for (int i = 0; i < Status.values().length; i++) {
+//
+//        }
+//        Stream.of(Status.values()).filter(x -> x < 90).map(x -> x + 10)
+//                .limit(3).forEach(System.out::print);
+//
+//    }
 
     private static int takeInt(Scanner console, String notification) {
         while (true) {
