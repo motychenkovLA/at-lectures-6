@@ -31,6 +31,7 @@ public class Main {
         }
     }
 
+    // todo - private
     public static int canParseInt(Scanner scanner) {
         while (true) {
             try {
@@ -41,6 +42,7 @@ public class Main {
         }
     }
 
+    // todo - private
     public static void addDefect(Scanner scanner) {
         System.out.println("Введите резюме дефекта");
         String resumeBug = scanner.nextLine();
@@ -87,12 +89,14 @@ public class Main {
         }
     }
 
+    // todo - private
     public static void displayDefectList() {
         for (Defect defect : defectHashMap.values()) {
             System.out.println(defect);
         }
     }
 
+    // todo - private
     public static void changeDefectStatus(Scanner scanner) {
         if (defectHashMap.isEmpty()) {
             System.out.println("В репозитории нет дефектов");
@@ -110,6 +114,7 @@ public class Main {
         List<Status> statusList = Transition.getValidStatus(currentStatus);
         System.out.println("Список валидных статусов для данного дефекта: " + statusList);
         System.out.println("Введите новый статус дефекта из списка");
+        // todo 1 - зачем выводить все возможные, если уже вывели список валидных?
         Status[] statuses = Status.values();
         for (Status status : statuses) {
             System.out.println(status.getInRus());
