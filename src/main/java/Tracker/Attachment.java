@@ -1,12 +1,10 @@
 package Tracker;
 
-public abstract class Attachment {
+public class Attachment {
 
-    //здесь это не нужно, поля необходимо перенести в наследники, для коментария String, для дефекта int - исправлено
-    //в этом конструкторе надобность также отпадает, у каждого наследника свой конструктор - исправлено
 
     public String asString() {
-        return "";
+        return "Вложений нет";
     }
 
 }

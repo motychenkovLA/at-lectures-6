@@ -1,6 +1,5 @@
 package Tracker;
 
-import java.lang.annotation.Target;
 
 public class Repository {
     private int counter = 0;                          //счётчик
@@ -25,15 +24,23 @@ public class Repository {
         return filledDefects;
     }
 
-    public int getCounter() {                   //взять количество дефектов
-        return counter;
+
+    public boolean checkId(int id){
+        boolean found = false;
+        for (int i = 0; i < counter && !found; i++) {
+           found = defects[i].getId() == id;
+        }
+        return found;
     }
 
-    boolean equals (int id, int counter){       //сравнить id дефектов
-        return defects[counter].getId() == id;
+    public int getPosById(int id) {
+        int position = 0;
+        for (int i = 0; i < counter; i++) {
+            if (defects[i].getId() == id) position = i;
+        }
+        return position;
     }
-
-    void changeStatus(int counter, String status){ //смена статуса дефекта
-        defects[counter].setStatus(status);
+        void changeStatus ( int counter, DefectStatus status){ //смена статуса дефекта
+            defects[counter].setStatus(status);
+        }
     }
-}
