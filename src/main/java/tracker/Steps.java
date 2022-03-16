@@ -2,15 +2,19 @@ package tracker;
 
 import java.util.Scanner;
 
-public class StepAdd {
-    public static void addDefect() {
-        Scanner scanner = new Scanner(System.in);
+public class Steps {
+    public static void addDefect(Scanner scanner) {
         Defect def;
         System.out.println("Введите резюме дефекта");
         String name = scanner.nextLine();
         System.out.println("Введите критичность дефекта из списка: \n BLOCKER \n CRITICAL\n MAJOR \n" +
                 " MINOR\n TRIVIAL");
-        Criticality criticality = Criticality.valueOf(scanner.nextLine());
+        String critical = scanner.nextLine();
+        Criticality criticality = Criticality.getCriticality(critical);
+        if (criticality == null) {
+            System.out.println("Введена несуществующая критичность");
+            return;
+        }
         System.out.println("Выберите тип вложения: \n для добавления комментария введите comment \n " +
                 "для добавления ссылки на другой дефект введите link");
         String attachment = scanner.nextLine();
@@ -20,16 +24,32 @@ public class StepAdd {
             def = new Defect(name, criticality, attCom);
         } else if (attachment.equals("link")) {
             System.out.println("Введите ссылку на дефект в виде ID этого дефекта");
-            DefectAttachment attDef = new DefectAttachment(scanner.nextInt());
-            scanner.nextLine();
+            int id;
+            while (true) {
+                try {
+                    id = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Неверный формат.Введите еще раз ссылку на дефект в виде ID этого дефекта");
+                }
+            }
+            DefectAttachment attDef = new DefectAttachment(id);
             def = new Defect(name, criticality, attDef);
         } else {
             System.out.println("Введена несуществующая операция \n");
             return;
         }
         System.out.println("Введите ожидаемое количество дней на исправление дефекта");
-        def.setDaysNumber(scanner.nextInt());
-        scanner.nextLine();
+        int i;
+        while (true) {
+            try {
+                i = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Неверный формат.Введите ожидаемое количество дней на исправление дефекта еще раз");
+            }
+        }
+        def.setDaysNumber(i);
         Repository.add(def);
     }
 }
