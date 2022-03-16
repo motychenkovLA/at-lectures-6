@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 public class Main {
     private static final Map<Long, Defect> defectHashMap = new HashMap<>();
+    // todo 1 - не используется
     private static final Collection<Defect> defectList = defectHashMap.values();
 
     public static void main(String[] args) {
@@ -134,9 +135,11 @@ public class Main {
     }
 
     private static void getStatistic() {
+        // todo 1 - три раза пересчитывается IntSummaryStatistics
         System.out.println("Минимальное кол-во дней на исправление дефектов: " + getStatisticByDaysToFix().getMin());
         System.out.println("Максимальное кол-во дней на исправление дефектов: " + getStatisticByDaysToFix().getMax());
         System.out.println("Среднее кол-во дней на исправление дефектов: " + getStatisticByDaysToFix().getAverage());
+        // todo 1 - не отформатированный вывод статистики
         System.out.println("Статистика по статусам заведенных дефектов: " + getStatisticByStatus());
     }
 
