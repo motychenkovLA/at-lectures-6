@@ -65,12 +65,13 @@ public class Main {
 
         if (typeInclosure != 1) {
 
-            DefectAttachment defect = new DefectAttachment(takeLong(console, "Введите id дефекта"));
-            map.put(++id, new Defect(id, resume, critical, numberOfDays, defect));
+            DefectAttachment defectAttachment = new DefectAttachment(takeLong(console, "Введите id дефекта"));
+            Defect defect = new Defect(resume, critical, numberOfDays, defectAttachment);
+            map.put(defect.getId(), defect);
 
         }
         System.out.println("Введите комментарий");
-        map.put(++id, new Defect(id, resume, critical, numberOfDays, new CommentAttachment(console.nextLine())));
+        map.put(++id, new Defect(resume, critical, numberOfDays, new CommentAttachment(console.nextLine())));
 
 
     }

@@ -8,13 +8,13 @@ public class Defect {
     private Severity critical;
     private Status status;
     private int numberOfDays;
-    private final long id;
+    private int counterId=0;
     private Attachment attachment;
+    private long id;
 
 
-    // todo 5++ - в ТЗ нет ничего о том что дефект должен перестать выдавать себе id
-    public Defect(Long id, String resume, Severity critical, int numberOfDays, Attachment attachment) {
-        this.id = id;
+    public Defect(String resume, Severity critical, int numberOfDays, Attachment attachment) {
+        id = ++counterId;
         this.resume = resume;
         this.critical = critical;
         this.numberOfDays = numberOfDays;
@@ -50,5 +50,9 @@ public class Defect {
     @Override
     public int hashCode() {
         return Objects.hash(resume, critical, status, numberOfDays, id, attachment);
+    }
+
+    public long getId() {
+        return id;
     }
 }
