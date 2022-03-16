@@ -2,6 +2,7 @@ package tracker;
 
 import java.util.*;
 import java.util.stream.Collectors;
+// todo 0 - комменты
 //import java.util.stream.IntStream;
 //import java.util.stream.Stream;
 
@@ -68,6 +69,7 @@ public class Main {
         if (typeInclosure != 1) {
 
             DefectAttachment defect = new DefectAttachment(takeLong(console, "Введите id дефекта"));
+            // todo 3 - дефект кладется в мапу по независимому счетчику из Main, но позже извлекается по id
             map.put(++id, new Defect(id, resume, critical, numberOfDays, defect));
 
         }
@@ -116,6 +118,8 @@ public class Main {
 
     private static void stats(Map<Long, Defect> map) {
 
+        // todo 1 - слишком длинные выражения для одной строки
+        // todo 1 - повторяющиеся выражения для мин\макс\сред
         System.out.println("Максимальное количество дней на исправление дефекта - " + map.values().stream().collect(Collectors.summarizingInt(Defect::getNumberOfDays)).getMax());
         System.out.println("Среднее количество дней на исправление дефекта - " + map.values().stream().collect(Collectors.summarizingInt(Defect::getNumberOfDays)).getAverage());
         System.out.println("Минимальное количество дней на исправление дефекта - " + map.values().stream().collect(Collectors.summarizingInt(Defect::getNumberOfDays)).getMin());

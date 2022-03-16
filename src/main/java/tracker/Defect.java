@@ -12,7 +12,7 @@ public class Defect {
     private Attachment attachment;
 
 
-    // todo 5+ - в ТЗ нет ничего о том что дефект должен перестать выдавать себе id
+    // todo 5++ - в ТЗ нет ничего о том что дефект должен перестать выдавать себе id
     public Defect(Long id, String resume, Severity critical, int numberOfDays, Attachment attachment) {
         this.id = id;
         this.resume = resume;
