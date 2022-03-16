@@ -1,6 +1,7 @@
 package tracker;
 
 import java.util.*;
+import java.util.stream.Collectors;
 //import java.util.stream.IntStream;
 //import java.util.stream.Stream;
 
@@ -17,7 +18,7 @@ public class Main {
             int maxDefects = takeInt(console, "Введите максимальное количество дефектов:");
             Map<Long, Defect> map = new HashMap<>();
             while (run) {
-                System.out.println("Чтобы добавить новый дефект, введите \"add\". Чтобы вывести список дефектов, введите \"list\". Введите \"change\", чтобы изменить статус. Чтобы выйти, введите \"quit\"");
+                System.out.println("Чтобы добавить новый дефект, введите \"add\". Чтобы вывести список дефектов, введите \"list\". Введите \"change\", чтобы изменить статус. Введите \"stats\", чтобы вывести статистику. Чтобы выйти, введите \"quit\"");
                 String action = console.nextLine();
                 switch (action) {
                     case "change":
@@ -31,9 +32,9 @@ public class Main {
                     case "add":
                         add(console, map, maxDefects);
                         break;
-//                    case "stats":
-//                        stats(console, map, maxDefects);
-//                        break;
+                    case "stats":
+                        stats(map);
+                        break;
                     case "quit":
                         run = false;
                         break;
@@ -112,25 +113,19 @@ public class Main {
         }
 
     }
-//    private static void stats (Scanner console, Map<Long, Defect> map, int maxDefects) {
-//        System.out.println("Максимальное количество дней на исправление дефекта - " + );
-//        System.out.println("Среднее количество дней на исправление дефекта - " + );
-//        System.out.println("Минимальное количество дней на исправление дефекта - " + );
-//        Stream stream = map.entrySet().stream();
-//        for (map:
-//             ) {
-//
-//        }
-//        for (Status status: Status.values()) {
-//            System.out.println("Статус " + status + "количество дефектов: " + );
-//        }
-//        for (int i = 0; i < Status.values().length; i++) {
-//
-//        }
-//        Stream.of(Status.values()).filter(x -> x < 90).map(x -> x + 10)
-//                .limit(3).forEach(System.out::print);
-//
-//    }
+
+    private static void stats(Map<Long, Defect> map) {
+
+        System.out.println("Максимальное количество дней на исправление дефекта - " + map.values().stream().collect(Collectors.summarizingInt(Defect::getNumberOfDays)).getMax());
+        System.out.println("Среднее количество дней на исправление дефекта - " + map.values().stream().collect(Collectors.summarizingInt(Defect::getNumberOfDays)).getAverage());
+        System.out.println("Минимальное количество дней на исправление дефекта - " + map.values().stream().collect(Collectors.summarizingInt(Defect::getNumberOfDays)).getMin());
+        map.values().stream().collect(Collectors.groupingBy(Defect::getStatus, Collectors.counting())).forEach((key, value) -> {
+            System.out.printf("В статусе %s %d дефектов", key, value);
+            System.out.println();
+        });
+
+
+    }
 
     private static int takeInt(Scanner console, String notification) {
         while (true) {

@@ -27,9 +27,8 @@ public class Defect {
 
     }
 
-    public long getId() {
-        return id;
-
+    public int getNumberOfDays() {
+        return numberOfDays;
     }
 
     public void setStatus(Status status) {
