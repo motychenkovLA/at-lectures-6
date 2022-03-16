@@ -2,9 +2,6 @@ package tracker;
 
 import java.util.*;
 import java.util.stream.Collectors;
-// todo 0 - комменты
-//import java.util.stream.IntStream;
-//import java.util.stream.Stream;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
@@ -69,7 +66,6 @@ public class Main {
         if (typeInclosure != 1) {
 
             DefectAttachment defect = new DefectAttachment(takeLong(console, "Введите id дефекта"));
-            // todo 3 - дефект кладется в мапу по независимому счетчику из Main, но позже извлекается по id
             map.put(++id, new Defect(id, resume, critical, numberOfDays, defect));
 
         }
@@ -81,7 +77,7 @@ public class Main {
 
     private static void list(Map<Long, Defect> map) {
 
-        for (long i = 1; i <= map.size(); i++) {
+        for (long i = 1; i <= id; i++) {
             Defect defect = map.get(i);
             System.out.println(defect.getDefectInfo());
         }
@@ -118,12 +114,12 @@ public class Main {
 
     private static void stats(Map<Long, Defect> map) {
 
-        // todo 1 - слишком длинные выражения для одной строки
-        // todo 1 - повторяющиеся выражения для мин\макс\сред
-        System.out.println("Максимальное количество дней на исправление дефекта - " + map.values().stream().collect(Collectors.summarizingInt(Defect::getNumberOfDays)).getMax());
-        System.out.println("Среднее количество дней на исправление дефекта - " + map.values().stream().collect(Collectors.summarizingInt(Defect::getNumberOfDays)).getAverage());
-        System.out.println("Минимальное количество дней на исправление дефекта - " + map.values().stream().collect(Collectors.summarizingInt(Defect::getNumberOfDays)).getMin());
-        map.values().stream().collect(Collectors.groupingBy(Defect::getStatus, Collectors.counting())).forEach((key, value) -> {
+        Map<Status, Long> statistic = map.values().stream().collect(Collectors.groupingBy(Defect::getStatus, Collectors.counting()));
+        IntSummaryStatistics numberOfDays = map.values().stream().collect(Collectors.summarizingInt(Defect::getNumberOfDays));
+        System.out.println("Максимальное количество дней на исправление дефекта - " + numberOfDays.getMax());
+        System.out.println("Среднее количество дней на исправление дефекта - " + numberOfDays.getAverage());
+        System.out.println("Минимальное количество дней на исправление дефекта - " + numberOfDays.getMin());
+        statistic.forEach((key, value) -> {
             System.out.printf("В статусе %s %d дефектов", key, value);
             System.out.println();
         });
