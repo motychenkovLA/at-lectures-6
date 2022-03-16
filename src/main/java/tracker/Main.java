@@ -2,12 +2,9 @@ package tracker;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Main {
     private static final Map<Long, Defect> defectHashMap = new HashMap<>();
-    // todo 1 - не используется
-    private static final Collection<Defect> defectList = defectHashMap.values();
 
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
@@ -129,18 +126,22 @@ public class Main {
                 .collect(Collectors.summarizingInt(Defect::getDaysToFix));
     }
 
-    private static Map<Status, Long> getStatisticByStatus() {
+    private static Map<Status, Long> getStatisticByStatuses() {
         return defectHashMap.values().stream()
                 .collect(Collectors.groupingBy(Defect :: getStatus, Collectors.counting()));
     }
 
     private static void getStatistic() {
-        // todo 1 - три раза пересчитывается IntSummaryStatistics
-        System.out.println("Минимальное кол-во дней на исправление дефектов: " + getStatisticByDaysToFix().getMin());
-        System.out.println("Максимальное кол-во дней на исправление дефектов: " + getStatisticByDaysToFix().getMax());
-        System.out.println("Среднее кол-во дней на исправление дефектов: " + getStatisticByDaysToFix().getAverage());
-        // todo 1 - не отформатированный вывод статистики
-        System.out.println("Статистика по статусам заведенных дефектов: " + getStatisticByStatus());
+        IntSummaryStatistics statisticsByDaysToFix = getStatisticByDaysToFix();
+        System.out.println("Минимальное кол-во дней на исправление дефектов: " + statisticsByDaysToFix.getMin());
+        System.out.println("Максимальное кол-во дней на исправление дефектов: " + statisticsByDaysToFix.getMax());
+        System.out.println("Среднее кол-во дней на исправление дефектов: " + statisticsByDaysToFix.getAverage());
+        System.out.println();
+        System.out.println("Статистика по статусам заведенных дефектов: ");
+        for (Map.Entry<Status, Long> statusMap : getStatisticByStatuses().entrySet()) {
+            System.out.println("Статус: " + statusMap.getKey() + " - " + statusMap.getValue());
+        }
+        System.out.println();
     }
 
 }
