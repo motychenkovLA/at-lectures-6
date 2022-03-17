@@ -24,17 +24,11 @@ public class Transition {
 
     public static void TransitionValidate(DefectStatus from, DefectStatus to, long id, Repository repository){
         Transition potentialTransition = new Transition(from, to);
-        boolean valid = false;
-        for (Transition transition : transitionSet) {
-            if (transition.equals(potentialTransition)){
-                repository.changeStatus(id, to);
-                valid = true;
-                System.out.println("Статус успешно изменён с " + from.ruName + " на " + to.ruName);
-                break;
-            }
+        if (transitionSet.contains(potentialTransition)){
+            repository.changeStatus(id, to);
+            System.out.println("Статус успешно изменён с " + from.ruName + " на " + to.ruName);
         }
-        if (!valid)  System.out.println("Нельзя изменить текущий статус c " + from.ruName + " на " + to.ruName);
-
+        else System.out.println("Нельзя изменить текущий статус c " + from.ruName + " на " + to.ruName);
     }
 
     @Override
