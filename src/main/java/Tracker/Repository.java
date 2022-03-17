@@ -1,46 +1,33 @@
 package Tracker;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Repository {
-    private int counter = 0;                          //счётчик
-    private int size = 10;                            //размер массива
-    private Defect[] defects = new Defect[size];
+
+    Map<Long, Defect> defectMap = new HashMap<>();
 
     void add(Defect defect) {                         //костыль безразмерного массива
-        if (counter == defects.length) {
-            Defect[] array;
-            array = defects;
-            size = size * 2;
-            defects = new Defect[size];
-            System.arraycopy(array, 0, defects, 0, array.length);
+        defectMap.put(defect.getId(), defect);
+    }
+
+    void getAll() {
+        for (Defect value : defectMap.values()) {
+            System.out.println(value.getInfo());
         }
-        defects[counter] = defect;
-        counter++;
-    }
-
-    Defect[] getAll() {
-        Defect[] filledDefects = new Defect[counter];
-        System.arraycopy(defects,0, filledDefects, 0, filledDefects.length);  //беру только заполненные дефекты
-        return filledDefects;
     }
 
 
-    public boolean checkId(int id){
-        boolean found = false;
-        for (int i = 0; i < counter && !found; i++) {
-           found = defects[i].getId() == id;
-        }
-        return found;
+    public boolean checkId(long id){
+        return defectMap.containsKey(id);
     }
 
-    public int getPosById(int id) {
-        int position = 0;
-        for (int i = 0; i < counter; i++) {
-            if (defects[i].getId() == id) position = i;
-        }
-        return position;
+    public DefectStatus getStatus(long id){
+       return defectMap.get(id).getStatus();
     }
-        void changeStatus ( int counter, DefectStatus status){ //смена статуса дефекта
-            defects[counter].setStatus(status);
+
+        void changeStatus (long id, DefectStatus status){ //смена статуса дефекта
+            defectMap.get(id).setStatus(status);
         }
     }

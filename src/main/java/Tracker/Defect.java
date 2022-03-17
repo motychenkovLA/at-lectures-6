@@ -3,8 +3,8 @@ package Tracker;
 import java.util.Objects;
 
 public class Defect {
-    private static int stepId = 1;              //начальное значение и шаг Id
-    private final Integer id;                       //порядковый номер дефекта
+    private static long stepId = 1;              //начальное значение и шаг Id
+    private final long id;                       //порядковый номер дефекта
     private final String resume;                //описание дефекта
     private final DefectPriority priority;      //критичность дефекта
     private final int daysToFix;                //время на иправление
@@ -24,13 +24,19 @@ public class Defect {
     }
 
 
-    int getId() {
+    long getId() {
         return this.id;
+    }
+
+    public DefectStatus getStatus() {
+        return status;
     }
 
     public void setStatus(DefectStatus status) {
         this.status = status;
     }
+
+
 
     String getInfo() {
         return "ID:" + id

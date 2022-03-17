@@ -1,14 +1,21 @@
 package Tracker;
 
 
+//        заменить класс Repository на Map<Long, Defect> +
+//        добавить класс Transition представляющий валидный переход между статусами дефекта с полями from и to +
+//        добавить Set<Transition> для хранения всех валидных переходов между статусами +
+//        при смене статуса пользователем проверять валидность +
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
         Repository repository = new Repository();
-        Scanner scanner = new Scanner(System.in);
         boolean isRun = true;
+
+
+        try(Scanner scanner = new Scanner(System.in)) {
 
             while (isRun) {
                 System.out.println("Выберите действие(укажите номер пункта меню): \n" +
@@ -25,11 +32,11 @@ public class Main {
                         break;
                     }
                     case 2: {
-                       defectOutput(repository);
+                        defectOutput(repository);
                         break;
                     }
                     case 3: {
-                        changeStatus(scanner,repository);
+                        changeStatus(scanner, repository);
                         break;
                     }
                     case 4: {
@@ -44,6 +51,7 @@ public class Main {
                 }
             }
         }
+    }
 
 
     public static void addDefect(Scanner scanner, Repository repository){
@@ -121,9 +129,7 @@ public class Main {
 
     public static void defectOutput(Repository repository){
         System.out.println("Список дефектов:");
-        for (Defect defect : repository.getAll()) {
-            System.out.println(defect.getInfo());       //выводим дефекты
-        }
+        repository.getAll();
     }
 
     public static void changeStatus(Scanner scanner, Repository repository){
@@ -133,18 +139,22 @@ public class Main {
             System.out.println("Выберите статус дефекта:\n" +   //меняем статус
                     "1." + DefectStatus.NEW.ruName + "\n" +
                     "2." + DefectStatus.OPEN.ruName + "\n" +
-                    "3." + DefectStatus.CLOSED.ruName);
+                    "3." + DefectStatus.IN_WORK.ruName + "\n" +
+                    "4." + DefectStatus.CLOSED.ruName);
            int menuItem = checkInt(scanner);
 
             switch (menuItem) {
                 case 1:
-                    repository.changeStatus(repository.getPosById(id), DefectStatus.NEW);
-                    break;
+                   Transition.TransitionValidate(repository.getStatus(id), DefectStatus.NEW, id, repository);
+                   break;
                 case 2:
-                    repository.changeStatus(repository.getPosById(id), DefectStatus.OPEN);
+                    Transition.TransitionValidate(repository.getStatus(id), DefectStatus.OPEN, id, repository);
                     break;
                 case 3:
-                    repository.changeStatus(repository.getPosById(id), DefectStatus.CLOSED);
+                    Transition.TransitionValidate(repository.getStatus(id), DefectStatus.IN_WORK, id, repository);
+                    break;
+                case 4:
+                    Transition.TransitionValidate(repository.getStatus(id), DefectStatus.CLOSED, id, repository);
                     break;
                 default:
                     System.out.println("Нет такого пункта меню. Статус не был изменён");
