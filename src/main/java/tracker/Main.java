@@ -8,7 +8,6 @@ import static java.lang.Long.parseLong;
 
 
 public class Main {
-    static long id = 0;
 
     public static void main(String[] args) {
         boolean run = true;
@@ -62,24 +61,20 @@ public class Main {
         }
         int numberOfDays = takeInt(console, "Введите ожидаемое количество дней на исправление дефекта");
         int typeInclosure = takeInt(console, "Введите номер типа вложения: 1 - комментарий, 2 - ссылка на другой дефект");
-
+        Attachment attachment;
         if (typeInclosure != 1) {
-
-            DefectAttachment defectAttachment = new DefectAttachment(takeLong(console, "Введите id дефекта"));
-            Defect defect = new Defect(resume, critical, numberOfDays, defectAttachment);
-            map.put(defect.getId(), defect);
-
+            attachment = new DefectAttachment(takeLong(console, "Введите id дефекта"));
+        } else {
+            System.out.println("Введите комментарий");
+            attachment = new CommentAttachment(console.nextLine());
         }
-        System.out.println("Введите комментарий");
-        map.put(++id, new Defect(resume, critical, numberOfDays, new CommentAttachment(console.nextLine())));
-
+        Defect defect = new Defect(resume, critical, numberOfDays, attachment);
+        map.put(defect.getId(), defect);
 
     }
 
     private static void list(Map<Long, Defect> map) {
-
-        for (long i = 1; i <= id; i++) {
-            Defect defect = map.get(i);
+        for (Defect defect : map.values()) {
             System.out.println(defect.getDefectInfo());
         }
     }

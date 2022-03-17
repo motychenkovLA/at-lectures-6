@@ -8,7 +8,7 @@ public class Defect {
     private Severity critical;
     private Status status;
     private int numberOfDays;
-    private int counterId=0;
+    private static int counterId=0;
     private Attachment attachment;
     private long id;
 
