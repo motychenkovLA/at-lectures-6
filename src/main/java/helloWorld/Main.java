@@ -1,12 +1,11 @@
 package helloWorld;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 class Main {
 
-    public static Criticality setCriticality() {
-        Scanner scanner = new Scanner(System.in);
+    public static Criticality getCriticalityFromConsole(Scanner scanner) {
+
         Boolean completed = false;
         Criticality critical = null;
 
@@ -16,8 +15,10 @@ class Main {
                 String criticalString = scanner.nextLine();
                 critical = Criticality.valueOf(criticalString);
                 completed = true;
-            } catch (Exception ex) {
+
+            } catch (IllegalArgumentException ex) {
                 System.out.println("Введено некорректное значение. Повторите ввод");
+
             }
         }
 
@@ -25,8 +26,8 @@ class Main {
     }
 
 
-    public static Command setCommand() {
-        Scanner scanner = new Scanner(System.in);
+    public static Command getCommandFromConsole(Scanner scanner) {
+
         Boolean completed = false;
         Command command = null;
 
@@ -36,8 +37,10 @@ class Main {
                 String inputCommand = scanner.nextLine();
                 command = Command.valueOf(inputCommand);
                 completed = true;
-            } catch (Exception ex) {
+
+            } catch (IllegalArgumentException ex) {
                 System.out.println("Введена неизвестная команда");
+
             }
         }
 
@@ -45,8 +48,8 @@ class Main {
     }
 
 
-    public static Status setStatus() {
-        Scanner scanner = new Scanner(System.in);
+    public static Status getStatusFromConsole(Scanner scanner) {
+
         Boolean completed = false;
         Status status = null;
 
@@ -56,16 +59,18 @@ class Main {
                 String inputStatus = scanner.nextLine();
                 status = Status.valueOf(inputStatus);
                 completed = true;
-            } catch (Exception ex) {
+
+            } catch (IllegalArgumentException e) {
                 System.out.println("Статус не найден. Повторите ввод.");
+
             }
         }
 
         return status;
     }
 
-    public static Integer setDays() {
-        Scanner scanner = new Scanner(System.in);
+    public static Integer getDaysFromConsole(Scanner scanner) {
+
         Boolean completed = false;
         Integer days = null;
 
@@ -75,28 +80,28 @@ class Main {
                 String daysString = scanner.nextLine();
                 days = Integer.parseInt(daysString);
                 completed = true;
-            } catch (Exception ex) {
+            } catch (NumberFormatException ex) {
 
                 System.out.println("Введено некорректное значение. Повторите ввод");
+
             }
         }
         return days;
     }
 
 
-    public static void addDefect() {
-        Scanner scanner = new Scanner(System.in);
+    public static void addDefect(Scanner scanner) {
+
         System.out.println("Введите резюме дефекта");
         String name = scanner.nextLine();
 
 
-        Status status;
         Defect def = new Defect(name);
 
-        def.setCritical(setCriticality());
+        def.setCritical(getCriticalityFromConsole(scanner));
 
 
-        def.setDaysNumber(setDays());
+        def.setDaysNumber(getDaysFromConsole(scanner));
         System.out.println("Выберите тип вложения: comment или link");
 
         String attachmentOfBug = scanner.nextLine();
@@ -125,44 +130,45 @@ class Main {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            Command operation = setCommand();
+        try (Scanner scanner = new Scanner(System.in)) {
+            while (true) {
+                Command operation = getCommandFromConsole(scanner);
 
-            switch (operation) {
+                switch (operation) {
 
-                case CHANGE:
-                    long id;
-                    while (true) {
-                        System.out.println("Введите Id дефекта:");
-                        id = scanner.nextLong();
-                        scanner.nextLine();
-                        if (Repository.getDefect(id) == null) {
-                            System.out.println("Нет дефекта с таким Id");
-                        } else {
-                            Repository.getDefect(id).setStatus(setStatus());
-                            break;
+                    case CHANGE:
+                        long id;
+                        while (true) {
+                            System.out.println("Введите Id дефекта:");
+                            id = scanner.nextLong();
+                            scanner.nextLine();
+                            if (Repository.getDefect(id) == null) {
+                                System.out.println("Нет дефекта с таким Id");
+                            } else {
+                                Repository.getDefect(id).setStatus(getStatusFromConsole(scanner));
+                                break;
+                            }
                         }
-                    }
-                    break;
+                        break;
 
 
-                case ADD:
-                    addDefect();
-                    break;
-                case LIST:
-                    for (int i = 0; i < Repository.countOfBug; i++) {
-                        System.out.println(Repository.getAll()[i].getInfo());
-                    }
-                    break;
-                case QUIT:
-                    return;
-                default:
-                    System.out.println("Введена неизвестная команда\n");
+                    case ADD:
+                        addDefect(scanner);
+                        break;
+                    case LIST:
+                        for (Defect defect : Repository.getAll()) {
+                           if (defect!=null) {System.out.println(defect);}
+
+                        }
+                        break;
+                    case QUIT:
+                        return;
+                    default:
+                        System.out.println("Введена неизвестная команда\n");
 
 
+                }
             }
         }
     }
 }
-

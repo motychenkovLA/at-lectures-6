@@ -69,11 +69,12 @@ public class Defect {
         else this.daysNumber = daysnumber;
     }
 
-    String getInfo() {
+    @Override
+    public String toString() {
         return id + " | " + description + " |  " + critical + " | " + daysNumber + " | " + "Вложение: " + attachment + " | " + status;
     }
 }
 
-
-
-
+//реализовать метод хэшкод по номральному
+//реализовать hash и equals (пример реализации  в коматач)
+//ПОЧИТАТЬ ДОКУМЕНТАЦИЮ
