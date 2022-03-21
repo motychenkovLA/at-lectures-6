@@ -19,7 +19,7 @@ public class CommentAttachment extends Attachment {
         if (this == a) return true;
         if (a == null || getClass() != a.getClass()) return false;
         CommentAttachment attCom = (CommentAttachment) a;
-        return comment == attCom.comment;
+        return Objects.equals(comment, attCom.comment);
     }
 
     @Override

@@ -9,10 +9,11 @@ public class Steps {
         String name = scanner.nextLine();
         System.out.println("Введите критичность дефекта из списка: \n BLOCKER \n CRITICAL\n MAJOR \n" +
                 " MINOR\n TRIVIAL");
-        String critical = scanner.nextLine();
-        Criticality criticality = Criticality.getCriticality(critical);
-        if (criticality == null) {
-            System.out.println("Введена несуществующая критичность");
+        Criticality criticality;
+        try {
+            criticality = Criticality.valueOf(scanner.nextLine());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Вы не ввели критичность из списка");
             return;
         }
         System.out.println("Выберите тип вложения: \n для добавления комментария введите comment \n " +

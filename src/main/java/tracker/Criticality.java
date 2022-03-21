@@ -5,14 +5,5 @@ public enum Criticality {
     CRITICAL,
     MAJOR,
     MINOR,
-    TRIVIAL;
-
-    public static Criticality getCriticality(String critical) {
-        for (Criticality criticality : Criticality.values()) {
-            if (critical.equals(criticality.toString())) {
-                return criticality;
-            }
-        }
-        return null;
-    }
+    TRIVIAL
 }
