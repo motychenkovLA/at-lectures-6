@@ -28,8 +28,17 @@ public class Defect {
         return this.id;
     }
 
-    public DefectStatus getStatus() {
+    public int getDaysToFix() {
+        return daysToFix;
+    }
+
+
+    public DefectStatus getStatus(){
         return status;
+    }
+
+    public String getRuStatus() {
+        return status.ruName;
     }
 
     public void setStatus(DefectStatus status) {

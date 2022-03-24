@@ -22,13 +22,9 @@ public class Transition {
         this.to = to;
     }
 
-    public static void TransitionValidate(DefectStatus from, DefectStatus to, long id, Repository repository){
+    public static boolean validate(DefectStatus from, DefectStatus to){
         Transition potentialTransition = new Transition(from, to);
-        if (transitionSet.contains(potentialTransition)){
-            repository.changeStatus(id, to);
-            System.out.println("Статус успешно изменён с " + from.ruName + " на " + to.ruName);
-        }
-        else System.out.println("Нельзя изменить текущий статус c " + from.ruName + " на " + to.ruName);
+        return transitionSet.contains(potentialTransition);
     }
 
     @Override

@@ -1,19 +1,18 @@
 package Tracker;
 
+import java.util.*;
+import java.util.stream.Collectors;
 
-//        заменить класс Repository на Map<Long, Defect> +
-//        добавить класс Transition представляющий валидный переход между статусами дефекта с полями from и to +
-//        добавить Set<Transition> для хранения всех валидных переходов между статусами +
-//        при смене статуса пользователем проверять валидность +
+//        добавить в главное меню "stats" для вывода статистики по заведенным дефекта
+//        при выводе статистики отображать: максимальное, среднее, минимальное количество дней на исправление и таблицу вида "статус - количество дефектов в этом статусе"
+//        расчет статистик выполнять через stream api
 
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        Repository repository = new Repository();
+        Map<Long, Defect> defectMap = new HashMap<>();
         boolean isRun = true;
-
 
         try(Scanner scanner = new Scanner(System.in)) {
 
@@ -22,24 +21,29 @@ public class Main {
                         "1.Добавить дефект\n" +
                         "2.Вывести список дефектов\n" +
                         "3.Изменить статус дефекта\n" +
-                        "4.Выход");
+                        "4.Вывести статистику\n" +
+                        "5.Выход");
 
                 int mainMenuItem = checkInt(scanner);
 
                 switch (mainMenuItem) {
                     case 1: {
-                        addDefect(scanner, repository);
+                        addDefect(scanner, defectMap);
                         break;
                     }
                     case 2: {
-                        defectOutput(repository);
+                        defectOutput(defectMap);
                         break;
                     }
                     case 3: {
-                        changeStatus(scanner, repository);
+                        changeStatus(scanner, defectMap);
                         break;
                     }
                     case 4: {
+                        statsOutput(defectMap);
+                        break;
+                    }
+                    case 5: {
                         System.out.println("До новых встреч!");
                         isRun = false;
                         break;
@@ -54,7 +58,7 @@ public class Main {
     }
 
 
-    public static void addDefect(Scanner scanner, Repository repository){
+    public static void addDefect(Scanner scanner, Map<Long, Defect> defectMap){
         int menuItem;
         System.out.println("Введите описание дефекта");
         String resume = scanner.nextLine();     //заполняем описание
@@ -101,7 +105,7 @@ public class Main {
                         System.out.println("Введите комментарий");
                         CommentAttachment commentAttachment = new CommentAttachment(scanner.nextLine());
                         Defect defect = new Defect(resume, priority, daysToFix, DefectStatus.NEW, commentAttachment);
-                        repository.add(defect);
+                        defectMap.put(defect.getId(), defect);
                         System.out.println("Дефект создан");
                         break;
                     }
@@ -109,7 +113,7 @@ public class Main {
                         System.out.println("Введите id дефекта");
                         DefectAttachment defectAttachment = new DefectAttachment(checkInt(scanner));
                         Defect defect = new Defect(resume, priority, daysToFix, DefectStatus.NEW, defectAttachment);
-                        repository.add(defect);
+                        defectMap.put(defect.getId(), defect);
                         System.out.println("Дефект создан");
                         break;
                     }
@@ -119,7 +123,7 @@ public class Main {
             default: {
                 Attachment attachment = new Attachment();
                 Defect defect = new Defect(resume, priority, daysToFix, DefectStatus.NEW, attachment);
-                repository.add(defect);
+                defectMap.put(defect.getId(), defect);
                 System.out.println("Дефект создан");
                 break;
             }
@@ -127,34 +131,52 @@ public class Main {
     }
 
 
-    public static void defectOutput(Repository repository){
+    public static void defectOutput(Map<Long, Defect> defectMap){
         System.out.println("Список дефектов:");
-        repository.getAll();
+        for (Defect value : defectMap.values()) {
+            System.out.println(value.getInfo());
+        }
     }
 
-    public static void changeStatus(Scanner scanner, Repository repository){
+    public static void changeStatus(Scanner scanner, Map<Long, Defect> defectMap){
         System.out.println("Введите id дефекта");
-        int id = checkInt(scanner);
-        if (repository.checkId(id)) {
+        long id = checkInt(scanner);
+        DefectStatus currentStatus = defectMap.get(id).getStatus();
+        if (defectMap.containsKey(id)) {
             System.out.println("Выберите статус дефекта:\n" +   //меняем статус
                     "1." + DefectStatus.NEW.ruName + "\n" +
                     "2." + DefectStatus.OPEN.ruName + "\n" +
                     "3." + DefectStatus.IN_WORK.ruName + "\n" +
                     "4." + DefectStatus.CLOSED.ruName);
            int menuItem = checkInt(scanner);
-
             switch (menuItem) {
                 case 1:
-                   Transition.TransitionValidate(repository.getStatus(id), DefectStatus.NEW, id, repository);
+                   if (Transition.validate(currentStatus,DefectStatus.NEW)) {
+                       defectMap.get(id).setStatus(DefectStatus.NEW);
+                       System.out.println("Статус успешно изменён с " +  currentStatus.ruName + " на " + DefectStatus.NEW.ruName);
+                   }
+                    else System.out.println("Нельзя изменить текущий статус c " + currentStatus.ruName + " на " + DefectStatus.NEW.ruName);
                    break;
                 case 2:
-                    Transition.TransitionValidate(repository.getStatus(id), DefectStatus.OPEN, id, repository);
+                    if (Transition.validate( currentStatus, DefectStatus.OPEN)) {
+                        defectMap.get(id).setStatus(DefectStatus.OPEN);
+                        System.out.println("Статус успешно изменён с " +  currentStatus.ruName + " на " + DefectStatus.OPEN.ruName);
+                    }
+                    else System.out.println("Нельзя изменить текущий статус c " +  currentStatus.ruName + " на " + DefectStatus.OPEN.ruName);
                     break;
                 case 3:
-                    Transition.TransitionValidate(repository.getStatus(id), DefectStatus.IN_WORK, id, repository);
+                    if (Transition.validate(currentStatus, DefectStatus.IN_WORK)) {
+                        defectMap.get(id).setStatus(DefectStatus.IN_WORK);
+                        System.out.println("Статус успешно изменён с " + currentStatus.ruName + " на " + DefectStatus.IN_WORK.ruName);
+                    }
+                    else System.out.println("Нельзя изменить текущий статус c " + currentStatus.ruName + " на " + DefectStatus.IN_WORK.ruName);
                     break;
                 case 4:
-                    Transition.TransitionValidate(repository.getStatus(id), DefectStatus.CLOSED, id, repository);
+                    if (Transition.validate(currentStatus, DefectStatus.CLOSED)) {
+                        defectMap.get(id).setStatus(DefectStatus.CLOSED);
+                        System.out.println("Статус успешно изменён с " + currentStatus.ruName + " на " + DefectStatus.CLOSED.ruName);
+                    }
+                    else System.out.println("Нельзя изменить текущий статус c " + currentStatus.ruName + " на " + DefectStatus.CLOSED.ruName);
                     break;
                 default:
                     System.out.println("Нет такого пункта меню. Статус не был изменён");
@@ -162,7 +184,21 @@ public class Main {
         } else System.out.println("Такого дефекта нет!");
     }
 
-    public static int checkInt(Scanner scanner){
+    public static void statsOutput(Map<Long, Defect> defectMap){
+        IntSummaryStatistics intSummaryStatistics = defectMap.values().stream().collect(Collectors.summarizingInt(Defect::getDaysToFix));
+        System.out.println(
+                "Максимальное количество дней на исправление дефекта: " + intSummaryStatistics.getMax() + "\n" +
+                "Минимальное количество дней на исправление дефекта: " + intSummaryStatistics.getMin() + "\n" +
+                "Среднее количество дней на исправление дефекта: " + intSummaryStatistics.getAverage() + "\n");
+
+        Map<DefectStatus, Long> statusStats = defectMap.values().stream().collect(Collectors.groupingBy(Defect::getStatus, Collectors.counting()));
+        for (Map.Entry<DefectStatus, Long> longEntry : statusStats.entrySet()) {
+            System.out.println("Количество дефектов в статусе " + longEntry);
+        }
+    }
+
+
+    static int checkInt(Scanner scanner){
         while (true){
             try {
                 return Integer.parseInt(scanner.nextLine());
