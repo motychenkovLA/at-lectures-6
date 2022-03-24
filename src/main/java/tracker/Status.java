@@ -2,9 +2,8 @@ package tracker;
 
 public enum Status {
     OPENED,
-    ASSIGNED,
-    FIXED,
-    REOPENED,
+    IN_PROCESS,
+    REJECTED,
     CLOSED;
 
 }

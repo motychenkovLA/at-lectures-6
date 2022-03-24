@@ -35,6 +35,10 @@ public class Defect {
         this.status = status;
     }
 
+    public Status getStatus(){
+        return status;
+    }
+
     @Override
     public String toString() {
         return "ID: " + id + ", Статус: " + status + ", Резюме дефекта: " + name + ", Критичность: " + criticality +

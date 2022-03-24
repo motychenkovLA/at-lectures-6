@@ -1,8 +1,11 @@
 package tracker;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Steps {
+
+    static Map<Long, Defect> map = new TreeMap<>();
+
     public static void addDefect(Scanner scanner) {
         Defect def;
         System.out.println("Введите резюме дефекта");
@@ -13,7 +16,7 @@ public class Steps {
         try {
             criticality = Criticality.valueOf(scanner.nextLine());
         } catch (IllegalArgumentException e) {
-            System.out.println("Вы не ввели критичность из списка");
+            System.out.println("Введенная критичность отсутствует в списке");
             return;
         }
         System.out.println("Выберите тип вложения: \n для добавления комментария введите comment \n " +
@@ -51,6 +54,33 @@ public class Steps {
             }
         }
         def.setDaysNumber(i);
-        Repository.add(def);
+        map.put(def.getId(), def);
+    }
+
+    public static void list() {
+        for (Map.Entry m : map.entrySet()) {
+            System.out.println(m.getValue());
+        }
+        System.out.println("\n");
+    }
+
+    public static void change(Scanner scanner) {
+        System.out.println("Введите ID дефекта");
+        Defect def = map.get(scanner.nextLong());
+        scanner.nextLine();
+        System.out.println("Введите статус дефекта из списка:  \n OPENED\n IN_PROCESS\n REJECTED\n CLOSED");
+
+        Status to = Status.valueOf(scanner.nextLine());
+        Set<Transition> set = new HashSet<>();
+        set.add(new Transition(Status.OPENED, Status.IN_PROCESS));
+        set.add(new Transition(Status.OPENED, Status.REJECTED));
+        set.add(new Transition(Status.IN_PROCESS, Status.CLOSED));
+        set.add(new Transition(Status.REJECTED, Status.CLOSED));
+        if (set.contains(new Transition(def.getStatus(), to))) {
+            def.setStatus(to);
+        } else {
+            System.out.println("Переход в этот статус невозможен");
+            System.out.println("\n");
+        }
     }
 }

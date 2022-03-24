@@ -1,6 +1,6 @@
 package tracker;
 
-import java.util.Scanner;
+import java.util.*;
 
 class Tracker {
 
@@ -16,18 +16,10 @@ class Tracker {
                         Steps.addDefect(scanner);
                         break;
                     case "list":
-                        for (int i = 0; i < Repository.countBug; i++) {
-                            System.out.println(Repository.getAll()[i]);
-                        }
-                        System.out.println("\n");
+                        Steps.list();
                         break;
                     case "change":
-                        System.out.println("Введите ID дефекта");
-                        Defect def = Repository.getDefect(scanner.nextInt());
-                        scanner.nextLine();
-                        System.out.println("Введите статус дефекта из списка:  \n OPENED\n ASSIGNED\n FIXED\n" +
-                                " REOPENED\n CLOSED");
-                        def.setStatus(Status.valueOf(scanner.nextLine()));
+                        Steps.change(scanner);
                         break;
                     case "quit":
                         return;
