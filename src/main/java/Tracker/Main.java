@@ -191,6 +191,7 @@ public class Main {
                 "Минимальное количество дней на исправление дефекта: " + intSummaryStatistics.getMin() + "\n" +
                 "Среднее количество дней на исправление дефекта: " + intSummaryStatistics.getAverage() + "\n");
 
+
         Map<DefectStatus, Long> statusStats = defectMap.values().stream().collect(Collectors.groupingBy(Defect::getStatus, Collectors.counting()));
         for (Map.Entry<DefectStatus, Long> longEntry : statusStats.entrySet()) {
             System.out.println("Количество дефектов в статусе " + longEntry);
