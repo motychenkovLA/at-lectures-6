@@ -132,7 +132,6 @@ class Main {
                         break;
 
 
-
                     case LIST:
                         for (Defect defect : defectHashMap.values()) {
                             if (defect != null) {
@@ -193,14 +192,17 @@ class Main {
         return defectHashMap.values().stream()
                 .collect(Collectors.summarizingInt(Defect::getDaysNumber));
     }
+
     private static Map<Status, Long> getStatisticByStatuses() {
         return defectHashMap.values().stream()
-                .collect(Collectors.groupingBy(Defect :: getStatus, Collectors.counting()));
+                .collect(Collectors.groupingBy(Defect::getStatus, Collectors.counting()));
     }
-    private static void getStatistic() { IntSummaryStatistics statisticsByDaysToFix = getStatisticByDaysToFix();
-        System.out.println("Минимальное кол-во дней на исправление дефектов: " + statisticsByDaysToFix.getMin());
-        System.out.println("Максимальное кол-во дней на исправление дефектов: " + statisticsByDaysToFix.getMax());
-        System.out.println("Среднее кол-во дней на исправление дефектов: " + statisticsByDaysToFix.getAverage());
+
+    private static void getStatistic() {
+        IntSummaryStatistics statisticsByDaysToFix = getStatisticByDaysToFix();
+        System.out.println("минимальное количество дней на исправление дефектов: " + statisticsByDaysToFix.getMin());
+        System.out.println("среднее количество дней на исправление дефектов: " + statisticsByDaysToFix.getAverage());
+        System.out.println("максимальное количество дней на исправление дефектов: " + statisticsByDaysToFix.getMax());
         System.out.println();
         System.out.println("Статистика по статусам заведенных дефектов: ");
         for (Map.Entry<Status, Long> statusMap : getStatisticByStatuses().entrySet()) {
@@ -208,7 +210,6 @@ class Main {
         }
         System.out.println();
     }
-
 
 
     private static int canParseInt(Scanner scanner) {
