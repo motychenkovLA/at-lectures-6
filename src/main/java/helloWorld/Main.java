@@ -1,8 +1,10 @@
 package helloWorld;
 
-import java.util.Scanner;
+import java.util.*;
 
 class Main {
+    private static final Map<Long, Defect> defectHashMap = new HashMap<>();
+    static long keyDefect = 0;
 
     public static Criticality getCriticalityFromConsole(Scanner scanner) {
 
@@ -12,6 +14,7 @@ class Main {
         while (!completed) {
             try {
                 System.out.println("Введите критичность дефекта:\nLOW\nMEDIUM\nHIGH\nCRITICAL");
+
                 String criticalString = scanner.nextLine();
                 critical = Criticality.valueOf(criticalString);
                 completed = true;
@@ -48,27 +51,6 @@ class Main {
     }
 
 
-    public static Status getStatusFromConsole(Scanner scanner) {
-
-        Boolean completed = false;
-        Status status = null;
-
-        while (!completed) {
-            try {
-                System.out.println("Введите новый статус: \nOPEN\nINWORK\nCLOSED\nANALYSIS");
-                String inputStatus = scanner.nextLine();
-                status = Status.valueOf(inputStatus);
-                completed = true;
-
-            } catch (IllegalArgumentException e) {
-                System.out.println("Статус не найден. Повторите ввод.");
-
-            }
-        }
-
-        return status;
-    }
-
     public static Integer getDaysFromConsole(Scanner scanner) {
 
         Boolean completed = false;
@@ -90,7 +72,7 @@ class Main {
     }
 
 
-    public static void addDefect(Scanner scanner) {
+    public static void addDefect(Map<Long, Defect> repository, Scanner scanner) {
 
         System.out.println("Введите резюме дефекта");
         String name = scanner.nextLine();
@@ -111,7 +93,8 @@ class Main {
                 String comment = scanner.nextLine();
                 CommentAttachment commentAttachment = new CommentAttachment(comment);
                 def.setCommentAttachment(commentAttachment);
-                Repository.add(def);
+
+                repository.put(def.getId(), def);
                 break;
 
             case "link":
@@ -120,7 +103,7 @@ class Main {
                 scanner.nextLine();
                 DefectAttachment defectAttachment = new DefectAttachment(idBug);
                 def.setDefectAttachment(defectAttachment);
-                Repository.add(def);
+                repository.put(def.getId(), def);
                 break;
 
             default:
@@ -131,33 +114,21 @@ class Main {
 
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
+
+
             while (true) {
                 Command operation = getCommandFromConsole(scanner);
 
                 switch (operation) {
 
-                    case CHANGE:
-                        long id;
-                        while (true) {
-                            System.out.println("Введите Id дефекта:");
-                            id = scanner.nextLong();
-                            scanner.nextLine();
-                            if (Repository.getDefect(id) == null) {
-                                System.out.println("Нет дефекта с таким Id");
-                            } else {
-                                Repository.getDefect(id).setStatus(getStatusFromConsole(scanner));
-                                break;
-                            }
-                        }
-                        break;
-
-
                     case ADD:
-                        addDefect(scanner);
+                        addDefect(defectHashMap, scanner);
                         break;
                     case LIST:
-                        for (Defect defect : Repository.getAll()) {
-                           if (defect!=null) {System.out.println(defect);}
+                        for (Defect defect : defectHashMap.values()) {
+                            if (defect != null) {
+                                System.out.println(defect);
+                            }
 
                         }
                         break;
@@ -166,10 +137,55 @@ class Main {
                     default:
                         System.out.println("Введена неизвестная команда\n");
 
+                    case CHANGE:
+
+                        long id;
+
+                        if (defectHashMap.isEmpty()) {
+                            System.out.println("В репозитории нет дефектов");
+                            return;
+                        }
+                        System.out.println("Введине id дефекта, у которого необходимо поменять статус");
+                        long idDefectForChangeStatus = canParseInt(scanner);
+
+                        Defect defectForChangeStatus = defectHashMap.get(idDefectForChangeStatus);
+                        if (!defectHashMap.containsKey(idDefectForChangeStatus)) {
+                            System.out.println("Дефекта с таким id не существует");
+                            return;
+                        }
+
+                        System.out.println("Введите новый статус дефекта из списка.\nПример доступных переходов:\nOPEN(Открыт) - INWORK(В работе)\nOPEN(Открыт) - ANALYSIS(На анализе)\nINWORK(В работе) - CLOSED(Закрыт)\nANALYSIS(На анализе) - CLOSED(Закрыт)");
+                        Status[] statuses = Status.values();
+
+                        for (Status status : statuses) {
+                            System.out.println(status.getInRus());
+                        }
+
+                        Status currentStatus = defectForChangeStatus.getStatus();
+                        String statusInput = scanner.nextLine();
+
+                        Status newStatusTo = Status.getStatus(statusInput);
+
+                        List<Status> statusList = Transition.getValidStatus(currentStatus);
+                        if (newStatusTo == null || !statusList.contains(newStatusTo)) {
+                            System.out.println("Такого значение не существует");
+                            return;
+                        }
+                        defectForChangeStatus.setStatus(newStatusTo);
+
 
                 }
             }
         }
     }
+
+    private static int canParseInt(Scanner scanner) {
+        while (true) {
+            try {
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Не верный формат введенного значения");
+            }
+        }
+    }
 }
-//

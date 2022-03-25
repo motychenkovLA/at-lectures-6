@@ -1,25 +1,28 @@
 package helloWorld;
 
+import java.util.Objects;
+
 public class Defect {
     final private long id;
     final private String description;
-   private Criticality  critical;
+    private Criticality critical;
     private int daysNumber;
-   private Attachment attachment;
+    private Attachment attachment;
     static private int numberOfBug = 1;
-        Status status = Status.OPEN;
+    Status status = Status.OPEN;
 
     public Defect(String description, Criticality critical, int daysNumber, Attachment attachment) {
         this(description);
-        this.critical=critical;
-        this.daysNumber=daysNumber;
-        this.attachment=attachment;
-            }
+        this.critical = critical;
+        this.daysNumber = daysNumber;
+        this.attachment = attachment;
+    }
 
     public Defect(String description) {
         this.description = description;
-               id = numberOfBug++;
+        id = numberOfBug++;
     }
+
     public long getId() {
         return id;
     }
@@ -55,11 +58,11 @@ public class Defect {
         this.status = status;
     }
 
-    public  Criticality getCritical(){
+    public Criticality getCritical() {
         return critical;
     }
 
-    public void setCritical(Criticality critical){
+    public void setCritical(Criticality critical) {
         this.critical = critical;
     }
 
@@ -72,10 +75,19 @@ public class Defect {
     @Override
     public String toString() {
         return id + " | " + description + " |  " + critical + " | " + daysNumber + " | " + "Вложение: " + attachment + " | " + status;
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Defect)) return false;
+        Defect defect = (Defect) o;
+        return id == defect.id && daysNumber == defect.daysNumber && description.equals(defect.description) && critical == defect.critical && attachment.equals(defect.attachment) && status == defect.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, description, critical, daysNumber, attachment, status);
     }
 }
-
-//реализовать метод хэшкод по номральному
-//реализовать hash и equals (пример реализации  в коматач)
-//ПОЧИТАТЬ ДОКУМЕНТАЦИЮ
-//

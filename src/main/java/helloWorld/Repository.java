@@ -4,7 +4,7 @@ public class Repository {
 
     static public int countOfBug = 0;
     static private int size = 100;
-    static Defect[] listBug = new Defect[size];
+    static private Defect[] listBug = new Defect[size];
 
 
     static public void add(Defect def) {
