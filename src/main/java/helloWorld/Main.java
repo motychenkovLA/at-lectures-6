@@ -1,6 +1,8 @@
 package helloWorld;
 
 import java.util.*;
+import java.util.stream.Collectors;
+
 
 class Main {
     private static final Map<Long, Defect> defectHashMap = new HashMap<>();
@@ -36,7 +38,7 @@ class Main {
 
         while (!completed) {
             try {
-                System.out.println("ADD - добавить новый дефект" + "\nCHANGE - изменить статус" + "\nLIST - вывести список дефектов" + "\nQUIT - выход из программы");
+                System.out.println("ADD - добавить новый дефект" + "\nCHANGE - изменить статус" + "\nLIST - вывести список дефектов" + "\nSTATS - вывести статистику" + "\nQUIT - выход из программы");
                 String inputCommand = scanner.nextLine();
                 command = Command.valueOf(inputCommand);
                 completed = true;
@@ -124,6 +126,13 @@ class Main {
                     case ADD:
                         addDefect(defectHashMap, scanner);
                         break;
+
+                    case STATS:
+                        getStatistic();
+                        break;
+
+
+
                     case LIST:
                         for (Defect defect : defectHashMap.values()) {
                             if (defect != null) {
@@ -132,6 +141,7 @@ class Main {
 
                         }
                         break;
+
                     case QUIT:
                         return;
                     default:
@@ -178,6 +188,28 @@ class Main {
             }
         }
     }
+
+    private static IntSummaryStatistics getStatisticByDaysToFix() {
+        return defectHashMap.values().stream()
+                .collect(Collectors.summarizingInt(Defect::getDaysNumber));
+    }
+    private static Map<Status, Long> getStatisticByStatuses() {
+        return defectHashMap.values().stream()
+                .collect(Collectors.groupingBy(Defect :: getStatus, Collectors.counting()));
+    }
+    private static void getStatistic() { IntSummaryStatistics statisticsByDaysToFix = getStatisticByDaysToFix();
+        System.out.println("Минимальное кол-во дней на исправление дефектов: " + statisticsByDaysToFix.getMin());
+        System.out.println("Максимальное кол-во дней на исправление дефектов: " + statisticsByDaysToFix.getMax());
+        System.out.println("Среднее кол-во дней на исправление дефектов: " + statisticsByDaysToFix.getAverage());
+        System.out.println();
+        System.out.println("Статистика по статусам заведенных дефектов: ");
+        for (Map.Entry<Status, Long> statusMap : getStatisticByStatuses().entrySet()) {
+            System.out.println("Статус: " + statusMap.getKey() + " - " + statusMap.getValue());
+        }
+        System.out.println();
+    }
+
+
 
     private static int canParseInt(Scanner scanner) {
         while (true) {

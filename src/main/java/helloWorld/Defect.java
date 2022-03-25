@@ -50,6 +50,8 @@ public class Defect {
         return daysNumber;
     }
 
+
+
     public Status getStatus() {
         return status;
     }
