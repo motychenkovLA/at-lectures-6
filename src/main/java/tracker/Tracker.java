@@ -9,7 +9,7 @@ class Tracker {
             while (true) {
 
                 System.out.println("Введите операцию из списка:\n add - добавить новый дефект \n list - вывести список дефектов"
-                        + " \n change - изменить статус дефекта\n quit - выход");
+                        + " \n change - изменить статус дефекта\n stats - вывод статистики по дефектам \n quit - выход");
                 String operation = scanner.nextLine();
                 switch (operation) {
                     case "add":
@@ -20,6 +20,9 @@ class Tracker {
                         break;
                     case "change":
                         Steps.change(scanner);
+                        break;
+                    case "stats":
+                        Steps.stats();
                         break;
                     case "quit":
                         return;
