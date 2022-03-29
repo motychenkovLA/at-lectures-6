@@ -87,31 +87,26 @@ public class Steps {
 
     public static void stats() {
 
-        int daysNumber[] = new int[map.size()];
-        Status statuses[] = new Status[map.size()];
-        int i = 0;
-        for (Map.Entry m : map.entrySet()) {
-            Defect def = (Defect) m.getValue();
-            daysNumber[i] = def.getDaysNumber();
-            statuses[i] = def.getStatus();
-            i++;
-        }
-        IntSummaryStatistics statistics = Arrays.stream(daysNumber)
+        long countOpened = map.values()
+                .stream()
+                .filter(defect -> defect.getStatus().equals(Status.OPENED))
+                .count();
+        long countInProcess = map.values()
+                .stream()
+                .filter(defect -> defect.getStatus().equals(Status.IN_PROCESS))
+                .count();
+        long countRejected = map.values()
+                .stream()
+                .filter(defect -> defect.getStatus().equals(Status.REJECTED))
+                .count();
+        long countClosed = map.values()
+                .stream()
+                .filter(defect -> defect.getStatus().equals(Status.CLOSED))
+                .count();
+        IntSummaryStatistics statistics = map.values().stream()
+                .mapToInt(defect -> defect.getDaysNumber())
                 .summaryStatistics();
         System.out.println(statistics);
-        Collection<Status> collection = Arrays.asList(statuses);
-        long countOpened = collection.stream()
-                .filter(Status.OPENED::equals)
-                .count();
-        long countInProcess = collection.stream()
-                .filter(Status.IN_PROCESS::equals)
-                .count();
-        long countRejected = collection.stream()
-                .filter(Status.REJECTED::equals)
-                .count();
-        long countClosed = collection.stream()
-                .filter(Status.CLOSED::equals)
-                .count();
         System.out.println("Количество дефектов в статусе OPENED: " + countOpened +
                 ",\nколичество дефектов в статусе IN_PROCESS: " + countInProcess +
                 ",\nколичество дефектов в статусе REJECTED: " + countRejected +

@@ -22,6 +22,18 @@ public class Defect {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Criticality getCriticality() {
+        return criticality;
+    }
+
+    public Attachment getAttachment() {
+        return attachment;
+    }
+
     public int getDaysNumber() {
         return daysNumber;
     }
@@ -35,7 +47,7 @@ public class Defect {
         this.status = status;
     }
 
-    public Status getStatus(){
+    public Status getStatus() {
         return status;
     }
 
@@ -51,11 +63,11 @@ public class Defect {
         if (a == null || getClass() != a.getClass()) return false;
         Defect def = (Defect) a;
         return id == def.id &&
-                name == def.name &&
-                criticality == def.criticality &&
+                this.equals(def.getName()) &&
+                this.equals(def.getCriticality()) &&
                 daysNumber == def.daysNumber &&
-                attachment == def.attachment &&
-                status == def.status;
+                this.equals(def.getAttachment()) &&
+                this.equals(def.getStatus());
     }
 
     @Override

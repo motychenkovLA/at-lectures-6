@@ -6,9 +6,17 @@ public class Transition {
     Status from;
     Status to;
 
-    public Transition(Status from, Status to){
+    public Transition(Status from, Status to) {
         this.from = from;
         this.to = to;
+    }
+
+    public Status getFrom() {
+        return from;
+    }
+
+    public Status getTo() {
+        return to;
     }
 
     @Override
@@ -16,12 +24,12 @@ public class Transition {
         if (this == a) return true;
         if (a == null || getClass() != a.getClass()) return false;
         Transition tr = (Transition) a;
-        return Objects.equals(from, tr.from) && Objects.equals(to, tr.to);
+        return this.equals(tr.getFrom()) && this.equals(tr.getTo());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(from,to);
+        return Objects.hash(from, to);
     }
 
 }

@@ -9,6 +9,10 @@ public class CommentAttachment extends Attachment {
         this.comment = comment;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
     @Override
     public String toString() {
         return "Комментарий: " + comment;
@@ -19,7 +23,7 @@ public class CommentAttachment extends Attachment {
         if (this == a) return true;
         if (a == null || getClass() != a.getClass()) return false;
         CommentAttachment attCom = (CommentAttachment) a;
-        return Objects.equals(comment, attCom.comment);
+        return this.equals(attCom.getComment());
     }
 
     @Override
