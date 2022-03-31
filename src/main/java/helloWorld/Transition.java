@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Transition {
-    Status  statusFrom;
+    Status statusFrom;
     Status statusTo;
     private static Set<Transition> SET_OF_TRANSITION = new HashSet<>();
 
@@ -15,14 +15,16 @@ public class Transition {
         this.statusFrom = statusFrom;
         this.statusTo = statusTo;
     }
+
     static {
-        SET_OF_TRANSITION.add(new Transition(Status.OPEN,Status.INWORK));
-        SET_OF_TRANSITION.add(new Transition(Status.OPEN,Status.ANALYSIS));
-        SET_OF_TRANSITION.add(new Transition(Status.INWORK,Status.CLOSED));
-        SET_OF_TRANSITION.add(new Transition(Status.ANALYSIS,Status.CLOSED));
+        SET_OF_TRANSITION.add(new Transition(Status.OPEN, Status.INWORK));
+        SET_OF_TRANSITION.add(new Transition(Status.OPEN, Status.ANALYSIS));
+        SET_OF_TRANSITION.add(new Transition(Status.INWORK, Status.CLOSED));
+        SET_OF_TRANSITION.add(new Transition(Status.ANALYSIS, Status.CLOSED));
     }
 
     public static List<Status> getValidStatus(Status currentStatus) {
+
         List<Status> statusList = new ArrayList<>();
         for (Transition transition : SET_OF_TRANSITION) {
             if (transition.getStatusFrom().equals(currentStatus)) {
@@ -40,3 +42,5 @@ public class Transition {
         return statusTo;
     }
 }
+
+
