@@ -18,7 +18,7 @@ public class Homework {
             Actions action = new Actions(driver);
             action.doubleClick(doubleClickBtn).contextClick(rightClickBtn).click(clickMeBtn).build().perform();
 
-            System.out.println(!driver.findElements(By.id("doubleClickMessage")).isEmpty()); // Если клик не выполнен, ловим Catch
+            System.out.println(!driver.findElements(By.id("doubleClickMessage")).isEmpty());
             System.out.println(!driver.findElements(By.id("rightClickMessage")).isEmpty());
             System.out.println(!driver.findElements(By.id("dynamicClickMessage")).isEmpty());
         } catch (Exception e) {
