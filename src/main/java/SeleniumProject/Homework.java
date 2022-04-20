@@ -9,6 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 public class Homework {
     public static void main(String[] args) {
         try {
+            System.setProperty("webdriver.chrome.driver", "C:/chromedriver/chromedriver.exe");
             WebDriver driver = new ChromeDriver();
             driver.get("https://demoqa.com/buttons");
             WebElement doubleClickBtn = driver.findElement(By.id("doubleClickBtn"));
