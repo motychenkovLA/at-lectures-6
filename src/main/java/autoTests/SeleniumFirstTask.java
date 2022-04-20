@@ -22,6 +22,10 @@ public class SeleniumFirstTask {
 
         System.setProperty("webdriver.chrome.driver", "src/main/java/chromedriver/chromedriver.exe");
         WebDriver webDriver = new ChromeDriver();
+        //Добавил строчку ниже (не явное ожидание) - без нее у меня падал тест на 28 строчке
+        //Потому что 27 строчка выполнилась (открывается страничка, но она еще не успела загрузится)
+        //и уже выполняется 30 строчка (пытается найти элемент, но его нет) - помогает ожидание
+        //webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         webDriver.get("https://demoqa.com/buttons");
 
         WebElement doubleClickMe = webDriver.findElement(By.id("doubleClickBtn"));
