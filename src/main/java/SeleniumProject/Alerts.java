@@ -13,13 +13,13 @@ import java.time.Duration;
 public class Alerts {
     public static void main(String[] args) {
         System.setProperty("webdriver.chrome.driver", "C:/chromedriver/chromedriver.exe");
-        //хром находится по другому пути
-        //вот как нужно было тогда объявить System.setProperty("webdriver.chrome.driver", "src/main/java/seleniumProject/chromedriver.exe");
-        //Исправь
+        //С…СЂРѕРј РЅР°С…РѕРґРёС‚СЃСЏ РїРѕ РґСЂСѓРіРѕРјСѓ РїСѓС‚Рё
+        //РІРѕС‚ РєР°Рє РЅСѓР¶РЅРѕ Р±С‹Р»Рѕ С‚РѕРіРґР° РѕР±СЉСЏРІРёС‚СЊ System.setProperty("webdriver.chrome.driver", "src/main/java/seleniumProject/chromedriver.exe");
+        //РСЃРїСЂР°РІСЊ
         WebDriver driver = new ChromeDriver();
         driver.get("https://demoqa.com/alerts");
 
-        //Вот тут установил неявное ожидание (в 1 задании нет)
+        //Р’РѕС‚ С‚СѓС‚ СѓСЃС‚Р°РЅРѕРІРёР» РЅРµСЏРІРЅРѕРµ РѕР¶РёРґР°РЅРёРµ (РІ 1 Р·Р°РґР°РЅРёРё РЅРµС‚)
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         WebElement alertButton = driver.findElement(By.id("alertButton"));
@@ -27,18 +27,18 @@ public class Alerts {
         WebElement confirmButton = driver.findElement(By.id("confirmButton"));
 
         /*
-        Actions подходит для цепочки действий и сложных действий. Клик не сложной действие
+        Actions РїРѕРґС…РѕРґРёС‚ РґР»СЏ С†РµРїРѕС‡РєРё РґРµР№СЃС‚РІРёР№ Рё СЃР»РѕР¶РЅС‹С… РґРµР№СЃС‚РІРёР№. РљР»РёРє РЅРµ СЃР»РѕР¶РЅРѕР№ РґРµР№СЃС‚РІРёРµ
 
-        Вот пример как нужно.
+        Р’РѕС‚ РїСЂРёРјРµСЂ РєР°Рє РЅСѓР¶РЅРѕ.
         alertButton.click();
 
-        UPD. Твой код работать будет - но обычный клик так не нужно делать.
-        Исправь все последующие тоже.
+        UPD. РўРІРѕР№ РєРѕРґ СЂР°Р±РѕС‚Р°С‚СЊ Р±СѓРґРµС‚ - РЅРѕ РѕР±С‹С‡РЅС‹Р№ РєР»РёРє С‚Р°Рє РЅРµ РЅСѓР¶РЅРѕ РґРµР»Р°С‚СЊ.
+        РСЃРїСЂР°РІСЊ РІСЃРµ РїРѕСЃР»РµРґСѓСЋС‰РёРµ С‚РѕР¶Рµ.
          */
         Actions action = new Actions(driver);
         action.click(alertButton).build().perform();
 
-        //Ремарка. так и дебажить удобнее и структурировано выглядит код.
+        //Р РµРјР°СЂРєР°. С‚Р°Рє Рё РґРµР±Р°Р¶РёС‚СЊ СѓРґРѕР±РЅРµРµ Рё СЃС‚СЂСѓРєС‚СѓСЂРёСЂРѕРІР°РЅРѕ РІС‹РіР»СЏРґРёС‚ РєРѕРґ.
         driver.switchTo()
                 .alert()
                 .accept();
@@ -47,7 +47,7 @@ public class Alerts {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.alertIsPresent());
-        //Ремарка. так и дебажить удобнее и структурировано выглядит код.
+        //Р РµРјР°СЂРєР°. С‚Р°Рє Рё РґРµР±Р°Р¶РёС‚СЊ СѓРґРѕР±РЅРµРµ Рё СЃС‚СЂСѓРєС‚СѓСЂРёСЂРѕРІР°РЅРѕ РІС‹РіР»СЏРґРёС‚ РєРѕРґ.
         driver.switchTo()
                 .alert()
                 .accept();
@@ -57,8 +57,8 @@ public class Alerts {
                 .alert()
                 .dismiss();
 
-        //Тут тоже проверка не правильная. Посмотри как реализована у меня.
-        //Нам нужно посмотреть какой появился текст после отмены алерта.
+        //РўСѓС‚ С‚РѕР¶Рµ РїСЂРѕРІРµСЂРєР° РЅРµ РїСЂР°РІРёР»СЊРЅР°СЏ. РџРѕСЃРјРѕС‚СЂРё РєР°Рє СЂРµР°Р»РёР·РѕРІР°РЅР° Сѓ РјРµРЅСЏ.
+        //РќР°Рј РЅСѓР¶РЅРѕ РїРѕСЃРјРѕС‚СЂРµС‚СЊ РєР°РєРѕР№ РїРѕСЏРІРёР»СЃСЏ С‚РµРєСЃС‚ РїРѕСЃР»Рµ РѕС‚РјРµРЅС‹ Р°Р»РµСЂС‚Р°.
         System.out.println(!driver.findElements(By.id("confirmResult")).isEmpty());
     }
 }
