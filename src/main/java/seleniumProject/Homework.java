@@ -10,7 +10,7 @@ import java.time.Duration;
 
 public class Homework {
     public static void main(String[] args) {
-        try {
+
             System.setProperty("webdriver.chrome.driver", "src/main/java/seleniumProject/chromedriver.exe");
 
             WebDriver driver = new ChromeDriver();
@@ -39,9 +39,7 @@ public class Homework {
             } else {
                 System.out.println("Тест не пройден");
             }
-        } catch (Exception e) {
-            System.out.println("Что то пошло не так");
-        }
+
 
     }
 }
