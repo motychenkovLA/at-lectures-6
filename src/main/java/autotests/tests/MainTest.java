@@ -1,11 +1,11 @@
 package autotests.tests;
 
 import autotests.pages.DemoqaAlertsPage;
+import autotests.pages.DemoqaBrowserWindowsPage;
 import autotests.pages.DemoqaButtonsPage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -37,9 +37,9 @@ public class MainTest {
     public void demoqaButtonsTest(){
         webDriver.get("https://demoqa.com/buttons");
 
-        WebElement doubleClickMe = webDriver.findElement(By.xpath("//button[text()=\"Double Click Me\"]"));
-        WebElement rightClickMe = webDriver.findElement(By.xpath("//button[text()=\"Right Click Me\"]"));
-        WebElement clickMe = webDriver.findElement(By.xpath("//button[text()=\"Click Me\"]"));
+        WebElement doubleClickMe = webDriver.findElement(DemoqaButtonsPage.getDoubleClickMeLocator());
+        WebElement rightClickMe = webDriver.findElement(DemoqaButtonsPage.getRightClickMeLocator());
+        WebElement clickMe = webDriver.findElement(DemoqaButtonsPage.getClickMeLocator());
 
         Actions actions = new Actions(webDriver);
         actions.doubleClick(doubleClickMe)
@@ -55,9 +55,9 @@ public class MainTest {
     public void demoqaAlertsTest(){
         webDriver.get("https://demoqa.com/alerts");
 
-        WebElement alertButton = webDriver.findElement(By.id("alertButton"));
-        WebElement timerAlertButton = webDriver.findElement(By.id("timerAlertButton"));
-        WebElement confirmButton = webDriver.findElement(By.id("confirmButton"));
+        WebElement alertButton = webDriver.findElement(DemoqaAlertsPage.getAlertButtonLocator());
+        WebElement timerAlertButton = webDriver.findElement(DemoqaAlertsPage.getTimerAlertButtonLocator());
+        WebElement confirmButton = webDriver.findElement(DemoqaAlertsPage.getConfirmButtonLocator());
 
         alertButton.click();
         webDriver.switchTo()
@@ -86,7 +86,7 @@ public class MainTest {
 
         String demoqaWindowDesc = webDriver.getWindowHandle();
 
-        WebElement tabButton = webDriver.findElement(By.id("tabButton"));
+        WebElement tabButton = webDriver.findElement(DemoqaBrowserWindowsPage.getTabButtonLocator());
         tabButton.click();
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.numberOfWindowsToBe(2));
