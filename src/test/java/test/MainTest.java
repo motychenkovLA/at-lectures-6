@@ -1,4 +1,4 @@
-package autotests.tests;
+package test;
 
 import autotests.pages.DemoqaAlertsPage;
 import autotests.pages.DemoqaBrowserWindowsPage;
