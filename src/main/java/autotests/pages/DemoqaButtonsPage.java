@@ -16,30 +16,22 @@ public class DemoqaButtonsPage {
         this.webDriver = webDriver;
     }
 
-    WebElement doubleClickMe = webDriver.findElement(doubleClickMeLocator);
-    WebElement rightClickMe = webDriver.findElement(rightClickMeLocator);
-    WebElement clickMe = webDriver.findElement(clickMeLocator);
-
-
     public void doubleClick(){
         Actions actions = new Actions(webDriver);
-        actions.doubleClick(doubleClickMe)
+        actions.doubleClick(webDriver.findElement(doubleClickMeLocator))
                 .build()
                 .perform();
     }
 
     public void rightClick(){
         Actions actions = new Actions(webDriver);
-        actions.contextClick(rightClickMe)
+        actions.contextClick(webDriver.findElement(rightClickMeLocator))
                 .build()
                 .perform();
     }
 
     public void click(){
-        Actions actions = new Actions(webDriver);
-        actions.click(clickMe)
-                .build()
-                .perform();
+        webDriver.findElement(clickMeLocator).click();
     }
 
     public String checkResult(WebDriver webDriver) {
