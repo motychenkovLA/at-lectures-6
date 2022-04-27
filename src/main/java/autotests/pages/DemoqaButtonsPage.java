@@ -11,6 +11,9 @@ public class DemoqaButtonsPage {
     private static By doubleClickMeLocator = By.xpath("//button[text()=\"Double Click Me\"]");
     private static By rightClickMeLocator = By.xpath("//button[text()=\"Right Click Me\"]");
     private static By clickMeLocator = By.xpath("//button[text()=\"Click Me\"]");
+    private static By isHaveDoubleClickTextLocator = By.id("doubleClickMessage");
+    private static By isHaveRightClickTextLocator = By.id("rightClickMessage");
+    private static By isHaveDynamicClickTextLocator = By.id("dynamicClickMessage");
 
     public DemoqaButtonsPage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -35,9 +38,9 @@ public class DemoqaButtonsPage {
     }
 
     public String checkResult(WebDriver webDriver) {
-        boolean isHaveDoubleClickText = !webDriver.findElements(By.id("doubleClickMessage")).isEmpty();
-        boolean isHaveRightClickText = !webDriver.findElements(By.id("rightClickMessage")).isEmpty();
-        boolean isHaveDynamicClickText = !webDriver.findElements(By.id("dynamicClickMessage")).isEmpty();
+        boolean isHaveDoubleClickText = !webDriver.findElements(isHaveDoubleClickTextLocator).isEmpty();
+        boolean isHaveRightClickText = !webDriver.findElements(isHaveRightClickTextLocator).isEmpty();
+        boolean isHaveDynamicClickText = !webDriver.findElements(isHaveDynamicClickTextLocator).isEmpty();
 
         if (isHaveDoubleClickText && isHaveRightClickText && isHaveDynamicClickText) {
             return "Тест пройден!";

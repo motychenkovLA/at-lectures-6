@@ -1,7 +1,6 @@
 package test;
 
 import autotests.pages.DemoqaAlertsPage;
-import autotests.pages.DemoqaBrowserWindowsPage;
 import autotests.pages.DemoqaButtonsPage;
 import org.junit.After;
 import org.junit.Before;
@@ -22,7 +21,7 @@ public class MainTest {
 
     @Before
     public void startMethod(){
-        System.setProperty("webdriver.chrome.driver", "src/test/chromedriver/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver/chromedriver.exe");
         webDriver = new ChromeDriver();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(150));
     }
@@ -50,33 +49,5 @@ public class MainTest {
         demoqaAlertsPage.clickAndWaitAlert();
         demoqaAlertsPage.clickAndDismiss();
         System.out.println(DemoqaAlertsPage.checkResult(webDriver));
-    }
-
-    @Test
-    public void demoqaBrowserWindowsTest(){
-        webDriver.get("https://demoqa.com/browser-windows");
-
-        String demoqaWindowDesc = webDriver.getWindowHandle();
-
-        WebElement tabButton = webDriver.findElement(DemoqaBrowserWindowsPage.getTabButtonLocator());
-        tabButton.click();
-        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.numberOfWindowsToBe(2));
-
-        webDriver.switchTo()
-                .window(demoqaWindowDesc);
-
-        Set<String> handles = webDriver.getWindowHandles();
-        handles.remove(demoqaWindowDesc);
-        Iterator<String> iterator = handles.iterator();
-        String secondWindow = iterator.next();
-
-        webDriver.switchTo()
-                .window(secondWindow);
-
-        webDriver.get("https://google.com");
-
-        webDriver.switchTo()
-                .window(demoqaWindowDesc);
     }
 }

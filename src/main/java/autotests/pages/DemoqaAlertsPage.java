@@ -13,13 +13,14 @@ public class DemoqaAlertsPage {
     private static By alertButtonLocator = By.id("alertButton");
     private static By timerAlertButtonLocator = By.id("timerAlertButton");
     private static By confirmButtonLocator = By.id("confirmButton");
+    private static By isHaveCancelLocator = By.xpath("//span[text()='Cancel']");
 
     public DemoqaAlertsPage(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 
     public static String checkResult(WebDriver webDriver) {
-        boolean isHaveCancel = !webDriver.findElements(By.xpath("//span[text()='Cancel']")).isEmpty();
+        boolean isHaveCancel = !webDriver.findElements(isHaveCancelLocator).isEmpty();
 
         if (isHaveCancel) {
             return "Тест пройден!";

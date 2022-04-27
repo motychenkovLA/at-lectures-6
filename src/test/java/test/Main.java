@@ -20,7 +20,7 @@ public class Main {
     }
 
     public static void taskOne(){
-        System.setProperty("webdriver.chrome.driver", "src/test/chromedriver/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver/chromedriver.exe");
         WebDriver webDriver = new ChromeDriver();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(150));
         webDriver.get("https://demoqa.com/buttons");
@@ -49,7 +49,7 @@ public class Main {
     }
 
     public static void taskTwo(){
-        System.setProperty("webdriver.chrome.driver", "src/test/chromedriver/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver/chromedriver.exe");
         WebDriver webDriver = new ChromeDriver();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(150));
         webDriver.get("https://demoqa.com/alerts");
@@ -91,7 +91,7 @@ public class Main {
     }
 
     public static void taskThree(){
-        System.setProperty("webdriver.chrome.driver", "src/test/chromedriver/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver/chromedriver.exe");
         WebDriver webDriver = new ChromeDriver();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(150));
         webDriver.get("https://demoqa.com/browser-windows");
