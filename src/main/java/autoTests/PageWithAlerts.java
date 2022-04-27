@@ -1,11 +1,20 @@
 package autoTests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class PageWithAlerts {
 
-    private static final String url = "https://demoqa.com/alerts";
+    WebDriver webDriver;
+
+    public PageWithAlerts(WebDriver webDriver) {
+        this.webDriver = webDriver;
+    }
 
     private static final By alertButtonId = By.id("alertButton");
     private static final By timerAlertButtonId = By.id("timerAlertButton");
@@ -13,23 +22,29 @@ public class PageWithAlerts {
 
     private static final By textAlertCancelXpath = By.xpath("//span[text()='You selected ' and text()='Cancel'] ");
 
-    public static String getUrl() {
-        return url;
+    public PageWithAlerts clickPageButtons() {
+        WebDriverWait webDriverWait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+
+        WebElement alertButton = webDriver.findElement(alertButtonId);
+        WebElement timerAlertButton = webDriver.findElement(timerAlertButtonId);
+        WebElement confirmButton = webDriver.findElement(confirmButtonId);
+
+        alertButton.click();
+        webDriver.switchTo().alert().accept();
+
+        timerAlertButton.click();
+        webDriverWait.until(ExpectedConditions.alertIsPresent()).accept();
+
+        confirmButton.click();
+        webDriver.switchTo().alert().dismiss();
+        return new PageWithAlerts(webDriver);
     }
 
-    public static By getAlertButtonId() {
-        return alertButtonId;
-    }
-
-    public static By getTimerAlertButtonId() {
-        return timerAlertButtonId;
-    }
-
-    public static By getConfirmButtonId() {
-        return confirmButtonId;
-    }
-
-    public static By getTextAlertCancelXpath() {
-        return textAlertCancelXpath;
+    public void assertTestText() {
+        if (webDriver.findElement(textAlertCancelXpath).isDisplayed()) {
+            System.out.println("Текст сообщения об отмене аллерта появился");
+        } else {
+            System.out.println("Тест провалился");
+        }
     }
 }

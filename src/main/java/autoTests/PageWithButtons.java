@@ -13,8 +13,6 @@ public class PageWithButtons {
         this.webDriver = webDriver;
     }
 
-    private static final String url = "https://demoqa.com/buttons";
-
     private static final By doubleClickMeId = By.id("doubleClickBtn");
     private static final By rightClickMeId = By.id("rightClickBtn");
     private static final By clickMeXpath = By.xpath("//button[text()='Click Me']");
@@ -39,7 +37,7 @@ public class PageWithButtons {
 
     public void assertTestText(String expectedText, String actualText) {
         if (expectedText.equals(actualText)) {
-            System.out.println("Тестирование текста сообщение пройдено успешно");
+            System.out.println("Тестирование текста сообщения пройдено успешно");
         } else {
             System.out.println("Тест провалился");
         }
