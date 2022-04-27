@@ -1,8 +1,17 @@
 package autoTests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 public class PageWithButtons {
+
+    WebDriver webDriver;
+
+    public PageWithButtons(WebDriver webDriver) {
+        this.webDriver = webDriver;
+    }
 
     private static final String url = "https://demoqa.com/buttons";
 
@@ -12,33 +21,39 @@ public class PageWithButtons {
 
     private static final By doubleClickMeText = By.xpath("//p[text()='You have done a double click']");
     private static final By rightClickMeText = By.xpath("//p[text()='You have done a right click']");
-    private static final By clickMeText = By.id("dynamicClickMessage");
+    private static final By clickMeText = By.xpath("//p[text()='You have done a dynamic click']");
 
-    public static String getUrl() {
-        return url;
+    public PageWithButtons clickPageButtons() {
+        Actions actions = new Actions(webDriver);
+        WebElement doubleClickMe = webDriver.findElement(doubleClickMeId);
+        WebElement rightClickMe = webDriver.findElement(rightClickMeId);
+        WebElement clickMe = webDriver.findElement(clickMeXpath);
+        actions
+                .doubleClick(doubleClickMe)
+                .contextClick(rightClickMe)
+                .click(clickMe)
+                .build()
+                .perform();
+       return new PageWithButtons(webDriver);
     }
 
-    public static By getDoubleClickMeId() {
-        return doubleClickMeId;
+    public void assertTestText(String expectedText, String actualText) {
+        if (expectedText.equals(actualText)) {
+            System.out.println("Тестирование текста сообщение пройдено успешно");
+        } else {
+            System.out.println("Тест провалился");
+        }
     }
 
-    public static By getRightClickMeId() {
-        return rightClickMeId;
+    public String getDoubleClickMeText() {
+       return webDriver.findElement(doubleClickMeText).getText();
     }
 
-    public static By getClickMeXpath() {
-        return clickMeXpath;
+    public String getRightClickMeText() {
+        return webDriver.findElement(rightClickMeText).getText();
     }
 
-    public static By getDoubleClickMeText() {
-        return doubleClickMeText;
-    }
-
-    public static By getRightClickMeText() {
-        return rightClickMeText;
-    }
-
-    public static By getClickMeText() {
-        return clickMeText;
+    public String getClickMeText() {
+        return webDriver.findElement(clickMeText).getText();
     }
 }

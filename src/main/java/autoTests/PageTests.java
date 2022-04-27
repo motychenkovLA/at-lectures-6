@@ -15,7 +15,7 @@ public class PageTests {
     public static void main(String[] args) {
 
         buttonPageTest();
-        alertPageTest();
+//        alertPageTest();
 
     }
 
@@ -24,31 +24,43 @@ public class PageTests {
         System.setProperty("webdriver.chrome.driver", "src/main/java/chromedriver/chromedriver.exe");
         WebDriver webDriver = new ChromeDriver();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        webDriver.get(PageWithButtons.getUrl());
+        webDriver.get("https://demoqa.com/buttons");
 
-        WebElement doubleClickMe = webDriver.findElement(PageWithButtons.getDoubleClickMeId());
-        WebElement rightClickMe = webDriver.findElement(PageWithButtons.getRightClickMeId());
-        WebElement clickMe = webDriver.findElement(PageWithButtons.getClickMeXpath());
+        PageWithButtons pageWithButtons = new PageWithButtons(webDriver);
+        pageWithButtons.clickPageButtons();
+        pageWithButtons.assertTestText
+                ("You have done a double click", pageWithButtons.getDoubleClickMeText());
+        pageWithButtons.assertTestText
+                ("You have done a right click", pageWithButtons.getRightClickMeText());
+        pageWithButtons.assertTestText
+                ("You have done a dynamic click", pageWithButtons.getClickMeText());
+        webDriver.close();
 
-        new Actions(webDriver)
-                .doubleClick(doubleClickMe)
-                .contextClick(rightClickMe)
-                .click(clickMe)
-                .build()
-                .perform();
 
-        boolean isHaveDoubleClickMeText = webDriver.findElement
-                (PageWithButtons.getDoubleClickMeText()).isDisplayed();
-        boolean isHaveRightClickMeText = webDriver.findElement
-                (PageWithButtons.getRightClickMeText()).isDisplayed();
-        boolean isHaveClickMeText = webDriver.findElement
-                (PageWithButtons.getClickMeText()).isDisplayed();
-        webDriver.quit();
-        if (isHaveDoubleClickMeText && isHaveRightClickMeText && isHaveClickMeText) {
-            System.out.println("Тест с кнопками пройден успешно");
-        } else {
-            System.out.println("Тест с кнопками не пройден");
-        }
+//        webDriver.get(PageWithButtons.getUrl());
+//        WebElement doubleClickMe = webDriver.findElement(PageWithButtons.getDoubleClickMeId());
+//        WebElement rightClickMe = webDriver.findElement(PageWithButtons.getRightClickMeId());
+//        WebElement clickMe = webDriver.findElement(PageWithButtons.getClickMeXpath());
+//
+//        new Actions(webDriver)
+//                .doubleClick(doubleClickMe)
+//                .contextClick(rightClickMe)
+//                .click(clickMe)
+//                .build()
+//                .perform();
+//
+//        boolean isHaveDoubleClickMeText = webDriver.findElement
+//                (PageWithButtons.getDoubleClickMeText()).isDisplayed();
+//        boolean isHaveRightClickMeText = webDriver.findElement
+//                (PageWithButtons.getRightClickMeText()).isDisplayed();
+//        boolean isHaveClickMeText = webDriver.findElement
+//                (PageWithButtons.getClickMeText()).isDisplayed();
+//        webDriver.quit();
+//        if (isHaveDoubleClickMeText && isHaveRightClickMeText && isHaveClickMeText) {
+//            System.out.println("Тест с кнопками пройден успешно");
+//        } else {
+//            System.out.println("Тест с кнопками не пройден");
+//        }
     }
 
     public static void alertPageTest() {
