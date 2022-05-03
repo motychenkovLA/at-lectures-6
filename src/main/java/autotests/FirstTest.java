@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import java.time.Duration;
+
 //1. Зайти по адресу https://demoqa.com/buttons
 //        2. Кликнуть по Double Click me - двойным нажатием.
 //        3. Кликнуть по Right Click Me - правой кнопкой.
@@ -19,25 +21,31 @@ import org.openqa.selenium.interactions.Actions;
 //        Как можно проверить?
 //        boolean isHaveDoubleClickText = !webDriver.findElements(By.id("doubleClickMessage")).isEmpty();
 
-
-
-
-
 public class FirstTest {
     public static void main(String[] args) {
         System.setProperty("webdriver.chrome.driver","src/test/chromedriver/chromedriver.exe");
         WebDriver webDriver = new ChromeDriver();
         webDriver.get("https://demoqa.com/buttons");
-        WebElement webElement = webDriver.findElement(By.xpath("//button[text()='Double Click Me']"));
+        webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
+
+        WebElement webElementDCM = webDriver.findElement(By.xpath("//button[text()='Double Click Me']"));
+        WebElement webElementRCM  = webDriver.findElement(By.xpath("//button[text()='Right Click Me']"));
+        WebElement webElementCM  = webDriver.findElement(By.xpath("//button[text()='Click Me']"));
+
+
         Actions actions = new Actions(webDriver);
-        actions .doubleClick(webElement);
-        webElement = webDriver.findElement(By.xpath("//button[text()='Right Click Me']"));
-        actions .contextClick(webElement);
-        webElement = webDriver.findElement(By.xpath("//button[text()='Click Me']"));
-        actions.click(webElement)
+        actions .doubleClick(webElementDCM);
+        actions .contextClick(webElementRCM);
+        actions.click(webElementCM)
+                .build()
                 .perform();
 
         boolean isHaveDoubleClickText = !webDriver.findElements(By.id("doubleClickMessage")).isEmpty();
-        System.out.println(isHaveDoubleClickText);
+        boolean isHaveRightClickText = !webDriver.findElements(By.id("rightClickMessage")).isEmpty();
+        boolean isHaveClickText = !webDriver.findElements(By.id("dynamicClickMessage")).isEmpty();
+
+        if (isHaveDoubleClickText&&isHaveRightClickText&&isHaveClickText){
+            System.out.println("Тест пройден успешно!");
+        }
     }
 }

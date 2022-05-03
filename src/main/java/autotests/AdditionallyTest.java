@@ -1,12 +1,10 @@
 package autotests;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 
-import java.util.HashSet;
+
+import java.time.Duration;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -22,6 +20,8 @@ public class AdditionallyTest {
         System.setProperty("webdriver.chrome.driver", "src/test/chromedriver/chromedriver.exe");
         WebDriver webDriver = new ChromeDriver();
         webDriver.get("https://demoqa.com/browser-window");
+        webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
+
         String windowDescriptor = webDriver.getWindowHandle();
         ((ChromeDriver) webDriver).executeScript("window.open('about:blank')");
 
