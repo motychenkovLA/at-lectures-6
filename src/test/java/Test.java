@@ -1,8 +1,8 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import page.pageClassButtons;
-import page.PageClassAlerts;
+import page.PageButtons;
+import page.PageAlerts;
 
 import java.time.Duration;
 
@@ -19,7 +19,7 @@ public class Test {
         webDriver = new ChromeDriver();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         webDriver.get("https://demoqa.com/buttons");
-        pageClassButtons pageClass = new pageClassButtons(webDriver);
+        PageButtons pageClass = new PageButtons(webDriver);
         pageClass.clickDoubleButton();
         pageClass.clickRightButton();
         pageClass.clickButton();
@@ -38,7 +38,7 @@ public class Test {
         webDriver = new ChromeDriver();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         webDriver.get("https://demoqa.com/alerts");
-        PageClassAlerts pageClass = new PageClassAlerts(webDriver);
+        PageAlerts pageClass = new PageAlerts(webDriver);
         pageClass.clickAlertButton();
         pageClass.clickTimerAlertButton();
         pageClass.clickConfirmButton();

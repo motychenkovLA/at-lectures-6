@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 
-public class PageClassAlerts {
+public class PageAlerts {
     private WebDriver webDriver;
 
 
@@ -17,7 +17,7 @@ public class PageClassAlerts {
     private By timerAlertButtonxpath = By.xpath("//button[@id ='timerAlertButton']");
     private By confirmButtonxpath = By.xpath("//button[@id ='confirmButton']");
 
-    public PageClassAlerts(WebDriver webDriver) {
+    public PageAlerts(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 

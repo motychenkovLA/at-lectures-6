@@ -7,14 +7,14 @@ import org.openqa.selenium.interactions.Actions;
 
 
 
-public class pageClassButtons {
+public class PageButtons {
     private WebDriver webDriver;
 
     private By doubleClickxpath = By.xpath("//button[text()='Double Click Me']");
     private By rightClickxpath = By.xpath("//button[text()='Right Click Me']");
     private By clickxpath = By.xpath("//button[text()='Click Me']");
 
-    public pageClassButtons(WebDriver webDriver) {
+    public PageButtons(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 
