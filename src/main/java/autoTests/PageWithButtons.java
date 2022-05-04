@@ -35,13 +35,6 @@ public class PageWithButtons {
         return new PageWithButtons(webDriver);
     }
 
-    public void assertTestText(String expectedText, String actualText) {
-        if (expectedText.equals(actualText)) {
-            System.out.println("Тест выполнен успешно");
-        } else {
-            System.out.println("Тест не выполнен");
-        }
-    }
 
     public String getDoubleClickMeText() {
         return webDriver.findElement(doubleClickMeText).getText();

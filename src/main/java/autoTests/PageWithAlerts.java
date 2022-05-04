@@ -20,7 +20,7 @@ public class PageWithAlerts {
     private static final By timerAlertButtonId = By.id("timerAlertButton");
     private static final By confirmButtonId = By.id("confirmButton");
 
-    private static final By textAlertCancelXpath = By.xpath("//span[text()='You selected ' and text()='Cancel'] ");
+
 
     public PageWithAlerts clickPageButtons() {
         WebDriverWait webDriverWait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
@@ -40,11 +40,5 @@ public class PageWithAlerts {
         return new PageWithAlerts(webDriver);
     }
 
-    public void assertTestText() {
-        if (webDriver.findElement(textAlertCancelXpath).isDisplayed()) {
-            System.out.println("Тест успешный");
-        } else {
-            System.out.println("Тест не выполнен");
-        }
-    }
+
 }
