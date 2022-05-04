@@ -81,7 +81,6 @@ public class Main {
             } else if (attachmentType.equals("defect")) {
                 System.out.println("Введите номер дефекта: ");
                 int defectId = inInt(scanner);
-                scanner.nextLine(); // todo 3 - ?
                 attachment = new DefectAttachment(defectId);
             } else {
                 System.out.println("Ошибочное значение");
