@@ -1,8 +1,8 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import page.PageClass1;
-import page.PageClass2;
+import page.pageClassButtons;
+import page.PageClassAlerts;
 
 import java.time.Duration;
 
@@ -19,10 +19,12 @@ public class Test {
         webDriver = new ChromeDriver();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         webDriver.get("https://demoqa.com/buttons");
-        PageClass1 pageClass = new PageClass1(webDriver);
-        pageClass.findEndClick();
+        pageClassButtons pageClass = new pageClassButtons(webDriver);
+        pageClass.clickDoubleButton();
+        pageClass.clickRightButton();
+        pageClass.clickButton();
 
-        if (pageClass.doubleClickText() && pageClass.rightClickText() && pageClass.clickText()) {
+        if (pageClass.isHaveDoubleClickText() && pageClass.isHaveRightClickText() && pageClass.isHaveClickText()) {
             System.out.println("Тест пройден");
         } else {
             System.out.println("Тест не пройден");
@@ -34,11 +36,14 @@ public class Test {
     public static void test2() {
         System.setProperty("webdriver.chrome.driver", "src/test/chromedriver/chromedriver.exe");
         webDriver = new ChromeDriver();
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         webDriver.get("https://demoqa.com/alerts");
-        PageClass2 pageClass = new PageClass2(webDriver);
-        pageClass.findEndClick();
+        PageClassAlerts pageClass = new PageClassAlerts(webDriver);
+        pageClass.clickAlertButton();
+        pageClass.clickTimerAlertButton();
+        pageClass.clickConfirmButton();
 
-        if (pageClass.checkConfirmResult()) {
+        if (pageClass.isHaveConfirmResult()) {
             System.out.println("Тест пройден");
         } else {
             System.out.println("Тест не пройден");
