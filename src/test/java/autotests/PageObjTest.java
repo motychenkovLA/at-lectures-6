@@ -1,4 +1,5 @@
 package autotests;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.DemoQaAlerts;
@@ -8,10 +9,12 @@ import java.time.Duration;
 
 public class PageObjTest {
 
+    private static final By cancelText = By.id("confirmResult");
     public static void main(String[] args) {
         System.setProperty("webdriver.chrome.driver","src/test/chromedriver/chromedriver.exe");
         testButtons();
         testAlerts();
+        checkTest();
     }
 
     public static void testButtons(){
@@ -30,9 +33,18 @@ public class PageObjTest {
 
         DemoQaAlerts demoQaAlerts = new DemoQaAlerts(webDriver);
         demoQaAlerts.findAndClick();
-        demoQaAlerts.checkTest();
-    }
 
+    }
+    public static void checkTest(){
+        WebDriver webDriver = new ChromeDriver();
+        boolean isHaveCancelText = webDriver.findElement(cancelText).isDisplayed();
+
+
+        if (isHaveCancelText){
+            System.out.println("Тест пройден успешно!");
+        }
+        else System.out.println("Тест не пройден");
+    }
 
 
 

@@ -1,4 +1,4 @@
-package autotests;
+package autotests.FirstTest;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

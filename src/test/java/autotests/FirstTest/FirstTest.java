@@ -1,4 +1,4 @@
-package autotests;
+package autotests.FirstTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -47,5 +47,6 @@ public class FirstTest {
         if (isHaveDoubleClickText&&isHaveRightClickText&&isHaveClickText){
             System.out.println("Тест пройден успешно!");
         }
+        else System.out.println("Тест не проден");
     }
 }

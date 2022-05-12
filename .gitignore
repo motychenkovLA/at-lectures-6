@@ -1,3 +1,4 @@
 /.idea/
 /target/
 *.iml
+/src/test/chromedriver/chromedriver.exe

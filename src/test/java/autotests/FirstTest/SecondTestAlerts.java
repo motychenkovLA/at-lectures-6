@@ -1,4 +1,4 @@
-package autotests;
+package autotests.FirstTest;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -38,6 +38,7 @@ public class SecondTestAlerts {
                 .accept();
 
         webElement = webDriver.findElement(By.xpath("//button[@Id = 'confirmButton']"));
+
         webElement.click();
         webDriver.switchTo()
                 .alert()
@@ -48,5 +49,6 @@ public class SecondTestAlerts {
         if (cancelText){
             System.out.println("Тест пройден успешно!");
         }
+        else System.out.println("Тест не проден");
     }
 }

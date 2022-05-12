@@ -40,15 +40,15 @@ public class DemoQaAlerts {
                 .dismiss();
     }
 
-    public  void checkTest(){
-        boolean isHaveCancelText = webDriver.findElement(cancelText).isDisplayed();
-
-
-        if (isHaveCancelText){
-            System.out.println("Тест пройден успешно!");
-        }
-        else System.out.println("Тест не пройден");
-    }
+//    public  void checkTest(){
+//        boolean isHaveCancelText = webDriver.findElement(cancelText).isDisplayed();
+//
+//
+//        if (isHaveCancelText){
+//            System.out.println("Тест пройден успешно!");
+//        }
+//        else System.out.println("Тест не пройден");
+//    }
 
 
 }
