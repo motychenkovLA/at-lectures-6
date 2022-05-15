@@ -40,11 +40,7 @@ public class PageWithAlerts {
         return new PageWithAlerts(webDriver);
     }
 
-    public void assertTestText() {
-        if (webDriver.findElement(textAlertCancelXpath).isDisplayed()) {
-            System.out.println("Текст сообщения об отмене аллерта появился");
-        } else {
-            System.out.println("Тест провалился");
-        }
+    public String getAlertCancelText() {
+        return webDriver.findElement(textAlertCancelXpath).getText();
     }
 }
