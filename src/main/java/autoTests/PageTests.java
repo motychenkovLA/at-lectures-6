@@ -9,7 +9,7 @@ import java.time.Duration;
 
 public class PageTests {
 
-    WebDriver webDriver;
+    private WebDriver webDriver;
 
     @Rule
     public Timeout durationsOfTests = Timeout.seconds(180);
@@ -23,6 +23,8 @@ public class PageTests {
     @After
     public void closingTheDriver() {
         webDriver.close();
+        if (webDriver != null)
+            webDriver.quit();
     }
 
     @Test
@@ -37,11 +39,11 @@ public class PageTests {
         PageWithButtons pageWithButtons = new PageWithButtons(webDriver);
         pageWithButtons.clickPageButtons();
 
-        Assert.assertEquals("Тексты сообщений не совпадают",
+        Assert.assertEquals("Тексты сообщений дабл клик не совпадают",
                 expectedDoubleClickMeText, pageWithButtons.getDoubleClickMeText());
-        Assert.assertEquals("Тексты сообщений не совпадают",
+        Assert.assertEquals("Тексты сообщений правый клик не совпадают",
                 expectedRightClickMeText, pageWithButtons.getRightClickMeText());
-        Assert.assertEquals("Тексты сообщений не совпадают",
+        Assert.assertEquals("Тексты сообщений клик не совпадают",
                 expectedClickMeText, pageWithButtons.getClickMeText());
     }
 
@@ -55,7 +57,7 @@ public class PageTests {
         PageWithAlerts pageWithAlerts = new PageWithAlerts(webDriver);
         pageWithAlerts.clickPageButtons();
 
-        Assert.assertEquals("Тексты сообщений не совпадают",
+        Assert.assertEquals("Тексты сообщений отмены алерта не совпадают",
                 expectedAlertCancelText, pageWithAlerts.getAlertCancelText());
     }
 }
