@@ -22,7 +22,6 @@ public class PageTests {
 
     @After
     public void closingTheDriver() {
-        webDriver.close();
         if (webDriver != null)
             webDriver.quit();
     }
