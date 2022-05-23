@@ -2,7 +2,6 @@ package autotests.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 public class DemoqaButtonsPage {
@@ -14,9 +13,24 @@ public class DemoqaButtonsPage {
     private static By isHaveDoubleClickTextLocator = By.id("doubleClickMessage");
     private static By isHaveRightClickTextLocator = By.id("rightClickMessage");
     private static By isHaveDynamicClickTextLocator = By.id("dynamicClickMessage");
+    public String expectedHaveDoubleClickText = "You have done a double click";
+    public String expectedHaveRightClickText = "You have done a right click";
+    public String expectedHaveDynamicClickText = "You have done a dynamic click";
 
     public DemoqaButtonsPage(WebDriver webDriver) {
         this.webDriver = webDriver;
+    }
+
+    public String getHaveDoubleClickText(WebDriver webDriver) {
+        return webDriver.findElement(isHaveDoubleClickTextLocator).getText();
+    }
+
+    public String getHaveRightClickText(WebDriver webDriver) {
+        return webDriver.findElement(isHaveRightClickTextLocator).getText();
+    }
+
+    public String getHaveDynamicClickText(WebDriver webDriver) {
+        return webDriver.findElement(isHaveDynamicClickTextLocator).getText();
     }
 
     public void doubleClick(){
@@ -48,6 +62,5 @@ public class DemoqaButtonsPage {
             return "Тест не пройден!";
         }
     }
-
 
 }
