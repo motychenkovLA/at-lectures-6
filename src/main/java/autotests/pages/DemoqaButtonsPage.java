@@ -13,9 +13,6 @@ public class DemoqaButtonsPage {
     private static By isHaveDoubleClickTextLocator = By.id("doubleClickMessage");
     private static By isHaveRightClickTextLocator = By.id("rightClickMessage");
     private static By isHaveDynamicClickTextLocator = By.id("dynamicClickMessage");
-    public String expectedHaveDoubleClickText = "You have done a double click";
-    public String expectedHaveRightClickText = "You have done a right click";
-    public String expectedHaveDynamicClickText = "You have done a dynamic click";
 
     public DemoqaButtonsPage(WebDriver webDriver) {
         this.webDriver = webDriver;

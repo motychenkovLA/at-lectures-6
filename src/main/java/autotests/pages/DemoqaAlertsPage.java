@@ -14,7 +14,6 @@ public class DemoqaAlertsPage {
     private static By timerAlertButtonLocator = By.id("timerAlertButton");
     private static By confirmButtonLocator = By.id("confirmButton");
     private static By isHaveCancelLocator = By.xpath("//span[text()='Cancel']");
-    public String expectedHaveCancelText = "You selected Cancel";
 
     public DemoqaAlertsPage(WebDriver webDriver) {
         this.webDriver = webDriver;

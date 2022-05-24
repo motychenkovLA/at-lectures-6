@@ -5,17 +5,18 @@ import autotests.pages.DemoqaButtonsPage;
 import org.junit.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.rules.ErrorCollector;
-import org.junit.rules.Stopwatch;
 import org.junit.rules.Timeout;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.asserts.SoftAssert;
 
-import java.time.Duration;
-
 public class MainTest {
 
     private WebDriver webDriver;
+    public String expectedHaveDoubleClickText = "You have done a double click";
+    public String expectedHaveRightClickText = "You have done a right click";
+    public String expectedHaveDynamicClickText = "You have done a dynamic click";
+    public String expectedHaveCancelText = "You selected Cancel";
 
     @Before
     public void startMethod(){
@@ -44,15 +45,14 @@ public class MainTest {
         demoqaButtonsPage.rightClick();
         demoqaButtonsPage.click();
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(demoqaButtonsPage.expectedHaveDoubleClickText,
+        softAssert.assertEquals(expectedHaveDoubleClickText,
                 demoqaButtonsPage.getHaveDoubleClickText(webDriver),"\nНекорректное сообщение после дабл клика");
-        softAssert.assertEquals(demoqaButtonsPage.expectedHaveRightClickText,
+        softAssert.assertEquals(expectedHaveRightClickText,
                 demoqaButtonsPage.getHaveRightClickText(webDriver),"\nНекорректное сообщение после райт клика");
-        softAssert.assertEquals(demoqaButtonsPage.expectedHaveDynamicClickText,
+        softAssert.assertEquals(expectedHaveDynamicClickText,
                 demoqaButtonsPage.getHaveDynamicClickText(webDriver),"\nНекорректное сообщение после динамик клика");
 
         softAssert.assertAll();
-
         System.out.println(demoqaButtonsPage.checkResult(webDriver));
     }
 
@@ -64,7 +64,7 @@ public class MainTest {
         demoqaAlertsPage.clickAndAcceptAlert();
         demoqaAlertsPage.clickAndWaitAlert();
         demoqaAlertsPage.clickAndDismiss();
-        Assert.assertEquals("Некорректное сообщение отмены аллерта", demoqaAlertsPage.expectedHaveCancelText,
+        Assert.assertEquals("Некорректное сообщение отмены аллерта", expectedHaveCancelText,
                 demoqaAlertsPage.getHaveCancelText(webDriver));
         System.out.println(DemoqaAlertsPage.checkResult(webDriver));
     }
