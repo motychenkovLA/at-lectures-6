@@ -14,6 +14,7 @@ public class Alerts {
     private final By alertButtonPath = By.id("alertButton");
     private final By timerAlertButtonPath = By.id("timerAlertButton");
     private final By confirmButtonPath = By.id("confirmButton");
+    private final By textAlertCancelXpath = By.xpath("//span[text()='You selected ' and text()='Cancel'] ");
     private final WebDriver driver;
 
     public Alerts(WebDriver driver) {
@@ -51,6 +52,10 @@ public class Alerts {
 
     public void isTestSuccess(WebDriver driver) {
         System.out.println(!driver.findElements(By.xpath("//span[contains(., 'Cancel')]")).isEmpty() ? "Тест пройден успешно" : "Тест не пройден");
+    }
+
+    public String getAlertCancelText() {
+        return driver.findElement(textAlertCancelXpath).getText();
     }
 }
 

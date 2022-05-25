@@ -40,4 +40,16 @@ public class Buttons {
         boolean isClickMe = !driver.findElements(By.xpath("//p[text()='You have done a dynamic click']")).isEmpty();
         System.out.println(isDouble && isRight && isClickMe ? "Тест пройден успешно" : "Тест не пройден");
     }
+
+    public String getDoubleClickMeText() {
+        return driver.findElement(doubleClickBtnPath).getText();
+    }
+
+    public String getRightClickMeText() {
+        return driver.findElement(rightClickBtnPath).getText();
+    }
+
+    public String getClickMeText() {
+        return driver.findElement(clickMeBtnPath).getText();
+    }
 }
