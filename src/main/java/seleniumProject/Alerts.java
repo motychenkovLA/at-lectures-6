@@ -3,6 +3,7 @@ package seleniumProject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class Alerts {
+
+
     private final String site = "https://demoqa.com/alerts";
     private final By alertButtonPath = By.id("alertButton");
     private final By timerAlertButtonPath = By.id("timerAlertButton");
@@ -50,9 +53,7 @@ public class Alerts {
                 .dismiss();
     }
 
-    public void isTestSuccess(WebDriver driver) {
-        System.out.println(!driver.findElements(By.xpath("//span[contains(., 'Cancel')]")).isEmpty() ? "Тест пройден успешно" : "Тест не пройден");
-    }
+
 
     public String getAlertCancelText() {
         return driver.findElement(textAlertCancelXpath).getText();

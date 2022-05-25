@@ -16,6 +16,5 @@ public class TestAlerts {
         alerts.clickFirstButton();
         alerts.clickSecondButton();
         alerts.clickThirdButton();
-        alerts.isTestSuccess(driver);
     }
 }
