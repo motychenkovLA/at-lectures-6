@@ -13,7 +13,9 @@ public class Buttons {
     private final By rightClickBtnPath = By.id("rightClickBtn");
     private final By clickMeBtnPath = By.xpath("//button[text() = 'Click Me']");
     private final WebDriver driver;
-
+    private static final By doubleClickMeText = By.xpath("//p[text()='You have done a double click']");
+    private static final By rightClickMeText = By.xpath("//p[text()='You have done a right click']");
+    private static final By clickMeText = By.xpath("//p[text()='You have done a dynamic click']");
     public Buttons(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -42,14 +44,14 @@ public class Buttons {
     }
 
     public String getDoubleClickMeText() {
-        return driver.findElement(doubleClickBtnPath).getText();
+        return driver.findElement(doubleClickMeText).getText();
     }
 
     public String getRightClickMeText() {
-        return driver.findElement(rightClickBtnPath).getText();
+        return driver.findElement(rightClickMeText).getText();
     }
 
     public String getClickMeText() {
-        return driver.findElement(clickMeBtnPath).getText();
+        return driver.findElement(clickMeText).getText();
     }
 }
