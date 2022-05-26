@@ -2,7 +2,6 @@ package seleniumProject;
 
 import org.junit.*;
 import org.junit.rules.Timeout;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -10,10 +9,9 @@ import java.time.Duration;
 
 
 public class Main {
-    private WebDriver driver;
     @Rule
     public Timeout durationsOfTests = Timeout.seconds(180);
-
+    private WebDriver driver;
 
     @Before
     public void driverInitialization() {
@@ -32,7 +30,6 @@ public class Main {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         Buttons buttons = new Buttons(driver);
         buttons.clickAllButtons();
-        buttons.isTestSuccess();
         String expectedDoubleClickMeText = "You have done a double click";
         String expectedRightClickMeText = "You have done a right click";
         String expectedClickMeText = "You have done a dynamic click";
@@ -47,14 +44,12 @@ public class Main {
 
     @Test
     public void alertsPageTest() {
-        By examination = By.xpath("//span[contains(., 'Cancel')]");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         String expectedAlertCancelText = "You selected " + "Cancel";
         Alerts alerts = new Alerts(driver);
         alerts.clickFirstButton();
         alerts.clickSecondButton();
         alerts.clickThirdButton();
-        System.out.println(!driver.findElements(examination).isEmpty() ? "Тест пройден успешно" : "Тест не пройден");
         Assert.assertEquals("Тексты сообщений не совпадают",
                 expectedAlertCancelText, alerts.getAlertCancelText());
 
