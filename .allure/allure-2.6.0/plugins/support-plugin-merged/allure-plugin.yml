@@ -1,0 +1,9 @@
+id: support-plugin
+name: Support plugin
+description: Plugin adds Support tab, aggregating testruns in categories based on @Owner labels
+extensions:
+ - ru.tsconsulting.autoqa.supportplugin.impl_merged.PrintFormPlugin
+ - ru.tsconsulting.autoqa.supportplugin.impl_merged.SupportPlugin
+ - ru.tsconsulting.autoqa.supportplugin.impl_merged.TskRespPlugin
+jsFiles:
+ - index.js

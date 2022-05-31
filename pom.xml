@@ -91,11 +91,11 @@
                 <artifactId>allure-maven</artifactId>
                 <version>2.9</version>
                 <configuration>
-                    <reportVersion>2.9.0</reportVersion>
+                    <reportVersion>2.6.0</reportVersion>
 <!--                    <properties>-->
 <!--                        <allure.issues.tracker.pattern>http://example.com/%s</allure.issues.tracker.pattern>-->
 <!--                    </properties>-->
-                    <propertiesFilePath>C:\Users\DPOPOVA\IdeaProjects\at-lectures-6\src\test\resources</propertiesFilePath>
+                    <propertiesFilePath>src\test\resources\allure.properties</propertiesFilePath>
                 </configuration>
             </plugin>
         </plugins>
