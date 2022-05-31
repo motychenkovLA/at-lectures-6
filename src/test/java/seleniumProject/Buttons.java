@@ -1,6 +1,7 @@
 package seleniumProject;
 
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,7 +23,7 @@ public class Buttons {
         PageFactory.initElements(driver, this);
         driver.get(site);
     }
-
+    @Step("Нажаты все кнопки")
     public void clickAllButtons() {
         WebElement doubleClickBtn = driver.findElement(doubleClickBtnPath);
         WebElement rightClickBtn = driver.findElement(rightClickBtnPath);
@@ -36,15 +37,15 @@ public class Buttons {
                 .build()
                 .perform();
     }
-
+    @Step("Найден текст двойного клика")
     public String getDoubleClickMeText() {
         return driver.findElement(doubleClickMeText).getText();
     }
-
+    @Step("Найден текст правого клика")
     public String getRightClickMeText() {
         return driver.findElement(rightClickMeText).getText();
     }
-
+    @Step("Найден текст клик ми")
     public String getClickMeText() {
         return driver.findElement(clickMeText).getText();
     }
