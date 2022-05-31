@@ -3,15 +3,15 @@ package test;
 import autotests.pages.DemoqaAlertsPage;
 import autotests.pages.DemoqaButtonsPage;
 import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.hamcrest.core.IsEqual;
 import org.junit.*;
 import org.junit.rules.ErrorCollector;
 import org.junit.rules.Timeout;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.asserts.SoftAssert;
 
-
+@DisplayName("Allure ДЗ")
 public class MainTest {
 
     private WebDriver webDriver;
@@ -38,7 +38,7 @@ public class MainTest {
     @Rule
     public ErrorCollector collector = new ErrorCollector();
 
-   // @DisplayName("Тест №1. Проверка страницы https://demoqa.com/buttons")
+    @DisplayName("Тест №1. Проверка страницы https://demoqa.com/buttons")
     @Description("Тестирование страницы с кнопками")
     @Test
     public void demoqaButtonsTest(){
@@ -80,7 +80,7 @@ public class MainTest {
         System.out.println(demoqaButtonsPage.checkResult(webDriver));
     }
 
-   // @DisplayName("Тест №2. Проверка страницы https://demoqa.com/alerts")
+    @DisplayName("Тест №2. Проверка страницы https://demoqa.com/alerts")
     @Description("Тестирование страницы с алертами")
     @Test
     public void demoqaAlertsTest(){

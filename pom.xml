@@ -41,11 +41,11 @@
             <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.8.8</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.testng</groupId>-->
+<!--            <artifactId>testng</artifactId>-->
+<!--            <version>6.8.8</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit4</artifactId>
@@ -91,11 +91,11 @@
                 <artifactId>allure-maven</artifactId>
                 <version>2.9</version>
                 <configuration>
-                    <reportVersion>2.7.0</reportVersion>
+                    <reportVersion>2.9.0</reportVersion>
 <!--                    <properties>-->
 <!--                        <allure.issues.tracker.pattern>http://example.com/%s</allure.issues.tracker.pattern>-->
 <!--                    </properties>-->
-<!--                    <propertiesFilePath>path/to/your/allure.properties</propertiesFilePath>-->
+                    <propertiesFilePath>C:\Users\DPOPOVA\IdeaProjects\at-lectures-6\src\test\resources</propertiesFilePath>
                 </configuration>
             </plugin>
         </plugins>
