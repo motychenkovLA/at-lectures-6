@@ -1,5 +1,6 @@
 package autoTests;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +23,7 @@ public class PageWithButtons {
     private static final By rightClickMeText = By.xpath("//p[text()='You have done a right click']");
     private static final By clickMeText = By.xpath("//p[text()='You have done a dynamic click']");
 
+    @Step("Клики по кнопкам")
     public PageWithButtons clickPageButtons() {
         Actions actions = new Actions(webDriver);
         WebElement doubleClickMe = webDriver.findElement(doubleClickMeId);
@@ -36,14 +38,17 @@ public class PageWithButtons {
        return new PageWithButtons(webDriver);
     }
 
+    @Step("Получить текст при клике на кнопку doubleClickMe")
     public String getDoubleClickMeText() {
        return webDriver.findElement(doubleClickMeText).getText();
     }
 
+    @Step("Получить текст при клике на кнопку rightClickMe")
     public String getRightClickMeText() {
         return webDriver.findElement(rightClickMeText).getText();
     }
 
+    @Step("Получить текст при клике на кнопку clickMe")
     public String getClickMeText() {
         return webDriver.findElement(clickMeText).getText();
     }

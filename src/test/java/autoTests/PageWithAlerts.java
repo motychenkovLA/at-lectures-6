@@ -1,5 +1,6 @@
 package autoTests;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,6 +37,7 @@ public class PageWithAlerts {
 //    private static final By confirmButtonId = By.id("confirmButton");
 //    private static final By textAlertCancelXpath = By.xpath("//span[text()='You selected ' and text()='Cancel'] ");
 
+    @Step("Клики по кнопкам с алертами")
     public PageWithAlerts clickPageButtons() {
         WebDriverWait webDriverWait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
 
@@ -54,6 +56,7 @@ public class PageWithAlerts {
         return new PageWithAlerts(webDriver);
     }
 
+    @Step("Получить текст по отмене алерта")
     public String getAlertCancelText() {
 //        return webDriver.findElement(textAlertCancelXpath).getText();
         return textAlertCancel.getText();
