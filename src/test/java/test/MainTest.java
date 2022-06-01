@@ -4,6 +4,7 @@ import autotests.pages.DemoqaAlertsPage;
 import autotests.pages.DemoqaButtonsPage;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import org.hamcrest.core.IsEqual;
 import org.junit.*;
@@ -47,6 +48,7 @@ public class MainTest {
     @DisplayName("Тест №1. Проверка страницы https://demoqa.com/buttons")
     @Description("Тестирование страницы с кнопками")
     @Test
+    @Step
     public void demoqaButtonsTest(){
         webDriver.get("https://demoqa.com/buttons");
         DemoqaButtonsPage demoqaButtonsPage = new DemoqaButtonsPage(webDriver);
@@ -90,6 +92,7 @@ public class MainTest {
     @DisplayName("Тест №2. Проверка страницы https://demoqa.com/alerts")
     @Description("Тестирование страницы с алертами")
     @Test
+    @Step
     public void demoqaAlertsTest(){
         webDriver.get("https://demoqa.com/alerts");
         DemoqaAlertsPage demoqaAlertsPage = new DemoqaAlertsPage(webDriver);
