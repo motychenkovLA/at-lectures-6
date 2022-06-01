@@ -1,5 +1,6 @@
 package seleniumProject;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,7 +26,7 @@ public class Alerts {
         driver.get(site);
 
     }
-
+    @Step("Нажата первая кнопка")
     public void clickFirstButton() {
         WebElement alertButton = driver.findElement(alertButtonPath);
         alertButton.click();
@@ -33,7 +34,7 @@ public class Alerts {
                 .alert()
                 .accept();
     }
-
+    @Step("Нажата вторая кнопка")
     public void clickSecondButton() {
         WebElement timerAlertButton = driver.findElement(timerAlertButtonPath);
         timerAlertButton.click();
@@ -43,7 +44,7 @@ public class Alerts {
                 .alert()
                 .accept();
     }
-
+    @Step("Нажата третья кнопка")
     public void clickThirdButton() {
         WebElement confirmButton = driver.findElement(confirmButtonPath);
         confirmButton.click();
