@@ -1,3 +1,6 @@
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -6,49 +9,35 @@ import page.PageAlerts;
 
 import java.time.Duration;
 
-public class Test {
-    private static WebDriver webDriver;
+public class Test2 {
+    WebDriver webDriver;
 
-    public static void main(String[] args) {
-        test1();
-        test2();
-    }
-
-    public static void test1() {
+    @Before
+    public void beforeMethod () {
         System.setProperty("webdriver.chrome.driver", "src/test/chromedriver/chromedriver.exe");
         webDriver = new ChromeDriver();
+    }
+    @Test (timeout = 180000)
+    public void test1() {
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         webDriver.get("https://demoqa.com/buttons");
         PageButtons pageClass = new PageButtons(webDriver);
         pageClass.clickDoubleButton();
         pageClass.clickRightButton();
         pageClass.clickButton();
-
-        if (pageClass.isHaveDoubleClickText() && pageClass.isHaveRightClickText() && pageClass.isHaveClickText()) {
-            System.out.println("Тест пройден");
-        } else {
-            System.out.println("Тест не пройден");
-        }
-
+        Assert.assertTrue( "Тест не пройден",pageClass.isHaveDoubleClickText()
+                && pageClass.isHaveRightClickText() && pageClass.isHaveClickText());
         webDriver.quit();
     }
-
-    public static void test2() {
-        System.setProperty("webdriver.chrome.driver", "src/test/chromedriver/chromedriver.exe");
-        webDriver = new ChromeDriver();
+    @Test (timeout = 180000)
+    public void test2() {
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         webDriver.get("https://demoqa.com/alerts");
         PageAlerts pageClass = new PageAlerts(webDriver);
         pageClass.clickAlertButton();
         pageClass.clickTimerAlertButton();
         pageClass.clickConfirmButton();
-
-        if (pageClass.isHaveConfirmResult()) {
-            System.out.println("Тест пройден");
-        } else {
-            System.out.println("Тест не пройден");
-        }
-
+        Assert.assertTrue("Тест не пройден",pageClass.isHaveConfirmResult());
         webDriver.quit();
     }
 }
