@@ -2,14 +2,20 @@ package test;
 
 import autotests.pages.DemoqaAlertsPage;
 import autotests.pages.DemoqaButtonsPage;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.hamcrest.core.IsEqual;
 import org.junit.*;
 import org.junit.rules.ErrorCollector;
 import org.junit.rules.Timeout;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.nio.file.Files;
 
 @DisplayName("Allure ДЗ")
 public class MainTest {
@@ -78,6 +84,7 @@ public class MainTest {
         }
 
         System.out.println(demoqaButtonsPage.checkResult(webDriver));
+        logScreenshot(webDriver);
     }
 
     @DisplayName("Тест №2. Проверка страницы https://demoqa.com/alerts")
@@ -92,5 +99,16 @@ public class MainTest {
         Assert.assertEquals("Некорректное сообщение отмены аллерта", expectedHaveCancelText,
                 demoqaAlertsPage.getHaveCancelText(webDriver));
         System.out.println(DemoqaAlertsPage.checkResult(webDriver));
+        logScreenshot(webDriver);
+    }
+    @Attachment(value="screenshot",type="image/png")
+    public static byte[] logScreenshot(WebDriver webDriver){
+        byte[] scrFile = ((TakesScreenshot)webDriver).getScreenshotAs(OutputType.BYTES);
+        try {
+            return scrFile;
+        } catch (Exception e){
+            e.printStackTrace();
+            return new byte[0];
+        }
     }
 }
