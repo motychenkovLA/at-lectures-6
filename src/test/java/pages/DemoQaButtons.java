@@ -15,9 +15,11 @@ public class DemoQaButtons {
     private static final By doubleClickButton = By.xpath("//button[text()='Double Click Me']");
     private static final By rightClickButton = By.xpath("//button[text()='Right Click Me']");
     private static final By clickButton = By.xpath("//button[text()='Click Me']");
-    private static final By doubleClickText = By.id("doubleClickMessage");
-    private static final By rightClickText = By.id("rightClickMessage");
-    private static final By dynamicClickText  = By.id("dynamicClickMessage");
+
+    private static final By doubleClickMessage = By.xpath("//p [@Id = 'doubleClickMessage']");
+    private static final By rightClickMessage = By.xpath("//p [@Id = 'rightClickMessage']");
+    private static final By clickMessage = By.xpath("//p [@Id = 'dynamicClickMessage']");
+
 
     public  void findAndClick(){
         Actions actions = new Actions(webDriver);
@@ -28,15 +30,17 @@ public class DemoQaButtons {
         webDriver.findElement(clickButton).click();
     }
 
-    public  void checkTest(){
-        boolean isHaveDoubleClickText = webDriver.findElement(doubleClickText).isDisplayed();
-        boolean isHaveRightClickText = webDriver.findElement(rightClickText).isDisplayed();
-        boolean isHaveDynamicClickText= webDriver.findElement(dynamicClickText).isDisplayed();
-
-        if (isHaveDoubleClickText && isHaveRightClickText && isHaveDynamicClickText){
-            System.out.println("Тест пройден успешно!");
-        }
-        else System.out.println("Тест не пройден");
+    public String getDoubleClickMessageText() {
+        return webDriver.findElement(doubleClickMessage).getText();
     }
+
+    public String getRightClickMessageText() {
+        return webDriver.findElement(rightClickMessage).getText();
+    }
+
+    public String getClickMessageText() {
+        return webDriver.findElement(clickMessage).getText();
+    }
+
 
 }
