@@ -10,7 +10,7 @@ import java.time.Duration;
 
 public class JUnitTest {
     WebDriver webDriver;
-
+    final String cancelText = "You selected Cancel";
 
     @Rule
     public Timeout timeout = Timeout.seconds(180);
@@ -19,6 +19,11 @@ public class JUnitTest {
     public void chromeDriverInit(){
         System.setProperty("webdriver.chrome.driver", "src/test/chromedriver/chromedriver.exe");
         webDriver = new ChromeDriver();
+    }
+
+    @After
+    public void chromeDriverClose(){
+        webDriver.close();
     }
 
     @Test
@@ -45,9 +50,9 @@ public class JUnitTest {
         webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
 
         DemoQaAlerts demoQaAlerts = new DemoQaAlerts(webDriver);
-        demoQaAlerts.findAndClick();
-
-        final String cancelText = "You selected Cancel";
+        demoQaAlerts.clickAlertButton();
+        demoQaAlerts.clickTimerAlertButton();
+        demoQaAlerts.dismissAlert();
 
         Assert.assertEquals("Текст кнопки отмена отсутствует", cancelText, demoQaAlerts.getCancelText());
     }

@@ -32,7 +32,9 @@ public class PageObjTest {
         webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
 
         DemoQaAlerts demoQaAlerts = new DemoQaAlerts(webDriver);
-        demoQaAlerts.findAndClick();
+        demoQaAlerts.clickAlertButton();
+        demoQaAlerts.clickTimerAlertButton();
+        demoQaAlerts.dismissAlert();
 
     }
     public static void checkTest(){

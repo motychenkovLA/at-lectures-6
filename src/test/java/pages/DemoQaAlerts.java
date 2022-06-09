@@ -21,19 +21,21 @@ public class DemoQaAlerts {
     private static final By confirmButton = By.xpath("//button[@Id = 'confirmButton']");
     private static final By cancelText = By.id("confirmResult");
 
-    public  void findAndClick(){
+    public  void clickAlertButton(){
         webDriver.findElement(alertButton).click();
         webDriver.switchTo()
                 .alert()
                 .accept();
-
+    }
+    public  void clickTimerAlertButton() {
         webDriver.findElement(timerAlertButton).click();
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.alertIsPresent());
         webDriver.switchTo()
                 .alert()
                 .accept();
-
+    }
+    public  void dismissAlert() {
         webDriver.findElement(confirmButton).click();
         webDriver.switchTo()
                 .alert()
