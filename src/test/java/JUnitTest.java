@@ -9,7 +9,7 @@ import page.PageAlerts;
 
 import java.time.Duration;
 
-public class Test2 {
+public class JUnitTest {
     WebDriver webDriver;
 
     @Before
