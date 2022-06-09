@@ -1,5 +1,7 @@
 package autotests.JUnit;
+import io.qameta.allure.Step;
 import org.junit.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.rules.Timeout;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -7,7 +9,7 @@ import pages.DemoQaAlerts;
 import pages.DemoQaButtons;
 import java.time.Duration;
 
-
+@DisplayName("Тест на Junit")
 public class JUnitTest {
     WebDriver webDriver;
     final String cancelText = "You selected Cancel";
@@ -26,7 +28,9 @@ public class JUnitTest {
         webDriver.close();
     }
 
+    @DisplayName("Тест на нажатия кнопок")
     @Test
+    @Step("Переход на страницу https://demoqa.com/buttons и нажатие кнопок")
     public void testButtons(){
         webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
         webDriver.get("https://demoqa.com/buttons");
@@ -45,6 +49,7 @@ public class JUnitTest {
     }
 
     @Test
+    @Step("Переход на страницу https://demoqa.com/alerts и работа с алертами")
     public void testAlerts(){
         webDriver.get("https://demoqa.com/alerts");
         webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));

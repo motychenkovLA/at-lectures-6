@@ -8,12 +8,6 @@ import java.time.Duration;
 import java.util.Iterator;
 import java.util.Set;
 
-//        Доп.задание
-//        1. Зайти по адресу https://demoqa.com/browser-windows
-//        2. Нажать New Tab кнопочку.
-//        3. Переключить драйвер на новое окно.
-//        4. В этом новом окне открыть google.com
-//        5. вернуться на предыдущее окно.
 
 public class AdditionallyTest {
     public static void main(String[] args) {
