@@ -1,5 +1,6 @@
 package page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,6 +22,7 @@ public class PageButtons {
         this.webDriver = webDriver;
     }
 
+    @Step("Нажать кнопку Double Click me")
     public void clickDoubleButton() {
         WebElement doubleClick = webDriver.findElement(doubleClickxpath);
         new Actions(webDriver)
@@ -28,6 +30,8 @@ public class PageButtons {
                 .build()
                 .perform();
     }
+
+    @Step("Нажать кнопку Right Click me")
     public void clickRightButton() {
         WebElement rightClick = webDriver.findElement(rightClickxpath);
         new Actions(webDriver)
@@ -35,6 +39,8 @@ public class PageButtons {
                 .build()
                 .perform();
     }
+
+    @Step("Нажать кнопку Click me")
     public void clickButton() {
         WebElement click = webDriver.findElement(clickxpath);
         new Actions(webDriver)

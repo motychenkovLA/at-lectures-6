@@ -1,3 +1,4 @@
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +10,7 @@ import page.PageAlerts;
 
 import java.time.Duration;
 
+@DisplayName("JUnitTests")
 public class JUnitTest {
     WebDriver webDriver;
 
@@ -17,6 +19,8 @@ public class JUnitTest {
         System.setProperty("webdriver.chrome.driver", "src/test/chromedriver/chromedriver.exe");
         webDriver = new ChromeDriver();
     }
+
+    @DisplayName("Тест с кнопками")
     @Test (timeout = 180000)
     public void test1() {
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -29,6 +33,8 @@ public class JUnitTest {
                 && pageClass.isHaveRightClickText() && pageClass.isHaveClickText());
         webDriver.quit();
     }
+
+    @DisplayName("Тест с алертами")
     @Test (timeout = 180000)
     public void test2() {
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

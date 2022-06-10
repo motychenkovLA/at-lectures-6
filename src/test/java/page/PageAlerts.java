@@ -1,5 +1,6 @@
 package page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +23,7 @@ public class PageAlerts {
         this.webDriver = webDriver;
     }
 
+    @Step("Нажать кнопку рядом с тестом: Click Button to see alert")
     public void clickAlertButton() {
 
         WebElement alertButton = webDriver.findElement(alertButtonXpath);
@@ -29,7 +31,7 @@ public class PageAlerts {
         webDriver.switchTo().alert().accept();
     }
 
-
+    @Step("Нажать кнопку рядом с тестом: On button click, alert will appear after 5 seconds")
     public void clickTimerAlertButton() {
         WebElement timerAlertButton = webDriver.findElement(timerAlertButtonXpath);
         timerAlertButton.click();
@@ -37,6 +39,7 @@ public class PageAlerts {
         webDriverWait.until(ExpectedConditions.alertIsPresent()).accept();
     }
 
+    @Step("Нажать кнопку рядом с тестом: On button click, confirm box will appear")
     public void clickConfirmButton() {
         WebElement confirmButton = webDriver.findElement(confirmButtonXpath);
         confirmButton.click();
