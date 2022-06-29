@@ -3,7 +3,7 @@ package services.bugred;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import models.bugred.doRegister.request.RootCreateCompanyRequestPostModel;
+import models.bugred.createCompany.request.RootCreateCompanyRequestPostModel;
 import models.bugred.doRegister.request.RootDoRegisterRequestPostModel;
 
 public class BugredController {

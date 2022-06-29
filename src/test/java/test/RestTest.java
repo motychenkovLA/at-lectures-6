@@ -3,9 +3,9 @@ package test;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import models.bugred.doRegister.generator.RootCreateCompanyRequestPostGenerator;
+import models.bugred.createCompany.generator.RootCreateCompanyRequestPostGenerator;
 import models.bugred.doRegister.generator.RootDoRegisterRequestPostGenerator;
-import models.bugred.doRegister.request.RootCreateCompanyRequestPostModel;
+import models.bugred.createCompany.request.RootCreateCompanyRequestPostModel;
 import models.bugred.doRegister.request.RootDoRegisterRequestPostModel;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -13,7 +13,7 @@ import services.bugred.BugredController;
 
 public class RestTest extends BaseApiTest {
 
-    @DisplayName("РўРµСЃС‚ в„–1 РџСЂРѕРІРµСЂРєР° СѓСЃРїРµС€РЅРѕР№ СЂРµРіРёСЃС‚СЂР°С†РёРё")
+    @DisplayName("Тест №1 Проверка успешной регистрации")
     @Test
     public void doRegisterTest() {
         RootDoRegisterRequestPostModel model = RootDoRegisterRequestPostGenerator.randomEmailAndName("tY7sd09");
@@ -25,11 +25,12 @@ public class RestTest extends BaseApiTest {
                 .body("name", Matchers.equalTo(model.getName()));
     }
 
-    @DisplayName("РўРµСЃС‚ в„–2 РџСЂРѕРІРµСЂРєР° РїРѕРІС‚РѕСЂРЅРѕР№ СЂРµРіРёСЃС‚СЂР°С†РёРё")
+    @DisplayName("Тест №2 Проверка повторной регистрации")
     @Test
     public void doReplyTest() {
         RootDoRegisterRequestPostModel model = RootDoRegisterRequestPostGenerator.randomEmailAndName("34gfd09");
         RequestSpecification requestSpecification = BugredController.prepareDoRegister(model);
+        requestSpecification.post();
         Response response = requestSpecification.post();
 
         response.then()
@@ -38,19 +39,19 @@ public class RestTest extends BaseApiTest {
                 .body("message", Matchers.containsString(model.getEmail()));
     }
 
-    @DisplayName("РўРµСЃС‚ в„–3 РџСЂРѕРІРµСЂРєР° СѓСЃРїРµС€РЅРѕР№ СЂРµРіРёСЃС‚СЂР°С†РёРё РєРѕРјРїР°РЅРёРё")
+    @DisplayName("Тест №3 Проверка успешной регистрации компании")
     @Test
     public void registrationCompanyTest() {
-        RootDoRegisterRequestPostModel companyModel = RootDoRegisterRequestPostGenerator.randomEmailAndName("htdege5hd9");
-        RequestSpecification requestSpecification = BugredController.prepareDoRegister(companyModel);
-        Response response = requestSpecification.post();
+        RootDoRegisterRequestPostModel regModel = RootDoRegisterRequestPostGenerator.randomEmailAndName("htdege5hd9");
+        RequestSpecification registerRequest = BugredController.prepareDoRegister(regModel);
+        Response regResponse = registerRequest.post();
 
-        response.then()
+        regResponse.then()
                 .statusCode(200)
-                .body("name", Matchers.equalTo(companyModel.getName()));
+                .body("name", Matchers.equalTo(regModel.getName()));
 
-        RootCreateCompanyRequestPostModel createCompanyModel = RootCreateCompanyRequestPostGenerator.generate(companyModel.getEmail(),
-                "РРџ",companyModel.getEmail(),companyModel.getEmail(),companyModel.getEmail());
+        RootCreateCompanyRequestPostModel createCompanyModel = RootCreateCompanyRequestPostGenerator.generate(regModel.getEmail(),
+                "ИП",regModel.getEmail(),regModel.getEmail(),regModel.getEmail());
         RequestSpecification createCompanyRequest = BugredController.prepareCreateCompany(createCompanyModel);
         Response createCompanyResponse = createCompanyRequest.post();
 
