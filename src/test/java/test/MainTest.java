@@ -13,11 +13,6 @@ import org.junit.rules.Timeout;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.nio.file.Files;
-
 @DisplayName("Allure ДЗ")
 public class MainTest {
 
@@ -48,7 +43,6 @@ public class MainTest {
     @DisplayName("Тест №1. Проверка страницы https://demoqa.com/buttons")
     @Description("Тестирование страницы с кнопками")
     @Test
-    @Step
     public void demoqaButtonsTest(){
         webDriver.get("https://demoqa.com/buttons");
         DemoqaButtonsPage demoqaButtonsPage = new DemoqaButtonsPage(webDriver);
@@ -92,7 +86,6 @@ public class MainTest {
     @DisplayName("Тест №2. Проверка страницы https://demoqa.com/alerts")
     @Description("Тестирование страницы с алертами")
     @Test
-    @Step
     public void demoqaAlertsTest(){
         webDriver.get("https://demoqa.com/alerts");
         DemoqaAlertsPage demoqaAlertsPage = new DemoqaAlertsPage(webDriver);
