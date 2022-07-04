@@ -23,7 +23,7 @@ public class Buttons {
         PageFactory.initElements(driver, this);
         driver.get(site);
     }
-    @Step("Нажаты все кнопки")
+    @Step("Нажаты все кнопки {0}")
     public void clickAllButtons() {
         WebElement doubleClickBtn = driver.findElement(doubleClickBtnPath);
         WebElement rightClickBtn = driver.findElement(rightClickBtnPath);
