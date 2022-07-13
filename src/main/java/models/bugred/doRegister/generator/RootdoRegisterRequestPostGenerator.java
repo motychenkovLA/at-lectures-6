@@ -4,7 +4,7 @@ import com.github.javafaker.Faker;
 import models.bugred.doRegister.request.RootdoRegisterRequestPostModel;
 
 public class RootdoRegisterRequestPostGenerator {
-    public static RootdoRegisterRequestPostModel randomEmailAndName(String password){
+    public static RootdoRegisterRequestPostModel randomEmailAndName(String password) {
         Faker faker = Faker.instance();
         String email = faker.bothify("???###@email.ru");
         String name = faker.name()
