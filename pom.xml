@@ -108,8 +108,8 @@
         <plugins>
             <plugin>
                 <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-                <version>2.9</version>
+                <artifactId>allure-junit4</artifactId>
+                <version>2.11.0</version>
                 <configuration>
                     <reportVersion>2.6.0</reportVersion>
                 </configuration>
