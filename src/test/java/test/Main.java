@@ -14,8 +14,8 @@ import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-        //taskOne();
-        //taskTwo();
+        taskOne();
+        taskTwo();
         taskThree();
     }
 

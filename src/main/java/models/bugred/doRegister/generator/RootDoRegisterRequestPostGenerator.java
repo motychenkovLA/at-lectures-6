@@ -1,7 +1,6 @@
 package models.bugred.doRegister.generator;
 
 import com.github.javafaker.Faker;
-import com.sun.org.glassfish.external.probe.provider.annotations.ProbeListener;
 import models.bugred.doRegister.request.RootDoRegisterRequestPostModel;
 
 public class RootDoRegisterRequestPostGenerator {

@@ -13,19 +13,21 @@ import services.bugred.BugredController;
 
 public class RestTest extends BaseApiTest {
 
-    @DisplayName("Тест №1 Проверка успешной регистрации")
+    @DisplayName("РўРµСЃС‚ в„–1 РџСЂРѕРІРµСЂРєР° СѓСЃРїРµС€РЅРѕР№ СЂРµРіРёСЃС‚СЂР°С†РёРё")
     @Test
     public void doRegisterTest() {
         RootDoRegisterRequestPostModel model = RootDoRegisterRequestPostGenerator.randomEmailAndName("tY7sd09");
         RequestSpecification requestSpecification = BugredController.prepareDoRegister(model);
         Response response = requestSpecification.post();
+        //RootDoRegisterRequestPostModel as = response.as(RootDoRegisterRequestPostModel.class);
 
         response.then()
                 .statusCode(200)
-                .body("name", Matchers.equalTo(model.getName()));
+                .body("name", Matchers.equalTo(model.getName()))
+                .body("email", Matchers.equalTo(model.getEmail()));
     }
 
-    @DisplayName("Тест №2 Проверка повторной регистрации")
+    @DisplayName("РўРµСЃС‚ в„–2 РџСЂРѕРІРµСЂРєР° РїРѕРІС‚РѕСЂРЅРѕР№ СЂРµРіРёСЃС‚СЂР°С†РёРё")
     @Test
     public void doReplyTest() {
         RootDoRegisterRequestPostModel model = RootDoRegisterRequestPostGenerator.randomEmailAndName("34gfd09");
@@ -39,7 +41,7 @@ public class RestTest extends BaseApiTest {
                 .body("message", Matchers.containsString(model.getEmail()));
     }
 
-    @DisplayName("Тест №3 Проверка успешной регистрации компании")
+    @DisplayName("РўРµСЃС‚ в„–3 РџСЂРѕРІРµСЂРєР° СѓСЃРїРµС€РЅРѕР№ СЂРµРіРёСЃС‚СЂР°С†РёРё РєРѕРјРїР°РЅРёРё")
     @Test
     public void registrationCompanyTest() {
         RootDoRegisterRequestPostModel regModel = RootDoRegisterRequestPostGenerator.randomEmailAndName("htdege5hd9");
@@ -51,7 +53,7 @@ public class RestTest extends BaseApiTest {
                 .body("name", Matchers.equalTo(regModel.getName()));
 
         RootCreateCompanyRequestPostModel createCompanyModel = RootCreateCompanyRequestPostGenerator.generate(regModel.getEmail(),
-                "ИП",regModel.getEmail(),regModel.getEmail(),regModel.getEmail());
+                "РРџ",regModel.getEmail(),regModel.getEmail(),regModel.getEmail());
         RequestSpecification createCompanyRequest = BugredController.prepareCreateCompany(createCompanyModel);
         Response createCompanyResponse = createCompanyRequest.post();
 

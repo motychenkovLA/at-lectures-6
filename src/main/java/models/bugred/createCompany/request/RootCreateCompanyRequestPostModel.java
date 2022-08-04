@@ -2,6 +2,7 @@ package models.bugred.createCompany.request;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -14,6 +15,7 @@ import lombok.experimental.Accessors;
         setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RootCreateCompanyRequestPostModel {
+    @JsonProperty("$%")
     private String company_name;
     private String company_type;
     private String[] company_users;

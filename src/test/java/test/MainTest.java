@@ -13,6 +13,8 @@ import org.junit.rules.Timeout;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.time.Duration;
+
 @DisplayName("Allure ДЗ")
 public class MainTest {
 
@@ -26,7 +28,7 @@ public class MainTest {
     public void startMethod(){
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver/chromedriver.exe");
         webDriver = new ChromeDriver();
-        //webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(150));
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(150));
     }
 
     @After
