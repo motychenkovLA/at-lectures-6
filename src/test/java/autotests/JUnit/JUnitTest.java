@@ -48,18 +48,18 @@ public class JUnitTest {
         Assert.assertEquals("Текст клика отсутствует", dynamicClickText, demoQaButtons.getClickMessageText());
     }
 
-//    @Test
-//    @Step("Переход на страницу https://demoqa.com/alerts и работа с алертами")
-//    public void testAlerts(){
-//        webDriver.get("https://demoqa.com/alerts");
-//        webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-//
-//        DemoQaAlerts demoQaAlerts = new DemoQaAlerts(webDriver);
-//        demoQaAlerts.clickAlertButton();
-//        demoQaAlerts.clickTimerAlertButton();
-//        demoQaAlerts.dismissAlert();
-//
-//        Assert.assertEquals("Текст кнопки отмена отсутствует", cancelText, demoQaAlerts.getCancelText());
-//    }
+    @Test
+    @Step("Переход на страницу https://demoqa.com/alerts и работа с алертами")
+    public void testAlerts(){
+        webDriver.get("https://demoqa.com/alerts");
+        webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+
+        DemoQaAlerts demoQaAlerts = new DemoQaAlerts(webDriver);
+        demoQaAlerts.clickAlertButton();
+        demoQaAlerts.clickTimerAlertButton();
+        demoQaAlerts.dismissAlert();
+
+        Assert.assertEquals("Текст кнопки отмена отсутствует", cancelText, demoQaAlerts.getCancelText());
+    }
 
 }
